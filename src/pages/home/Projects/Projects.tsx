@@ -1,6 +1,6 @@
 import { Main } from '../../../styles/mainContainer';
-import { Title } from '../../../components/Typography/Title';
-import { Typography } from '../../../components/Typography/Typography';
+import { Title } from '../../../components/c/Title';
+import { Typography } from '../../../components/c/Typography';
 import { useState } from 'react';
 import { Tag } from '../../../components/Button/Tag';
 import { Button } from '../../../components/Button/Button';

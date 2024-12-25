@@ -1,4 +1,4 @@
-import { Title } from '../../../components/Typography/Title';
+import { Title } from '../../../components/c/Title';
 // import redux from './assets/redux.svg';
 import styledcomponent from './assets/styledcomponents.svg';
 import storybookSvg from './assets/storybook.svg';
@@ -20,7 +20,7 @@ import { Main } from '../../../styles/mainContainer';
 import { IUseWindoSizeProps } from '../../../types/auxProps';
 import { AnimatedSection } from '../../../components/AnimatedSection/AnimatedSection';
 import { useState } from 'react';
-import { Typography } from '../../../components/Typography/Typography';
+import { Typography } from '../../../components/c/Typography';
 import {
   Container,
   ContainerCarrosel,

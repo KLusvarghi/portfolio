@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography } from '../../components/Typography/Typography';
+import { Typography } from '../c/Typography';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Instagram } from '../../components/Icons/Instagram';

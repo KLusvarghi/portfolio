@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import useSystemThemeContext from '../../hooks/useSystemThemeContext';
-import { Typography } from '../Typography/Typography';
+import { Typography } from '../c/Typography';
 import { snake } from '../../styles/keyframes/keyframes';
 
 interface ITagProps {

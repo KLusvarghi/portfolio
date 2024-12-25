@@ -1,6 +1,7 @@
 export const linkedin = 'https://www.linkedin.com/in/kaua-ortolani-frontend-jr/'
 export const github = 'https://github.com/KLusvarghi'
-export const curriculo = 'https://drive.google.com/file/d/1ds-2xGDxr5BolPXt38DmJ1F9vTQ-YarT/view?usp=sharing'
+// export const curriculo = 'https://drive.google.com/file/d/1ds-2xGDxr5BolPXt38DmJ1F9vTQ-YarT/view?usp=sharing'
+export const curriculo = 'https://drive.google.com/file/d/1B2_nkQCPsCaiYFEWyQeaZfJBQpRe634F/view?usp=sharing'
 export const instagram = 'https://www.instagram.com/lusvarghikaua/'
 export const whatsapp = 'https://web.whatsapp.com/send?phone=5513996068207&text='
 export const urlgitHub = 'https://api.github.com/users/KLusvarghi/repos?per_page=100&page=1'

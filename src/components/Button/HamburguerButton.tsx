@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 import useSystemThemeContext from '../../hooks/useSystemThemeContext';
-import { Typography } from '../Typography/Typography';
+import { Typography } from '../c/Typography';
 
 const ContainerHamburguer = styled.div`
   cursor: pointer;
@@ -80,7 +80,6 @@ export const HamburguerButton = forwardRef<
       )}
     </ContainerHamburguer>
   );
-
 });
 
 HamburguerButton.displayName = 'HamburguerButton';

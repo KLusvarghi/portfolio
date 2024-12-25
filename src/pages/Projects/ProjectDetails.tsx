@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import useSystemProjectContext from '../../hooks/useSystemProjectContext ';
 import { useEffect, useState } from 'react';
-import { Typography } from '../../components/Typography/Typography';
+import { Typography } from '../../components/c/Typography';
 import { Head } from '../../components/Head/Head';
 import { getImageUrl } from '../../utils/imageUtils';
 import { Tag } from '../../components/Button/Tag';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography } from '../../../components/Typography/Typography';
+import { Typography } from '../../../components/c/Typography';
 import { Button } from '../../../components/Button/Button';
 import erro404 from './assets/error-404.svg';
 import { Head } from '../../../components/Head/Head';

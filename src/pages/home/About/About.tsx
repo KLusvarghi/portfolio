@@ -1,10 +1,16 @@
-import { Title } from '../../../components/Typography/Title';
-import { Typography } from '../../../components/Typography/Typography';
+import { Title } from '../../../components/c/Title';
+import { Typography } from '../../../components/c/Typography';
 import { useEffect, useState } from 'react';
-import imgImagem from './assets/eu.png'
+import imgImagem from './assets/eu.png';
 import { Link } from '../../../components/Link/Link';
 import { Button } from '../../../components/Button/Button';
-import { curriculo, instagram, linkedin, linkedinImage, urlgitHub } from '../../../utils/links';
+import {
+  curriculo,
+  instagram,
+  linkedin,
+  linkedinImage,
+  urlgitHub,
+} from '../../../utils/links';
 import useFetchData from '../../../hooks/useFetchData';
 import { Main } from '../../../styles/mainContainer';
 import { IUseWindoSizeProps } from '../../../types/auxProps';
@@ -25,15 +31,15 @@ const About = ({ width }: IUseWindoSizeProps) => {
   const { data, error } = useFetchData(urlgitHub);
   const [allRepositories, setAllRepositories] = useState<number | null>(null);
   const [displayedRepositories, setDisplayedRepositories] = useState<number>(0);
-  const [imageUrl, setImageUrl] = useState<string>(linkedinImage)
+  const [imageUrl, setImageUrl] = useState<string>(linkedinImage);
   const [imageValid, setImageValid] = useState<boolean>(true);
 
   useEffect(() => {
     if (!imageValid) {
-      setImageUrl(imgImagem)
-      console.log('iamgme inválida')
+      setImageUrl(imgImagem);
+      console.log('iamgme inválida');
     }
-  }, [imageValid])
+  }, [imageValid]);
 
   const handleImageError = () => {
     setImageValid(false);
@@ -82,7 +88,11 @@ const About = ({ width }: IUseWindoSizeProps) => {
       <Wrapper>
         {width >= 1012 && (
           <AnimatedSection direction="toRight">
-            <Img src={imageUrl} alt="Imagem de Kauã Lusvarghi" onError={handleImageError} />
+            <Img
+              src={imageUrl}
+              alt="Imagem de Kauã Lusvarghi"
+              onError={handleImageError}
+            />
           </AnimatedSection>
         )}
         <ContainerContent>

@@ -2,7 +2,7 @@ import { GitHub } from '../../../components/Icons/GitHub';
 import { Linkedin } from '../../../components/Icons/Linkedin';
 import { Instagram } from '../../../components/Icons/Instagram';
 import { Cv } from '../../../components/Icons/Cv';
-import { Typography } from '../../../components/Typography/Typography';
+import { Typography } from '../../../components/c/Typography';
 import { Link as LinkScroll } from 'react-scroll';
 import { Button } from '../../../components/Button/Button';
 import { RefProps } from '../../../types/auxProps';
@@ -68,7 +68,8 @@ const Introduction = ({ refContainer }: RefProps) => {
             <AnimatedSection direction="toRight">
               <Typography variant="body">
                 Sou um jovem engenheiro de software especializado aplicações em
-                web, em busca do primeiro emprego na área de tecnologia. Sou apaixonado por desafios que me permitam criar e desenvolver
+                web, em busca do primeiro emprego na área de tecnologia. Sou
+                apaixonado por desafios que me permitam criar e desenvolver
                 interfaces intuitivas e eficientes a partir de código.
               </Typography>
             </AnimatedSection>

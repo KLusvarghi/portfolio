@@ -1,6 +1,6 @@
 import { ErrorMessage } from 'formik';
 import styled from 'styled-components';
-import { Typography } from '../Typography/Typography';
+import { Typography } from '../c/Typography';
 
 export interface IStyledClassProps {
   $gridArea: string;

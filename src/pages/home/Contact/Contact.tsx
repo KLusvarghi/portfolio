@@ -1,8 +1,8 @@
 import { Main } from '../../../styles/mainContainer';
-import { Title } from '../../../components/Typography/Title';
+import { Title } from '../../../components/c/Title';
 import { Forms } from '../../../components/Form/Form';
 import { GitHub, Linkedin, Email } from './icons';
-import { Typography } from '../../../components/Typography/Typography';
+import { Typography } from '../../../components/c/Typography';
 import useSystemThemeContext from '../../../hooks/useSystemThemeContext';
 import { useState } from 'react';
 import svgMessage from './assets/popup.svg';
@@ -65,12 +65,11 @@ const Contact = () => {
         <AnimatedSection direction="toUp">
           <ContainerInformations>
             {info.map(({ index, path, display }) => (
-              <ContainerInfo
-                key={index}
-                onClick={() => handleCopy(display)}
-              >
+              <ContainerInfo key={index} onClick={() => handleCopy(display)}>
                 <ContainerIcone $theme={theme.title}>{path}</ContainerIcone>
-                <Typography variant="body">/{display.split('/').filter(Boolean).pop()}</Typography>
+                <Typography variant="body">
+                  /{display.split('/').filter(Boolean).pop()}
+                </Typography>
               </ContainerInfo>
             ))}
           </ContainerInformations>

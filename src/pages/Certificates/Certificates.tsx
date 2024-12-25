@@ -1,5 +1,5 @@
 import { Head } from '../../components/Head/Head';
-import { Title } from '../../components/Typography/Title';
+import { Title } from '../../components/c/Title';
 import { useState } from 'react';
 import { Filter } from './Filter/Filter';
 import { Itens } from './Itens/Itens';
