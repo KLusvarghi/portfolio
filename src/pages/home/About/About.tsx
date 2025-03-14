@@ -135,7 +135,7 @@ const About = ({ width }: IUseWindoSizeProps) => {
             <ContainerInformations>
               <ContainerXp>
                 <ContaienrAttribute>
-                  <Typography>3+</Typography>
+                  <Typography>4+</Typography>
                   <Typography variant="body">
                     Anos <br /> de experiência
                   </Typography>
