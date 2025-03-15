@@ -1,50 +1,56 @@
-# React + TypeScript + Vite
+# Portfólio Pessoal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="https://via.placeholder.com/1000x500" alt="Demonstração do site" />
+</p>
 
-Currently, two official plugins are available:
+<div align="center">
+  
+![GitHub repo size](https://img.shields.io/github/repo-size/KLusvarghi/portfolio?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/KLusvarghi/portfolio?style=for-the-badge)
+![GitHub license](https://img.shields.io/github/license/KLusvarghi/portfolio?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/KLusvarghi/portfolio?style=for-the-badge)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+</div>
 
-## Expanding the ESLint configuration
+## Descrição  
+Este é o meu portfólio pessoal, onde você encontrará:  
+- Informações sobre mim  
+- Projetos desenvolvidos e minha trajetória profissional  
+- Habilidades técnicas (hardskills)  
+- Seção de contato com minhas redes sociais  
+- Sessão exibindo certificados na área de desenvolvimento  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Status  
+> Em desenvolviemnto de novas features
 
-- Configure the top-level `parserOptions` property like this:
+## Deploy  
+- [Acesse o projeto aqui](https://kaualusvarghi.vercel.app/)  
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Roadmap  
+- Criação de uma API em nodejs para adicionar conteúdo via web sem precisar mexer no código
+- Mudança no design, principalmente para melhorar a experiência mobile
+  
+## Tecnologias  
+- **Next.js**  
+- **TypeScript**  
+- **TailwindCSS**  
+- **ESLint**  
+- **Prettier**  
+- **Framer Motion**  
+- **React Icons**  
+- **Axios**  
+- **Styled Components**
+  
+## Funcionalidades  
+- Navegação entre seções  
+- Exibição de conteúdo interativo (efeitos visuais e interações)  
+- Envio de e-mail direto para mim  
+- Roteamento entre páginas  
+- Troca de tema (dark/light)  
+- Design responsivo para mobile  
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Contato  
+Se tiver uma ideia ou qiser trocar uma ideia sobre tecnologia:
+- Email: kauaolusvarghi@gmail.com
+- Linkedin: [kaua-lusvarghi-frontend-dev/](https://www.linkedin.com/in/kaua-lusvarghi-frontend-dev/)
