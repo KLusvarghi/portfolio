@@ -1,7 +1,7 @@
 # Portfólio Pessoal
 
 <p align="center">
-  <img src="https://imgur.com/a/0MYMPKJ" alt="Demonstração do site" />
+  <img src="public/assets/thumbnail/thumbnail.png" alt="Demonstração do site" />
 </p>
 
 <div align="center">
