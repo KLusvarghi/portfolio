@@ -1,7 +1,7 @@
 # Portfólio Pessoal
 
 <p align="center">
-  <img src="https://via.placeholder.com/1000x500" alt="Demonstração do site" />
+  <img src="https://imgur.com/a/0MYMPKJ" alt="Demonstração do site" />
 </p>
 
 <div align="center">
