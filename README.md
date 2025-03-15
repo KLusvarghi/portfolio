@@ -32,15 +32,13 @@ Este é o meu portfólio pessoal, onde você encontrará:
 - Mudança no design, principalmente para melhorar a experiência mobile
   
 ## Tecnologias  
-- **Next.js**  
+- **React**  
+- **Vite**  
 - **TypeScript**  
-- **TailwindCSS**  
-- **ESLint**  
-- **Prettier**  
-- **Framer Motion**  
+- **Styled Components**
 - **React Icons**  
 - **Axios**  
-- **Styled Components**
+- **Emailjs**  
   
 ## Funcionalidades  
 - Navegação entre seções  
