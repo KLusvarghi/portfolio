@@ -27,12 +27,12 @@ const Contact = () => {
     {
       index: 2,
       path: <Linkedin />,
-      display: 'https://www.linkedin.com/in/kaua-ortolani-frontend-jr/',
+      display: 'https://www.linkedin.com/in/kaua-lusvarghi-frontend-dev/',
     },
     {
       index: 3,
       path: <Email />,
-      display: 'kauaolusvarghi@gmail.com',
+      display: 'kauaolusvarghi@proton.me',
     },
   ];
 
