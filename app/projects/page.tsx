@@ -116,7 +116,7 @@ export default function ProjectsPage() {
                   className={
                     selectedTechs.includes(tech)
                       ? "bg-[#38A7F7] hover:bg-[#2a8fd9] text-white border-[#38A7F7]"
-                      : "border-zinc-700 hover:bg-zinc-800"
+                      : "text-[#444444] dark:text-[#e6e6e6] hover:text-[#313131] dark:hover:text-[#c7c6c6] border-zinc-200 dark:border-zinc-700 hover:bg-[#cbcdcf] dark:hover:bg-zinc-800"
                   }
                 >
                   {tech}
@@ -130,7 +130,7 @@ export default function ProjectsPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-zinc-700 hover:bg-zinc-800 bg-transparent"
+                  className="border-zinc-400 dark:border-zinc-700 text-[#444444] dark:text-[#e6e6e6] bg-transparent hover:bg-[#cbcdcf] dark:hover:bg-zinc-800  "
                 >
                   {t.projects.categories}
                   {selectedCategories.length > 0 && (
@@ -143,18 +143,18 @@ export default function ProjectsPage() {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="start"
-                className="w-56 bg-zinc-900 border-zinc-800"
+                className="w-56 bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700"
               >
                 <DropdownMenuLabel>
                   {t.projects.filterByCategory}
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-zinc-800" />
+                <DropdownMenuSeparator className="bg-zinc-300 dark:bg-zinc-800" />
                 {allCategories.map((category) => (
                   <DropdownMenuCheckboxItem
                     key={category}
                     checked={selectedCategories.includes(category)}
                     onCheckedChange={() => toggleCategory(category)}
-                    className="cursor-pointer"
+                    className="cursor-pointer text-[#444444] dark:text-[#e6e6e6] hover:bg-zinc-300 dark:hover:bg-zinc-900"
                   >
                     {category}
                   </DropdownMenuCheckboxItem>
@@ -168,7 +168,7 @@ export default function ProjectsPage() {
                 variant="ghost"
                 size="sm"
                 onClick={clearFilters}
-                className="text-zinc-400 hover:text-white"
+                className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-300 dark:hover:bg-zinc-800"
               >
                 <X className="h-4 w-4 mr-1" />
                 {t.projects.clear}
