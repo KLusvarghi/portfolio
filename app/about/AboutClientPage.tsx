@@ -256,7 +256,7 @@ export default function ResumeClientPage() {
             </div>
           </div>
 
-          {resumeData.languages && resumeData.languages.length > 0 && (
+          {/* {resumeData.languages && resumeData.languages.length > 0 && (
             <div className="space-y-6">
               <h2 className="text-2xl font-bold">Idiomas</h2>
               <Card className="border-2">
@@ -279,7 +279,7 @@ export default function ResumeClientPage() {
                 </CardContent>
               </Card>
             </div>
-          )}
+          )} */}
         </div>
 
         <div className="space-y-6">
