@@ -48,9 +48,9 @@ export default function Home() {
           <FeaturedProjects />
         </div>
 
-        <div className="mt-24 pt-16 border-t border-border/50 w-full">
+        {/* <div className="mt-24 pt-16 border-t border-border/50 w-full">
           <YouTubeVideos />
-        </div>
+        </div> */}
       </div>
     </div>
   );
