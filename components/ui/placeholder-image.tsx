@@ -27,7 +27,7 @@ export function PlaceholderImage({ type = "generic", title, className, ...props 
 
   return (
     <div
-      className={cn("relative flex flex-col items-center justify-center w-full h-full bg-zinc-900", className)}
+      className={cn("relative flex flex-col items-center justify-center w-full h-full bg-sidebar-border", className)}
       {...props}
     >
       <div className="flex items-center justify-center">{getIcon()}</div>
