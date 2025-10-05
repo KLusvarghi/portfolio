@@ -81,14 +81,14 @@ export function FeaturedProjects({
           )}
         </div>
       </CardHeader>
-      <CardContent className="relative p-6">
+      <CardContent className="relative p-6 flex flex-col flex-1">
         <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
         <p className="text-muted-foreground mb-4 line-clamp-2">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4 h-full">
           {project.tags.map((tag) => (
             <Badge key={tag} variant="secondary" className="text-xs">
               {tag}
