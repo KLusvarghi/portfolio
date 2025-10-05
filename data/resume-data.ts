@@ -36,6 +36,8 @@ export type ResumeData = {
     linkedin: string;
     github: string | null;
     instagram?: string;
+    cvPt?: string;
+    cvEn?: string;
     phone?: string;
     photo?: string;
     yearsOfExperience: string;
@@ -68,6 +70,8 @@ const resumeData: ResumeData = {
     linkedin: "https://www.linkedin.com/in/kaua-lusvarghi-fullstack-dev/",
     github: "https://github.com/KLusvarghi",
     instagram: "https://www.instagram.com/lusvarghkaua",
+    cvPt: "https://drive.google.com/file/d/19Etov9PQKz5iDyzX-vBeMEn9XAVVj3p2/view?usp=drive_link",
+    cvEn: "https://drive.google.com/file/d/1uKgpygddRZ4BtnvMZn1G1SSnbE1-W4H5/view?usp=drive_link",
     phone: "+55 (13) 99606-8207",
     photo: "/images/profile.png",
     yearsOfExperience: "3 anos de foco em front-end",
