@@ -20,7 +20,7 @@ import { useI18n } from "@/lib/i18n/i18n-context";
 export default function ResumeClientPage() {
   const [showPreviousRoles, setShowPreviousRoles] = useState(false);
   const [showPreviousEducation, setShowPreviousEducation] = useState(false);
-  const [isIntroExpanded, setIsIntroExpanded] = useState(false)
+  const [isIntroExpanded, setIsIntroExpanded] = useState(false);
 
   const { t } = useI18n();
 
@@ -74,7 +74,9 @@ export default function ResumeClientPage() {
                   onClick={() => setIsIntroExpanded(true)}
                   className="text-sm text-primary hover:text-primary/80 transition-colors font-medium md:hidden"
                 >
-                  {t.language === "pt" ? "Continuar lendo →" : "Continue reading →"}
+                  {t.language === "pt"
+                    ? "Continuar lendo →"
+                    : "Continue reading →"}
                 </button>
               )}
             </CardContent>
@@ -370,75 +372,30 @@ export default function ResumeClientPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#38A7F7]/10 via-transparent to-transparent" />
                 <CardContent className="relative p-6 h-full flex flex-col justify-between">
                   <div className="space-y-4">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <div className="w-10 h-10 rounded-lg bg-[#61DAFB]/10 flex items-center justify-center">
-                        <svg
-                          className="w-6 h-6"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <circle
-                            cx="12"
-                            cy="12"
-                            r="3"
-                            stroke="#61DAFB"
-                            strokeWidth="1.5"
-                          />
-                          <ellipse
-                            cx="12"
-                            cy="12"
-                            rx="10"
-                            ry="4"
-                            stroke="#61DAFB"
-                            strokeWidth="1.5"
-                          />
-                          <ellipse
-                            cx="12"
-                            cy="12"
-                            rx="10"
-                            ry="4"
-                            stroke="#61DAFB"
-                            strokeWidth="1.5"
-                            transform="rotate(60 12 12)"
-                          />
-                          <ellipse
-                            cx="12"
-                            cy="12"
-                            rx="10"
-                            ry="4"
-                            stroke="#61DAFB"
-                            strokeWidth="1.5"
-                            transform="rotate(-60 12 12)"
-                          />
-                        </svg>
-                      </div>
-                      <div className="w-10 h-10 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center">
-                        <svg
-                          className="w-6 h-6"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.044-.495.044H7.81l-.108-.068a.438.438 0 0 1-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.023-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z" />
-                        </svg>
-                      </div>
-                      <div className="w-10 h-10 rounded-lg bg-[#3178C6]/10 flex items-center justify-center">
-                        <svg
-                          className="w-6 h-6"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <rect width="24" height="24" rx="3" fill="#3178C6" />
-                          <path
-                            d="M13.5 16.5V18h5.25v-1.5H13.5zm-7.5 0V18h4.5v-1.5H6zm7.5-3V15h5.25v-1.5H13.5zm-7.5 0V15h4.5v-1.5H6z"
-                            fill="white"
-                          />
-                          <path
-                            d="M13.5 6v1.5h-3V6h3zm-7.5 0v1.5h4.5V6H6zm7.5 3v1.5h5.25V9H13.5zm-7.5 0v1.5h4.5V9H6z"
-                            fill="white"
-                          />
-                        </svg>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={"/icons/ts.svg"}
+                        alt="TS icon"
+                        width={32}
+                        height={32}
+                        className="object-cover rounded-sm"
+                      />
+                      <Image
+                        src={"/icons/next.svg"}
+                        alt="Next icon"
+                        width={32}
+                        height={32}
+                        className="object-cover rounded-sm"
+                      />
+                      <Image
+                        src={"/icons/fastify.svg"}
+                        alt="Fastify icon"
+                        width={32}
+                        height={32}
+                        className="object-cover rounded-sm"
+                      />
                     </div>
+
                     <h3 className="text-lg font-bold">
                       {t.language === "pt" ? "Stack Principal" : "Main Stack"}
                     </h3>
@@ -570,11 +527,30 @@ export default function ResumeClientPage() {
                 </div>
               </div>
 
-              <Link href="/contact" className="block">
-                <Button className="w-full">
-                  {t.language === "pt" ? "Entrar em contato" : "Get in touch"}
-                </Button>
-              </Link>
+              
+
+              <div className="space-y-1">
+                <Link
+                  href={
+                    t.language === "pt"
+                      ? resumeData.personalInfo.cvPt
+                      : resumeData.personalInfo.cvEn
+                  }
+                  className="block"
+                >
+                  <Button className="w-full">
+                    {t.language === "pt"
+                      ? "Abrir CV no Drive"
+                      : "Open Resume in Drive"}
+                  </Button>
+                </Link>
+
+                <Link href={"/contact"} className="block">
+                  <Button className="w-full">
+                    {t.language === "pt" ? "Entrar em contato" : "Get in touch"}
+                  </Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
 
@@ -637,12 +613,28 @@ export default function ResumeClientPage() {
                   <span className="text-sm">Instagram</span>
                 </Link>
               </div>
+              <div className="space-y-1">
+                <Link
+                  href={
+                    t.language === "pt"
+                      ? resumeData.personalInfo.cvPt
+                      : resumeData.personalInfo.cvEn
+                  }
+                  className="block"
+                >
+                  <Button className="w-full">
+                    {t.language === "pt"
+                      ? "Abrir CV no Drive"
+                      : "Open Resume in Drive"}
+                  </Button>
+                </Link>
 
-              <Link href="/contact" className="block">
-                <Button className="w-full">
-                  {t.language === "pt" ? "Entrar em contato" : "Get in touch"}
-                </Button>
-              </Link>
+                <Link href={"/contact"} className="block">
+                  <Button className="w-full">
+                    {t.language === "pt" ? "Entrar em contato" : "Get in touch"}
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
