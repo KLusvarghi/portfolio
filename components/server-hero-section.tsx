@@ -30,7 +30,8 @@ export function ServerHeroSection() {
 
         <div className="flex flex-wrap gap-4">
           <Link href="/about">
-            <Button size="lg" className="bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black">
+          {/* CORRIGIR A COR DOS BOTÕES EM MODO LIGHT */}
+            <Button size="lg" className="bg-popover-foreground text-popover hover:bg-[#262626] dark:hover:bg-[#dfdfdf]">
               {t.nav.about}
             </Button>
           </Link>
@@ -38,7 +39,7 @@ export function ServerHeroSection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-white/20 text-white hover:bg-white/10 dark:border-white/20 dark:text-white bg-transparent"
+              className="border-popover-foreground/20 text-popover-foreground hover:bg-popover-foreground/10 dark:border-white/20 dark:text-white bg-transparent"
             >
               {t.nav.contact}
             </Button>
@@ -47,28 +48,29 @@ export function ServerHeroSection() {
 
         <div className="flex gap-6">
           <Link
-            href={`https://${resumeData.personalInfo.github}`}
+            href={`${resumeData.personalInfo.github}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-white transition-colors"
+            className="text-zinc-400 hover:text-secondary-foreground transition-colors"
           >
             <Github className="h-5 w-5" />
             <span className="sr-only">GitHub</span>
           </Link>
           <Link
-            href={`https://${resumeData.personalInfo.linkedin}`}
+            href={`${resumeData.personalInfo.linkedin}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-white transition-colors"
+            className="text-zinc-400 hover:text-secondary-foreground transition-colors"
           >
             <Linkedin className="h-5 w-5" />
             <span className="sr-only">LinkedIn</span>
           </Link>
           <Link
-            href={resumeData.personalInfo.instagram}
+            href={`${resumeData.personalInfo.instagram}`}
+
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-white transition-colors"
+            className="text-zinc-400 hover:text-secondary-foreground transition-colors"
           >
             <Instagram className="h-5 w-5" />
             <span className="sr-only">Instagram</span>
