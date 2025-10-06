@@ -8,9 +8,8 @@ import { SidebarNav } from "@/components/sidebar-nav"
 import { BottomNav } from "@/components/bottom-nav"
 import Footer from "@/components/footer"
 import { ToastProvider } from "@/components/toast-provider"
-import { Suspense } from "react"
-import { I18nProvider } from "@/lib/i18n/i18n-context"
-import { LanguageDetector } from "@/components/language-detector"
+import { Suspense, useEffect, useState } from "react"
+import { NextIntlClientProvider } from 'next-intl'
 import { ThemeProvider } from "@/lib/theme/theme-context"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -20,12 +19,35 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const [locale, setLocale] = useState('pt')
+  const [messages, setMessages] = useState(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    async function loadLocaleData() {
+      // Get locale from cookie or default to 'pt'
+      const savedLocale = localStorage.getItem('locale') || 'pt'
+      setLocale(savedLocale)
+
+      // Load messages for the locale
+      const localeMessages = await import(`../messages/${savedLocale}.json`)
+      setMessages(localeMessages.default)
+      setMounted(true)
+    }
+
+    loadLocaleData()
+  }, [])
+
+  // Don't render until we have the locale and messages
+  if (!mounted || !messages) {
+    return null
+  }
+
   return (
-    <html lang="en" className="dark">
+    <html lang={locale} className="dark">
       <body className={`${inter.className} antialiased min-h-screen bg-background text-foreground`}>
         <ThemeProvider>
-          <I18nProvider>
-            <LanguageDetector />
+          <NextIntlClientProvider locale={locale} messages={messages}>
             <div className="flex min-h-screen flex-col">
               <SidebarNav />
               <BottomNav />
@@ -37,7 +59,7 @@ export default function ClientLayout({
               <ToastProvider />
               <Analytics />
             </div>
-          </I18nProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>
