@@ -130,7 +130,10 @@ const projects: Project[] = [
 
 export const featuredProjects = [projects[0], projects[1], projects[2]];
 
+const projectFilters = ["Typescript", "React", "Next.js", "Fastify", "Jest", "Docker", "Prisma", "Swagger", "Zod", ];
+
 export default {
   projects,
   featuredProjects,
+  projectFilters
 };
