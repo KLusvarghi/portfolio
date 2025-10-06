@@ -87,6 +87,8 @@ const resumeData: ResumeData = {
       "Node.js",
       "React",
       "Next.js",
+      "Express",
+      "Fastify",
       "HTML5",
       "CSS3",
       "SQL",
@@ -94,14 +96,15 @@ const resumeData: ResumeData = {
     architecture: [
       "Clean Architecture",
       "SOLID",
-      "Hexagonal Architecture",
+      "Arquitetura Hexagonal",
       "TDD",
+      "DDD",
       "Server Actions",
       "API REST",
     ],
     cloud: ["Docker", "GitHub Actions", "Vercel", "AWS (básico)", "CI/CD"],
-    data: ["PostgreSQL", "Redis", "Prisma", "Drizzle ORM"],
-    quality: ["Jest", "Supertest", "React Testing Library", "Cypress", "Zod"],
+    data: ["PostgreSQL", "MySQL", "MOngoDB","Redis", "Prisma", "Drizzle ORM", "Prisma"],
+    quality: ["Jest", "Supertest", "React Testing Library", "Vitest", "Zod", "Swagger", "JSDocs"],
   },
   experience: [
     {

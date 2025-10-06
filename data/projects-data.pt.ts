@@ -124,7 +124,7 @@ const projects: Project[] = [
     tags: ["Javascript", "Vite", "React", "Scss", "Testing-Library"],
     categories: ["Frontend"],
     github: "https://github.com/KLusvarghi/dogs",
-    demo: null,
+    demo: "https://dogsapp-eight.vercel.app/",
   },
 ];
 
