@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, MapPin } from "lucide-react"
-import { motion } from "framer-motion"
-import resumeData from "@/data/resume-data"
-import { useI18n } from "@/lib/i18n/i18n-context"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import resumeData from "@/data/resume-data";
+import { useI18n } from "@/lib/i18n/i18n-context";
 
 export function HeroSection() {
-  const [mounted, setMounted] = useState(false)
-  const { t } = useI18n()
+  const [mounted, setMounted] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return null
+  if (!mounted) return null;
 
   return (
     <div className="grid lg:grid-cols-[1fr_auto] items-start gap-12 lg:gap-16">
@@ -131,7 +131,7 @@ export function HeroSection() {
       >
         <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white/10">
           <Image
-            src="/images/profile.png"
+            src="/images/profile2.png"
             alt={resumeData.personalInfo.name}
             fill
             className="object-cover object-center"
@@ -140,5 +140,5 @@ export function HeroSection() {
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
