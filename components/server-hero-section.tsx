@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Instagram, MapPin } from "lucide-react"
-import resumeData from "@/data/resume-data"
-import { useI18n } from "@/lib/i18n/i18n-context"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Github, Linkedin, Instagram, MapPin } from "lucide-react";
+import resumeData from "@/data/resume-data";
+import { useI18n } from "@/lib/i18n/i18n-context";
 
 export function ServerHeroSection() {
-  const { t } = useI18n()
+  const { t } = useI18n();
 
   return (
-    <div className="grid lg:grid-cols-[1fr_auto] items-start gap-12 lg:gap-16">
+    <div className="grid lg:grid-cols-[1fr_auto] items-center gap-12 lg:gap-16">
       <div className="flex flex-col space-y-6">
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-zinc-400">
@@ -30,8 +30,11 @@ export function ServerHeroSection() {
 
         <div className="flex flex-wrap gap-4">
           <Link href="/about">
-          {/* CORRIGIR A COR DOS BOTÕES EM MODO LIGHT */}
-            <Button size="lg" className="bg-popover-foreground text-popover hover:bg-[#262626] dark:hover:bg-[#dfdfdf]">
+            {/* CORRIGIR A COR DOS BOTÕES EM MODO LIGHT */}
+            <Button
+              size="lg"
+              className="bg-popover-foreground text-popover hover:bg-[#262626] dark:hover:bg-[#dfdfdf]"
+            >
               {t.nav.about}
             </Button>
           </Link>
@@ -67,7 +70,6 @@ export function ServerHeroSection() {
           </Link>
           <Link
             href={`${resumeData.personalInfo.instagram}`}
-
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-400 hover:text-secondary-foreground transition-colors"
@@ -79,7 +81,7 @@ export function ServerHeroSection() {
       </div>
 
       <div className="hidden lg:flex items-start justify-center lg:justify-end pt-1">
-        <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white/10">
+        <div className="relative w-48 h-48 sm:w-64 sm:h-80 rounded-full overflow-hidden border-4 border-white/10">
           <Image
             src="/images/profile.png"
             alt={resumeData.personalInfo.name}
@@ -90,5 +92,5 @@ export function ServerHeroSection() {
         </div>
       </div>
     </div>
-  )
+  );
 }
