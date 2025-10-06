@@ -41,7 +41,7 @@ export default function ResumeClientPage() {
 
   return (
     <div className="container pt-10 md:py-12">
-      <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
+      <div className="grid lg:gap-12 lg:grid-cols-[1fr_300px]">
         <div className="space-y-8">
           <div>
             <h1 className="text-4xl font-bold">{t.about.title}</h1>
@@ -51,6 +51,87 @@ export default function ResumeClientPage() {
                 : `Meet ${resumeData.personalInfo.name}, ${resumeData.personalInfo.title}`}
             </p>
           </div>
+
+          {/* Mobile Sidebar - Keep as Card */}
+          <Card className="border-2 lg:hidden">
+            <CardContent className="p-6 space-y-2">
+              <div className="flex items-center gap-6 mb-6 ">
+                <div className="flex-shrink-0">
+                  <Image
+                    src={photoUrl || "/placeholder.svg"}
+                    alt={resumeData.personalInfo.name}
+                    width={80}
+                    height={60}
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-xl font-bold">
+                    {resumeData.personalInfo.name}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {resumeData.personalInfo.title}
+                  </p>
+                  <div className="flex items-center gap-2 text-muted-foreground mt-2">
+                    <MapPin className="h-4 w-4 flex-shrink-0" />
+                    <span className="text-sm">
+                      {resumeData.personalInfo.location}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-4 pt-4">
+                    <Link
+                      href={`${resumeData.personalInfo.linkedin}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </Link>
+                    <Link
+                      href={`${resumeData.personalInfo.github}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <Github className="h-5 w-5" />
+                    </Link>
+                    <Link
+                      href={`${resumeData.personalInfo.instagram}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <Instagram className="h-5 w-5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <Link
+                  href={
+                    t.language === "pt"
+                      ? resumeData.personalInfo.cvPt
+                      : resumeData.personalInfo.cvEn
+                  }
+                  target="_blank"
+                  className="block"
+                >
+                  <Button className="w-full">
+                    {t.language === "pt"
+                      ? "Abrir CV no Drive"
+                      : "Open Resume in Drive"}
+                  </Button>
+                </Link>
+
+                <Link href={"/contact"} className="block">
+                  <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
+                    {t.language === "pt" ? "Entrar em contato" : "Get in touch"}
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
 
           <Card className="border-2">
             <CardContent className="px-4 py-6 md:p-8 space-y-4">
@@ -380,20 +461,24 @@ export default function ResumeClientPage() {
                         height={32}
                         className="object-cover rounded-sm"
                       />
-                      <Image
-                        src={"/icons/next.svg"}
-                        alt="Next icon"
-                        width={32}
-                        height={32}
-                        className="object-cover rounded-sm"
-                      />
-                      <Image
-                        src={"/icons/fastify.svg"}
-                        alt="Fastify icon"
-                        width={32}
-                        height={32}
-                        className="object-cover rounded-sm"
-                      />
+                      <div className="bg-zinc-200 dark:bg-zinc-300 w-8 h-8 p-1 rounded-sm flex items-center justify-center">
+                        <Image
+                          src={"/icons/next.svg"}
+                          alt="Next icon"
+                          width={32}
+                          height={32}
+                          className="object-cover rounded-sm"
+                        />
+                      </div>
+                      <div className="bg-zinc-200 dark:bg-zinc-500 w-8 h-8 p-1 rounded-sm flex items-center justify-center">
+                        <Image
+                          src={"/icons/fastify.svg"}
+                          alt="Fastify icon"
+                          width={32}
+                          height={32}
+                          className="object-cover rounded-sm"
+                        />
+                      </div>
                     </div>
 
                     <h3 className="text-lg font-bold">
@@ -472,87 +557,7 @@ export default function ResumeClientPage() {
         </div>
 
         <div className="space-y-6">
-          {/* Mobile Sidebar - Keep as Card */}
-          <Card className="border-2 lg:hidden">
-            <CardContent className="p-6 space-y-2">
-              <div className="flex items-center gap-6 mb-6 ">
-                <div className="flex-shrink-0">
-                  <Image
-                    src={photoUrl || "/placeholder.svg"}
-                    alt={resumeData.personalInfo.name}
-                    width={80}
-                    height={60}
-                    className="object-cover rounded-full"
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-xl font-bold">
-                    {resumeData.personalInfo.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {resumeData.personalInfo.title}
-                  </p>
-                  <div className="flex items-center gap-2 text-muted-foreground mt-2">
-                    <MapPin className="h-4 w-4 flex-shrink-0" />
-                    <span className="text-sm">
-                      {resumeData.personalInfo.location}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4 pt-4">
-                    <Link
-                      href={`${resumeData.personalInfo.linkedin}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </Link>
-                    <Link
-                      href={`${resumeData.personalInfo.github}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <Github className="h-5 w-5" />
-                    </Link>
-                    <Link
-                      href={`${resumeData.personalInfo.instagram}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <Instagram className="h-5 w-5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              
-
-              <div className="space-y-1">
-                <Link
-                  href={
-                    t.language === "pt"
-                      ? resumeData.personalInfo.cvPt
-                      : resumeData.personalInfo.cvEn
-                  }
-                  className="block"
-                >
-                  <Button className="w-full">
-                    {t.language === "pt"
-                      ? "Abrir CV no Drive"
-                      : "Open Resume in Drive"}
-                  </Button>
-                </Link>
-
-                <Link href={"/contact"} className="block">
-                  <Button className="w-full">
-                    {t.language === "pt" ? "Entrar em contato" : "Get in touch"}
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+          
 
           {/* <div className=" lg:flex-col lg:sticky lg:top-0 lg:h-screen lg:py-6 lg:justify-between">
             <div className="flex flex-col items-center text-center space-y-4"> */}
@@ -620,6 +625,7 @@ export default function ResumeClientPage() {
                       ? resumeData.personalInfo.cvPt
                       : resumeData.personalInfo.cvEn
                   }
+                  target="_blank"
                   className="block"
                 >
                   <Button className="w-full">
@@ -630,7 +636,7 @@ export default function ResumeClientPage() {
                 </Link>
 
                 <Link href={"/contact"} className="block">
-                  <Button className="w-full">
+                  <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
                     {t.language === "pt" ? "Entrar em contato" : "Get in touch"}
                   </Button>
                 </Link>
