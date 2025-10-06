@@ -10,6 +10,7 @@ import { ShareButton } from "@/components/share-button";
 import type { BlogPost } from "@/data/blog-data.pt";
 import { useState, useMemo, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function BlogPage() {
   const [allBlogPosts, setAllBlogPosts] = useState<BlogPost[]>([]);
@@ -17,18 +18,21 @@ export default function BlogPage() {
   const [blogFilters, setBlogFilters] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
+  const t = useTranslations();
+  const locale = useLocale();
+
   useEffect(() => {
     const loadBlogData = async () => {
-      const savedLocale = localStorage.getItem('locale') || 'pt';
+      const savedLocale = localStorage.getItem("locale") || "pt";
       try {
         const data = await import(`@/data/blog-data.${savedLocale}.ts`);
         setAllBlogPosts(data.default.allBlogPosts);
-        setBlogFilters(data.default.blogFilters)
+        setBlogFilters(data.default.blogFilters);
       } catch (error) {
         // Fallback to Portuguese
         const data = await import(`@/data/blog-data.pt.ts`);
         setAllBlogPosts(data.default.allBlogPosts);
-        setBlogFilters(data.default.blogFilters)
+        setBlogFilters(data.default.blogFilters);
       }
     };
     loadBlogData();
@@ -69,7 +73,9 @@ export default function BlogPage() {
       <div>
         <h1 className="text-4xl font-bold mb-4">Blog</h1>
         <p className="text-xl text-muted-foreground mb-8">
-          Thoughts, insights, and technical articles
+          {locale === "pt"
+            ? "Pensamentos, insights e artigos técnicos."
+            : "Thoughts, insights, and technical articles."}
         </p>
       </div>
 
@@ -116,7 +122,9 @@ export default function BlogPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
             <Input
               type="text"
-              placeholder="Search articles..."
+              placeholder={
+                locale === "pt" ? "Buscar postagens ..." : "Search posts..."
+              }
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 bg-white border-zinc-300 focus-visible:ring-[#38A7F7] dark:bg-zinc-900/50 dark:border-zinc-800"
@@ -126,7 +134,9 @@ export default function BlogPage() {
 
         {/* Results count */}
         <div className="text-sm text-zinc-400">
-          Showing {filteredPosts.length} of {allBlogPosts.length} articles
+          {locale === "pt"
+            ? `Mostrando ${filteredPosts.length} de ${allBlogPosts.length} postagens`
+            : `Showing ${filteredPosts.length} of ${allBlogPosts.length} posts `}
         </div>
       </div>
 
@@ -205,21 +215,27 @@ export default function BlogPage() {
       {filteredPosts.length === 0 && allBlogPosts.length > 0 && (
         <div className="text-center py-12">
           <p className="text-xl text-zinc-400 mb-4">
-            No articles found matching your filters
+            {locale === "pt"
+              ? "Nenhum postagem encontrado"
+              : "No posts found matching your filters"}
           </p>
           <Button
             onClick={clearFilters}
             variant="outline"
             className="border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800 bg-transparent"
           >
-            Clear all filters
+            {locale === "pt" ? "Limpar todos os filtros" : "Clear all filters"}
           </Button>
         </div>
       )}
 
       {filteredPosts.length === 0 && allBlogPosts.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-xl text-zinc-400 mb-4">No articles found</p>
+          <p className="text-xl text-zinc-400 mb-4">
+            {locale === "pt"
+              ? "Nenhuma postagem encontrado"
+              : "No posts found matching your filters"}
+          </p>
           <div className="flex items-center justify-center">
             <Image
               src={"/images/noContent.svg"}
