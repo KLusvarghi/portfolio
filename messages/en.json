@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+  "home": {
+    "greeting": "Hi, I'm",
+    "role": "Full Stack Developer",
+    "description": "Passionate about creating innovative solutions and exceptional digital experiences.",
+    "viewAbout": "View About",
+    "featuredProjects": "Featured Projects",
+    "viewAllProjects": "View all projects",
+    "latestVideos": "Latest Videos",
+    "latestVideosDescription": "Check out my recent content on YouTube"
+  },
+  "about": {
+    "title": "About Me",
+    "career": "Career",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "seeMore": "See more",
+    "seeLess": "See less",
+    "present": "Present",
+    "online": "Online",
+    "inPerson": "In Person"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "A collection of my recent work and technical projects",
+    "searchPlaceholder": "Search projects...",
+    "allTechnologies": "All Technologies",
+    "categories": "Categories",
+    "filterByCategory": "Filter by category",
+    "clear": "Clear",
+    "showing": "Showing",
+    "of": "of",
+    "projectsText": "projects",
+    "demo": "Demo",
+    "code": "Code",
+    "projectsFound": "projects found",
+    "noProjectsFound": "No projects found matching your filters",
+    "clearAllFilters": "Clear all filters"
+  },
+  "contact": {
+    "title": "Contact",
+    "heading": "Let's talk?",
+    "description": "I'm always open to discuss new projects, business opportunities, partnerships, or simply exchange ideas about technology and innovation.",
+    "email": "Email",
+    "location": "Location",
+    "emailCopied": "Email copied to clipboard!",
+    "errorCopyingEmail": "Error copying email",
+    "whatsappHeading": "Got any questions?",
+    "whatsappDescription": "Send a message and talk directly with me. I respond personally!",
+    "whatsappButton": "CHAT ON WHATSAPP",
+    "findMeOn": "Or find me on:",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "instagram": "Instagram",
+    "socialMedia": "Social Media",
+    "sendMessage": "Send Message"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with",
+    "and": "and",
+    "switchToEnglish": "Switch to English",
+    "switchToPortuguese": "Switch to Portuguese"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Not found",
+    "toggleTheme": "Toggle theme",
+    "toggleMenu": "Toggle Menu",
+    "toggleSidebar": "Toggle Sidebar",
+    "shareThisPost": "Share this post",
+    "shareOnTwitter": "Share on Twitter",
+    "shareOnLinkedIn": "Share on LinkedIn",
+    "shareOnFacebook": "Share on Facebook",
+    "goToSlide": "Go to slide {slideNumber}",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "breadcrumb": "breadcrumb",
+    "pagination": "pagination"
+  },
+  "metadata": {
+    "defaultTitle": "Kauã Ortolani Lusvarghi | Senior Software Engineer",
+    "template": "%s | Kauã Ortolani Lusvarghi",
+    "description": "Senior Software Engineer specializing in fullstack development with Typescript, React, Next, Express, Fastify, and AI.",
+    "siteName": "Kauã Ortolani Lusvarghi Website",
+    "aboutTitle": "About",
+    "aboutDescription": "Learn about Kauã Ortolani Lusvarghi, Full Stack Developer."
+  }
+}

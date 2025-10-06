@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "projects": "Projetos",
+    "contact": "Contato",
+    "blog": "Blog"
+  },
+  "home": {
+    "greeting": "Olá, eu sou",
+    "role": "Desenvolvedor Full Stack",
+    "description": "Apaixonado por criar soluções inovadoras e experiências digitais excepcionais.",
+    "viewAbout": "Ver Sobre",
+    "featuredProjects": "Projetos em Destaque",
+    "viewAllProjects": "Ver todos os projetos",
+    "latestVideos": "Últimos Vídeos",
+    "latestVideosDescription": "Confira meu conteúdo recente no YouTube"
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "career": "Carreira",
+    "education": "Formação",
+    "skills": "Habilidades",
+    "languages": "Idiomas",
+    "seeMore": "Ver mais",
+    "seeLess": "Ver menos",
+    "present": "Presente",
+    "online": "Online",
+    "inPerson": "Presencial"
+  },
+  "projects": {
+    "title": "Projetos",
+    "description": "Uma coleção dos meus trabalhos recentes e projetos técnicos",
+    "searchPlaceholder": "Buscar projetos...",
+    "allTechnologies": "Todas as Tecnologias",
+    "categories": "Categorias",
+    "filterByCategory": "Filtrar por categoria",
+    "clear": "Limpar",
+    "showing": "Mostrando",
+    "of": "de",
+    "projectsText": "projetos",
+    "demo": "Demo",
+    "code": "Código",
+    "projectsFound": "projetos encontrados",
+    "noProjectsFound": "Nenhum projeto encontrado com seus filtros",
+    "clearAllFilters": "Limpar todos os filtros"
+  },
+  "contact": {
+    "title": "Contato",
+    "heading": "Vamos conversar?",
+    "description": "Estou sempre aberto para discutir novos projetos, oportunidades de negócio, parcerias, ou simplesmente trocar ideias sobre tecnologia e inovação.",
+    "email": "Email",
+    "location": "Localização",
+    "emailCopied": "Email copiado para a área de transferência!",
+    "errorCopyingEmail": "Erro ao copiar email",
+    "whatsappHeading": "Ficou com alguma dúvida?",
+    "whatsappDescription": "Envie uma mensagem e converse diretamente comigo. Respondo pessoalmente!",
+    "whatsappButton": "CHAMAR NO WHATSAPP",
+    "findMeOn": "Ou me encontre em:",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "instagram": "Instagram",
+    "socialMedia": "Redes Sociais",
+    "sendMessage": "Enviar Mensagem"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados.",
+    "builtWith": "Construído com",
+    "and": "e",
+    "switchToEnglish": "Mudar para Inglês",
+    "switchToPortuguese": "Mudar para Português"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "notFound": "Não encontrado",
+    "toggleTheme": "Alternar tema",
+    "toggleMenu": "Alternar Menu",
+    "toggleSidebar": "Alternar Barra Lateral",
+    "shareThisPost": "Compartilhar este post",
+    "shareOnTwitter": "Compartilhar no Twitter",
+    "shareOnLinkedIn": "Compartilhar no LinkedIn",
+    "shareOnFacebook": "Compartilhar no Facebook",
+    "goToSlide": "Ir para slide {slideNumber}",
+    "goToPreviousPage": "Ir para página anterior",
+    "goToNextPage": "Ir para próxima página",
+    "breadcrumb": "navegação estrutural",
+    "pagination": "paginação"
+  },
+  "metadata": {
+    "defaultTitle": "Kauã Ortolani Lusvarghi | Engenheiro de Software Sênior",
+    "template": "%s | Kauã Ortolani Lusvarghi",
+    "description": "Engenheiro de Software Sênior especializado em desenvolvimento fullstack com Typescript, React, Next, Express, Fastify e IA.",
+    "siteName": "Site de Kauã Ortolani Lusvarghi",
+    "aboutTitle": "Sobre",
+    "aboutDescription": "Conheça Kauã Ortolani Lusvarghi, Desenvolvedor Full Stack."
+  }
+}
