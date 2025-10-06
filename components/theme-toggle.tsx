@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "@/lib/theme/theme-context"
-import { cn } from "@/lib/utils"
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/lib/theme/theme-context";
+import { cn } from "@/lib/utils";
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <button
@@ -16,10 +16,15 @@ export function ThemeToggle() {
         "hover:border-zinc-600 hover:text-zinc-300",
         "dark:border-zinc-700/50 dark:text-zinc-400",
         "dark:hover:border-zinc-600 dark:hover:text-zinc-300",
+        "group"
       )}
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      {theme === "dark" ? (
+        <Sun className="w-5 h-5" />
+      ) : (
+        <Moon className="w-5 h-5 group-hover:fill-zinc-600 transition-colors" />
+      )}
     </button>
-  )
+  );
 }
