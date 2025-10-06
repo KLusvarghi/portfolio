@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, Github, Search, X } from "lucide-react";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
-import projectsData from "@/data/projects-data";
-import { useState, useMemo } from "react";
+import type { Project } from "@/data/projects-data.pt";
+import { useState, useMemo, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -18,23 +18,33 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import { useI18n } from "@/lib/i18n/i18n-context";
+import { useTranslations } from 'next-intl';
 
 export default function ProjectsPage() {
-  const { projects, projectFilters } = projectsData;
-  const { t } = useI18n();
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [projectFilters, setProjectFilters] = useState<string[]>([]);
+  const t = useTranslations();
+
+  useEffect(() => {
+    const loadProjectsData = async () => {
+      const savedLocale = localStorage.getItem('locale') || 'pt';
+      try {
+        const data = await import(`@/data/projects-data.${savedLocale}.ts`);
+        setProjects(data.default.projects);
+        setProjectFilters(data.default.projectFilters);
+      } catch (error) {
+        // Fallback to Portuguese
+        const data = await import(`@/data/projects-data.pt.ts`);
+        setProjects(data.default.projects);
+        setProjectFilters(data.default.projectFilters);
+      }
+    };
+    loadProjectsData();
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-
-  const allTechs = useMemo(() => {
-    const techSet = new Set<string>();
-    projects.forEach((project) => {
-      project.tags.forEach((tag) => techSet.add(tag));
-    });
-    return Array.from(techSet).sort();
-  }, [projects]);
 
   const allCategories = useMemo(() => {
     const categorySet = new Set<string>();
@@ -91,12 +101,16 @@ export default function ProjectsPage() {
     selectedTechs.length > 0 ||
     selectedCategories.length > 0;
 
+  if (projects.length === 0) {
+    return null;
+  }
+
   return (
     <div className="container pt-12">
       <div>
-        <h1 className="text-4xl font-bold mb-4">{t.projects.title}</h1>
+        <h1 className="text-4xl font-bold mb-4">{t('projects.title')}</h1>
         <p className="text-xl text-muted-foreground mb-8">
-          {t.projects.description}
+          {t('projects.description')}
         </p>
       </div>
 
@@ -132,7 +146,7 @@ export default function ProjectsPage() {
                   size="sm"
                   className="border-zinc-400 dark:border-zinc-700 text-[#444444] dark:text-[#e6e6e6] bg-transparent hover:bg-[#cbcdcf] dark:hover:bg-zinc-800  "
                 >
-                  {t.projects.categories}
+                  {t('projects.categories')}
                   {selectedCategories.length > 0 && (
                     <span className="ml-2 bg-[#38A7F7] text-white rounded-full px-2 py-0.5 text-xs">
                       {selectedCategories.length}
@@ -146,7 +160,7 @@ export default function ProjectsPage() {
                 className="w-56 bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700"
               >
                 <DropdownMenuLabel>
-                  {t.projects.filterByCategory}
+                  {t('projects.filterByCategory')}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-zinc-300 dark:bg-zinc-800" />
                 {allCategories.map((category) => (
@@ -171,7 +185,7 @@ export default function ProjectsPage() {
                 className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-300 dark:hover:bg-zinc-800"
               >
                 <X className="h-4 w-4 mr-1" />
-                {t.projects.clear}
+                {t('projects.clear')}
               </Button>
             )}
           </div>
@@ -181,7 +195,7 @@ export default function ProjectsPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
             <Input
               type="text"
-              placeholder={t.projects.searchPlaceholder}
+              placeholder={t('projects.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 bg-white border-zinc-300 focus-visible:ring-[#38A7F7] dark:bg-zinc-900/50 dark:border-zinc-800"
@@ -191,12 +205,12 @@ export default function ProjectsPage() {
 
         {/* Results count */}
         <div className="text-sm text-zinc-400">
-          {t.projects.showing} {filteredProjects.length} {t.projects.of}{" "}
-          {projects.length} {t.projects.projectsText}
+          {t('projects.showing')} {filteredProjects.length} {t('projects.of')}{" "}
+          {projects.length} {t('projects.projectsText')}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 sm:mb-12">
         {filteredProjects.map((project) => (
           <Card
             key={project.id}
@@ -266,7 +280,7 @@ export default function ProjectsPage() {
                       className="w-full bg-[#38A7F7] text-white hover:bg-[#2a8fd9] dark:bg-white dark:text-black dark:hover:bg-zinc-200 group/button"
                     >
                       <ExternalLink className="mr-2 h-4 w-4 transition-transform group-hover/button:scale-110" />
-                      {t.projects.demo}
+                      {t('projects.demo')}
                     </Button>
                   </Link>
                 )}
@@ -282,7 +296,7 @@ export default function ProjectsPage() {
                     className="w-full border-zinc-300 hover:bg-zinc-100 dark:border-white/20 dark:hover:bg-white/10 group/button bg-transparent"
                   >
                     <Github className="mr-2 h-4 w-4 transition-transform group-hover/button:scale-110" />
-                    {t.projects.code}
+                    {t('projects.code')}
                   </Button>
                 </Link>
               </div>
@@ -294,14 +308,14 @@ export default function ProjectsPage() {
       {filteredProjects.length === 0 && (
         <div className="text-center py-12">
           <p className="text-xl text-zinc-400 mb-4">
-            {t.projects.noProjectsFound}
+            {t('projects.noProjectsFound')}
           </p>
           <Button
             onClick={clearFilters}
             variant="outline"
             className="border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800 bg-transparent"
           >
-            {t.projects.clearAllFilters}
+            {t('projects.clearAllFilters')}
           </Button>
           <div className="flex items-center justify-center mt-6">
             <Image

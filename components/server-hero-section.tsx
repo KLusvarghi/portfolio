@@ -4,11 +4,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Instagram, MapPin } from "lucide-react";
-import resumeData from "@/data/resume-data";
-import { useI18n } from "@/lib/i18n/i18n-context";
+import type { ResumeData } from "@/data/resume-data.pt";
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from "react";
 
 export function ServerHeroSection() {
-  const { t } = useI18n();
+  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const t = useTranslations();
+
+  useEffect(() => {
+    const savedLocale = localStorage.getItem('locale') || 'pt';
+    loadResumeData(savedLocale);
+  }, []);
+
+  const loadResumeData = async (locale: string) => {
+    try {
+      const data = await import(`@/data/resume-data.${locale}.ts`);
+      setResumeData(data.default);
+    } catch (error) {
+      // Fallback to Portuguese
+      const data = await import(`@/data/resume-data.pt.ts`);
+      setResumeData(data.default);
+    }
+  };
+
+  if (!resumeData) return null;
 
   return (
     <div className="grid lg:grid-cols-[1fr_auto] items-center gap-12 lg:gap-16">
@@ -19,14 +39,14 @@ export function ServerHeroSection() {
             <span>{resumeData.personalInfo.location}</span>
           </div>
           <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">
-            {t.home.greeting} {resumeData.personalInfo.name}
+            {t('home.greeting')} {resumeData.personalInfo.name}
           </h1>
           <div className="flex items-center gap-2 text-zinc-400">
-            <span className="text-xl">{t.home.role}</span>
+            <span className="text-xl">{t('home.role')}</span>
           </div>
         </div>
 
-        <p className="text-muted-foreground text-lg">{t.home.description}</p>
+        <p className="text-muted-foreground text-lg">{t('home.description')}</p>
 
         <div className="flex flex-wrap gap-4">
           <Link href="/about">
@@ -35,7 +55,7 @@ export function ServerHeroSection() {
               size="lg"
               className="bg-popover-foreground text-popover hover:bg-[#262626] dark:hover:bg-[#dfdfdf]"
             >
-              {t.nav.about}
+              {t('nav.about')}
             </Button>
           </Link>
           <Link href="/contact">
@@ -44,7 +64,7 @@ export function ServerHeroSection() {
               size="lg"
               className="border-popover-foreground/20 text-popover-foreground hover:bg-popover-foreground/10 dark:border-white/20 dark:text-white bg-transparent"
             >
-              {t.nav.contact}
+              {t('nav.contact')}
             </Button>
           </Link>
         </div>
@@ -81,7 +101,7 @@ export function ServerHeroSection() {
       </div>
 
       <div className="hidden lg:flex items-start justify-center lg:justify-end pt-1">
-        <div className="relative w-48 h-48 sm:w-64 sm:h-80 rounded-full overflow-hidden border-4 border-white/10">
+        <div className="relative w-48 h-48 sm:w-64 sm:h-80 rounded-full overflow-hidden border-4 border-black/30 dark:border-white/10">
           <Image
             src="/images/profile.png"
             alt={resumeData.personalInfo.name}

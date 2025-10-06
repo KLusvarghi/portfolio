@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ExternalLink } from "lucide-react"
 import { PlaceholderImage } from "@/components/ui/placeholder-image"
-import { featuredBlogPosts } from "@/data/blog-data"
+import type { BlogPost } from "@/data/blog-data.pt"
+import { useState, useEffect } from "react"
+import { useTranslations } from 'next-intl'
 
 interface FeaturedBlogPostsProps {
   className?: string
@@ -11,17 +15,43 @@ interface FeaturedBlogPostsProps {
 }
 
 export function FeaturedBlogPosts({ className, showViewAll = true }: FeaturedBlogPostsProps) {
+  const [featuredBlogPosts, setFeaturedBlogPosts] = useState<BlogPost[]>([]);
+  const t = useTranslations();
+
+  useEffect(() => {
+    const loadBlogData = async () => {
+      const savedLocale = localStorage.getItem('locale') || 'pt';
+      try {
+        const data = await import(`@/data/blog-data.${savedLocale}.ts`);
+        setFeaturedBlogPosts(data.default.featuredBlogPosts);
+      } catch (error) {
+        // Fallback to Portuguese
+        const data = await import(`@/data/blog-data.pt.ts`);
+        setFeaturedBlogPosts(data.default.featuredBlogPosts);
+      }
+    };
+    loadBlogData();
+  }, []);
+
+  if (featuredBlogPosts.length === 0) {
+    return null;
+  }
+
   return (
     <div className={className}>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-bold mb-2">Featured Blog Posts</h2>
-          <p className="text-zinc-400">My latest articles and insights</p>
+          <h2 className="text-2xl font-bold mb-2">{t('home.featuredBlogPosts')}</h2>
+          <p className="text-zinc-400">
+            {t('language') === "pt"
+              ? "Meus artigos e insights mais recentes"
+              : "My latest articles and insights"}
+          </p>
         </div>
         {showViewAll && (
           <Link href="/blog">
             <Button variant="outline" className="border-zinc-700 text-white hover:bg-zinc-800">
-              View All Posts
+              {t('home.viewAllPosts')}
             </Button>
           </Link>
         )}
@@ -57,7 +87,7 @@ export function FeaturedBlogPosts({ className, showViewAll = true }: FeaturedBlo
                 <Link href={`/blog/${post.slug}`}>
                   <Button variant="default" size="sm" className="bg-white text-black hover:bg-zinc-200">
                     <ExternalLink className="mr-2 h-4 w-4" />
-                    Read Article
+                    {t('blog.readArticle')}
                   </Button>
                 </Link>
               </div>

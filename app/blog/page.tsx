@@ -7,20 +7,31 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, ExternalLink, Search, X } from "lucide-react";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { ShareButton } from "@/components/share-button";
-import { allBlogPosts } from "@/data/blog-data";
-import { useState, useMemo } from "react";
+import type { BlogPost } from "@/data/blog-data.pt";
+import { useState, useMemo, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 
 export default function BlogPage() {
+  const [allBlogPosts, setAllBlogPosts] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [blogFilters, setBlogFilters] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const allTags = useMemo(() => {
-    const tagSet = new Set<string>();
-    allBlogPosts.forEach((post) => {
-      post.tags.forEach((tag) => tagSet.add(tag));
-    });
-    return Array.from(tagSet).sort();
+  useEffect(() => {
+    const loadBlogData = async () => {
+      const savedLocale = localStorage.getItem('locale') || 'pt';
+      try {
+        const data = await import(`@/data/blog-data.${savedLocale}.ts`);
+        setAllBlogPosts(data.default.allBlogPosts);
+        setBlogFilters(data.default.blogFilters)
+      } catch (error) {
+        // Fallback to Portuguese
+        const data = await import(`@/data/blog-data.pt.ts`);
+        setAllBlogPosts(data.default.allBlogPosts);
+        setBlogFilters(data.default.blogFilters)
+      }
+    };
+    loadBlogData();
   }, []);
 
   const filteredPosts = useMemo(() => {
@@ -69,7 +80,7 @@ export default function BlogPage() {
           <div className="flex flex-wrap gap-2 items-center flex-1">
             {/* Tag filter buttons */}
             <div className="flex flex-wrap gap-2">
-              {allTags.map((tag) => (
+              {blogFilters.map((tag) => (
                 <Button
                   key={tag}
                   variant={selectedTags.includes(tag) ? "default" : "outline"}

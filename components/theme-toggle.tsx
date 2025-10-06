@@ -2,10 +2,12 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/lib/theme/theme-context";
+import { useTranslations } from 'next-intl';
 import { cn } from "@/lib/utils";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const t = useTranslations();
 
   return (
     <button
@@ -18,7 +20,7 @@ export function ThemeToggle() {
         "dark:hover:border-zinc-600 dark:hover:text-zinc-300",
         "group"
       )}
-      aria-label="Toggle theme"
+      aria-label={t('ariaLabels.toggleTheme')}
     >
       {theme === "dark" ? (
         <Sun className="w-5 h-5" />

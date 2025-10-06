@@ -6,18 +6,32 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import resumeData from "@/data/resume-data";
-import { useI18n } from "@/lib/i18n/i18n-context";
+import type { ResumeData } from "@/data/resume-data.pt";
+import { useTranslations } from 'next-intl';
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
-  const { t } = useI18n();
+  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     setMounted(true);
+    const savedLocale = localStorage.getItem('locale') || 'pt';
+    loadResumeData(savedLocale);
   }, []);
 
-  if (!mounted) return null;
+  const loadResumeData = async (locale: string) => {
+    try {
+      const data = await import(`@/data/resume-data.${locale}.ts`);
+      setResumeData(data.default);
+    } catch (error) {
+      // Fallback to Portuguese
+      const data = await import(`@/data/resume-data.pt.ts`);
+      setResumeData(data.default);
+    }
+  };
+
+  if (!mounted || !resumeData) return null;
 
   return (
     <div className="grid lg:grid-cols-[1fr_auto] items-start gap-12 lg:gap-16">
@@ -43,7 +57,7 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-5xl font-bold tracking-tight sm:text-6xl"
           >
-            {t.home.greeting} {resumeData.personalInfo.name}
+            {t('home.greeting')} {resumeData.personalInfo.name}
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +65,7 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex items-center gap-2 text-zinc-400"
           >
-            <span className="text-xl">{t.home.role}</span>
+            <span className="text-xl">{t('home.role')}</span>
           </motion.div>
         </div>
 
@@ -61,7 +75,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.45 }}
           className="text-muted-foreground text-lg"
         >
-          {t.home.description}
+          {t('home.description')}
         </motion.p>
 
         <motion.div
@@ -75,7 +89,7 @@ export function HeroSection() {
               size="lg"
               className="bg-[#38A7F7] text-white hover:bg-[#2a8fd9] dark:bg-white dark:text-black dark:hover:bg-zinc-200"
             >
-              {t.nav.about}
+              {t('nav.about')}
             </Button>
           </Link>
           <Link href="/contact">
@@ -84,7 +98,7 @@ export function HeroSection() {
               size="lg"
               className="border-2 border-zinc-800 text-zinc-900 bg-white hover:bg-zinc-100 dark:border-white dark:text-white dark:bg-transparent dark:hover:bg-white/10"
             >
-              {t.nav.contact}
+              {t('nav.contact')}
             </Button>
           </Link>
         </motion.div>

@@ -1,11 +1,10 @@
-import ResumeClientPage from "./ResumeClientPage"
-import resumeData from "@/data/resume-data"
+import AboutClientPage from "./AboutClientPage"
 
 export const metadata = {
   title: "About",
-  description: `Conheça ${resumeData.personalInfo.name}, ${resumeData.personalInfo.title}.`,
+  description: "Conheça Kauã Ortolani Lusvarghi, Desenvolvedor Full Stack.",
 }
 
-export default function ResumePage() {
-  return <ResumeClientPage />
+export default function AboutPage() {
+  return <AboutClientPage />
 }

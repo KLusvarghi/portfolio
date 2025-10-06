@@ -12,14 +12,33 @@ import {
   Check,
 } from "lucide-react";
 import Link from "next/link";
-import resumeData from "@/data/resume-data";
-import { useState } from "react";
+import type { ResumeData } from "@/data/resume-data.pt";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { useI18n } from "@/lib/i18n/i18n-context";
+import { useTranslations } from 'next-intl';
 
 export default function ContactPage() {
   const [copied, setCopied] = useState(false);
-  const { t } = useI18n();
+  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const t = useTranslations();
+
+  useEffect(() => {
+    const savedLocale = localStorage.getItem('locale') || 'pt';
+    loadResumeData(savedLocale);
+  }, []);
+
+  const loadResumeData = async (locale: string) => {
+    try {
+      const data = await import(`@/data/resume-data.${locale}.ts`);
+      setResumeData(data.default);
+    } catch (error) {
+      // Fallback to Portuguese
+      const data = await import(`@/data/resume-data.pt.ts`);
+      setResumeData(data.default);
+    }
+  };
+
+  if (!resumeData) return null;
 
   const email = resumeData?.personalInfo?.email || "kauaolusvarghi@proton.me";
   const location = resumeData?.personalInfo?.location || "Brasil, São Paulo";
@@ -38,10 +57,10 @@ export default function ContactPage() {
     try {
       await navigator.clipboard.writeText(email);
       setCopied(true);
-      toast.success(t.contact.emailCopied);
+      toast.success(t('contact.emailCopied'));
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      toast.error(t.contact.errorCopyingEmail);
+      toast.error(t('contact.errorCopyingEmail'));
     }
   };
 
@@ -51,10 +70,10 @@ export default function ContactPage() {
         {/* Hero Section */}
         <div className="mb-8 md:mb-12 text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4">
-            {t.contact.heading}
+            {t('contact.heading')}
           </h1>
           <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            {t.contact.description}
+            {t('contact.description')}
           </p>
         </div>
 
@@ -69,7 +88,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold mb-1 text-sm md:text-base">
-                      {t.contact.email}
+                      {t('contact.email')}
                     </p>
                     <button
                       onClick={copyToClipboard}
@@ -95,7 +114,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold mb-1 text-sm md:text-base">
-                      {t.contact.location}
+                      {t('contact.location')}
                     </p>
                     <p className="text-xs md:text-sm text-zinc-400">
                       {location}
@@ -123,10 +142,10 @@ export default function ContactPage() {
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-lg md:text-xl font-bold mb-2">
-                    {t.contact.whatsappHeading}
+                    {t('contact.whatsappHeading')}
                   </h3>
                   <p className="text-sm md:text-base text-muted-foreground mb-4">
-                    {t.contact.whatsappDescription}
+                    {t('contact.whatsappDescription')}
                   </p>
                   <Button
                     asChild
@@ -138,7 +157,7 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {t.contact.whatsappButton}
+                      {t('contact.whatsappButton')}
                     </Link>
                   </Button>
                 </div>
@@ -149,7 +168,7 @@ export default function ContactPage() {
           {/* Social Media Section */}
           <div className="text-center py-6 md:py-8">
             <p className="text-muted-foreground mb-4 md:mb-6 text-sm md:text-base">
-              {t.contact.findMeOn}
+              {t('contact.findMeOn')}
             </p>
             <div className="flex justify-center items-center gap-6 md:gap-8">
               <Link
@@ -162,7 +181,7 @@ export default function ContactPage() {
                   <Linkedin className="h-5 w-5 md:h-6 md:w-6 text-zinc-700 dark:text-zinc-400 group-hover:text-[#38A7F7] transition-colors" />
                 </div>
                 <span className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-[#38A7F7] transition-colors">
-                  {t.contact.linkedin}
+                  {t('contact.linkedin')}
                 </span>
               </Link>
 
@@ -176,7 +195,7 @@ export default function ContactPage() {
                   <Github className="h-5 w-5 md:h-6 md:w-6 text-zinc-700 dark:text-zinc-400 group-hover:text-[#38A7F7] transition-colors" />
                 </div>
                 <span className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-[#38A7F7] transition-colors">
-                  {t.contact.github}
+                  {t('contact.github')}
                 </span>
               </Link>
 
@@ -190,7 +209,7 @@ export default function ContactPage() {
                   <Instagram className="h-5 w-5 md:h-6 md:w-6 text-zinc-700 dark:text-zinc-400 group-hover:text-[#38A7F7] transition-colors" />
                 </div>
                 <span className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-[#38A7F7] transition-colors">
-                  {t.contact.instagram}
+                  {t('contact.instagram')}
                 </span>
               </Link>
             </div>

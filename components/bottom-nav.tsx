@@ -4,19 +4,18 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, FileText, Briefcase, Mail, Book } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useI18n } from "@/lib/i18n/i18n-context"
-import { ThemeToggle } from "./theme-toggle"
+import { useTranslations } from 'next-intl'
 
 export function BottomNav() {
   const pathname = usePathname()
-  const { t } = useI18n()
+  const t = useTranslations()
 
   const navItems = [
-    { name: t.nav.home, path: "/", icon: Home },
-    { name: t.nav.about, path: "/about", icon: FileText },
-    { name: t.nav.projects, path: "/projects", icon: Briefcase },
-    { name: t.nav.contact, path: "/contact", icon: Mail },
-    { name: t.nav.blog, path: "/blog", icon: Book },
+    { name: t('nav.home'), path: "/", icon: Home },
+    { name: t('nav.about'), path: "/about", icon: FileText },
+    { name: t('nav.projects'), path: "/projects", icon: Briefcase },
+    { name: t('nav.contact'), path: "/contact", icon: Mail },
+    { name: t('nav.blog'), path: "/blog", icon: Book },
   ]
 
   return (

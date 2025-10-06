@@ -1,11 +1,13 @@
 "use client"
 
 import { useEffect } from "react"
-import { useI18n } from "@/lib/i18n/i18n-context"
+import { useRouter } from "next/navigation"
+import { useLocale } from "next-intl"
 import { detectUserCountry } from "@/lib/i18n/detect-language"
 
 export function LanguageDetector() {
-  const { setLanguage } = useI18n()
+  const router = useRouter()
+  const currentLocale = useLocale()
 
   useEffect(() => {
     // Check if user has already set a language preference
@@ -14,10 +16,12 @@ export function LanguageDetector() {
     // Only auto-detect if no preference is saved
     if (!savedLanguage) {
       detectUserCountry().then((detectedLanguage) => {
-        setLanguage(detectedLanguage)
+        if (detectedLanguage !== currentLocale) {
+          router.push(`/${detectedLanguage}`)
+        }
       })
     }
-  }, [setLanguage])
+  }, [router, currentLocale])
 
   // This component doesn't render anything
   return null

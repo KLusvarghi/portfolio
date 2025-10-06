@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useTranslations } from 'next-intl'
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
@@ -13,6 +14,7 @@ interface HeaderClientProps {
 export function HeaderClient({ navItems }: HeaderClientProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const t = useTranslations()
 
   useEffect(() => {
     setMobileMenuOpen(false)
@@ -35,7 +37,7 @@ export function HeaderClient({ navItems }: HeaderClientProps) {
       <Button
         variant="ghost"
         className="px-2 md:hidden"
-        aria-label="Toggle Menu"
+        aria-label={t('ariaLabels.toggleMenu')}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
         {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

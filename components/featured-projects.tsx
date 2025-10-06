@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
-import projectsData from "@/data/projects-data";
+import type { Project } from "@/data/projects-data.pt";
 import {
   Carousel,
   CarouselContent,
@@ -15,7 +15,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
-import { useI18n } from "@/lib/i18n/i18n-context";
+import { useTranslations } from 'next-intl';
 
 interface FeaturedProjectsProps {
   className?: string;
@@ -26,10 +26,25 @@ export function FeaturedProjects({
   className,
   showViewAll = true,
 }: FeaturedProjectsProps) {
-  const { featuredProjects } = projectsData;
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const { t } = useI18n();
+  const t = useTranslations();
+
+  useEffect(() => {
+    const loadProjectsData = async () => {
+      const savedLocale = localStorage.getItem('locale') || 'pt';
+      try {
+        const data = await import(`@/data/projects-data.${savedLocale}.ts`);
+        setFeaturedProjects(data.default.featuredProjects);
+      } catch (error) {
+        // Fallback to Portuguese
+        const data = await import(`@/data/projects-data.pt.ts`);
+        setFeaturedProjects(data.default.featuredProjects);
+      }
+    };
+    loadProjectsData();
+  }, []);
 
   useEffect(() => {
     if (!api) {
@@ -46,7 +61,7 @@ export function FeaturedProjects({
   const ProjectCard = ({
     project,
   }: {
-    project: (typeof featuredProjects)[0];
+    project: Project;
   }) => (
     <Card className="group relative overflow-hidden border-2 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:border-primary/50">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -105,7 +120,7 @@ export function FeaturedProjects({
             >
               <Button size="sm" className="w-full group/button">
                 <ExternalLink className="mr-2 h-4 w-4 transition-transform group-hover/button:scale-110" />
-                {t.projects.demo}
+                {t('projects.demo')}
               </Button>
             </Link>
           )}
@@ -121,7 +136,7 @@ export function FeaturedProjects({
               className="w-full group/button bg-transparent"
             >
               <Github className="mr-2 h-4 w-4 transition-transform group-hover/button:scale-110" />
-              {t.projects.code}
+              {t('projects.code')}
             </Button>
           </Link>
         </div>
@@ -129,13 +144,17 @@ export function FeaturedProjects({
     </Card>
   );
 
+  if (featuredProjects.length === 0) {
+    return null;
+  }
+
   return (
     <div className={className}>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
         <div>
-          <h2 className="text-3xl font-bold mb-2">{t.home.featuredProjects}</h2>
+          <h2 className="text-3xl font-bold mb-2">{t('home.featuredProjects')}</h2>
           <p className="text-muted-foreground">
-            {t.language === "pt"
+            {t('language') === "pt"
               ? "Alguns dos meus trabalhos recentes e contribuições"
               : "Some of my recent work and contributions"}
           </p>
@@ -143,7 +162,7 @@ export function FeaturedProjects({
         {showViewAll && (
           <Link href="/projects">
             <Button variant="default" className="group">
-              {t.home.viewAllProjects}
+              {t('home.viewAllProjects')}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>

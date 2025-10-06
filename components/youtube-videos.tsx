@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { useI18n } from "@/lib/i18n/i18n-context"
+import { useTranslations } from 'next-intl'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 
 const getVideoData = (language: "en" | "pt") => {
@@ -98,7 +98,8 @@ const getVideoData = (language: "en" | "pt") => {
 }
 
 export function YouTubeVideos() {
-  const { t, language } = useI18n()
+  const t = useTranslations()
+  const language = t('language') as 'en' | 'pt'
   const [api, setApi] = useState<CarouselApi>()
   const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -162,8 +163,8 @@ export function YouTubeVideos() {
   return (
     <div className="w-full">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-2">{t.home.latestVideos}</h2>
-        <p className="text-muted-foreground">{t.home.latestVideosDescription}</p>
+        <h2 className="text-3xl font-bold mb-2">{t('home.latestVideos')}</h2>
+        <p className="text-muted-foreground">{t('home.latestVideosDescription')}</p>
       </div>
 
       <Carousel
