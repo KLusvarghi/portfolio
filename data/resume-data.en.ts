@@ -83,12 +83,12 @@ const resumeData: ResumeData = {
   skills: {
     languages: [
       "TypeScript",
-      "JavaScript",
       "Node.js",
       "React",
       "Next.js",
       "Express",
       "Fastify",
+      "JavaScript",
       "HTML5",
       "CSS3",
       "SQL",
@@ -103,7 +103,7 @@ const resumeData: ResumeData = {
       "REST API",
     ],
     cloud: ["Docker", "GitHub Actions", "Vercel", "AWS (basic)", "CI/CD"],
-    data: ["PostgreSQL", "MySQL", "MOngoDB","Redis", "Prisma", "Drizzle ORM", "Prisma"],
+    data: ["PostgreSQL", "MySQL", "MOngoDB","Redis", "Prisma", "Drizzle ORM"],
     quality: ["Jest", "Supertest", "React Testing Library", "Vitest", "Zod", "Swagger", "JSDocs"],
   },
   experience: [

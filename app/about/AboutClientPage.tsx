@@ -508,7 +508,7 @@ export default function AboutClientPage() {
                         : "Main Stack"}
                     </h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      {resumeData.skills.languages.slice(0, 4).join(", ")}
+                      {resumeData.skills.languages.slice(0, 6).join(", ")}
                     </p>
                   </div>
                 </CardContent>
