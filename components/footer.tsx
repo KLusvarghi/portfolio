@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Github, Linkedin, Instagram } from "lucide-react"
-import { useI18n } from "@/lib/i18n/i18n-context"
-import { cn } from "@/lib/utils"
-import resumeData from "@/data/resume-data"
-import { ThemeToggle } from "./theme-toggle"
+import Link from "next/link";
+import { Github, Linkedin, Instagram } from "lucide-react";
+import { useI18n } from "@/lib/i18n/i18n-context";
+import { cn } from "@/lib/utils";
+import resumeData from "@/data/resume-data";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Footer() {
-  const { language, setLanguage, t } = useI18n()
+  const { language, setLanguage, t } = useI18n();
 
   return (
     <footer className="border-t mb-20 md:mb-0">
       <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
         <div className="text-center md:text-left">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Kauã Ortolani Lusvarghi. {t.footer.rights}
+            &copy; Copyright · {new Date().getFullYear()} - Kauã Ortolani Lusvarghi.{" "}
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export default function Footer() {
                 "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all",
                 language === "en"
                   ? "bg-[hsl(var(--active))] text-white"
-                  : "text-muted-foreground hover:text-white hover:bg-zinc-800/50",
+                  : "text-muted-foreground hover:text-zinc-700 dark:hover:text-white hover:bg-zinc-400/40 dark:hover:bg-zinc-800/50"
               )}
               aria-label="Switch to English"
             >
@@ -43,7 +43,7 @@ export default function Footer() {
                 "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all",
                 language === "pt"
                   ? "bg-[hsl(var(--active))] text-white"
-                  : "text-muted-foreground hover:text-white hover:bg-zinc-800/50",
+                  : "text-muted-foreground hover:text-zinc-700 dark:hover:text-white hover:bg-zinc-400/40 dark:hover:bg-zinc-800/50"
               )}
               aria-label="Mudar para Português"
             >
