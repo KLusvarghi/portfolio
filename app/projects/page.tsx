@@ -21,7 +21,7 @@ import { ChevronDown } from "lucide-react";
 import { useI18n } from "@/lib/i18n/i18n-context";
 
 export default function ProjectsPage() {
-  const { projects } = projectsData;
+  const { projects, projectFilters } = projectsData;
   const { t } = useI18n();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -107,7 +107,7 @@ export default function ProjectsPage() {
           <div className="flex flex-wrap gap-2 items-center flex-1">
             {/* Technology filter buttons */}
             <div className="flex flex-wrap gap-2">
-              {allTechs.slice(0, 6).map((tech) => (
+              {projectFilters.map((tech) => (
                 <Button
                   key={tech}
                   variant={selectedTechs.includes(tech) ? "default" : "outline"}
