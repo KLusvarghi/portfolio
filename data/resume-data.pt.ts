@@ -68,7 +68,7 @@ const resumeData: ResumeData = {
     location: "Brasil, São Paulo",
     linkedin: "https://www.linkedin.com/in/kaua-lusvarghi-fullstack-dev/",
     github: "https://github.com/KLusvarghi",
-    instagram: "https://www.instagram.com/lusvarghkaua",
+    instagram: "https://www.instagram.com/lusvarghi.dev",
     cv: "https://drive.google.com/file/d/19Etov9PQKz5iDyzX-vBeMEn9XAVVj3p2/view?usp=sharing",
     phone: "+55 (13) 99198-1875",
     photo: "/images/profile.png",
