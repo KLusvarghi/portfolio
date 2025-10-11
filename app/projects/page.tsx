@@ -161,7 +161,7 @@ export default function ProjectsPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-zinc-400 dark:border-zinc-700 text-[#444444] dark:text-[#e6e6e6] bg-transparent hover:bg-[#cbcdcf] dark:hover:bg-zinc-800  "
+                  className="border-zinc-400 dark:border-zinc-700 text-[#444444] dark:text-[#e6e6e6] bg-transparent hover:bg-[#cbcdcf] dark:hover:bg-zinc-800"
                 >
                   {t("projects.categories")}
                   {selectedCategories.length > 0 && (
@@ -174,7 +174,7 @@ export default function ProjectsPage() {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="start"
-                className="w-56 bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700"
+                className="w-56 bg-zinc-300 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700"
               >
                 <DropdownMenuLabel>
                   {t("projects.filterByCategory")}
@@ -185,7 +185,7 @@ export default function ProjectsPage() {
                     key={category}
                     checked={selectedCategories.includes(category)}
                     onCheckedChange={() => toggleCategory(category)}
-                    className="cursor-pointer text-[#444444] dark:text-[#e6e6e6] hover:bg-zinc-300 dark:hover:bg-zinc-900"
+                    className="cursor-pointer text-[#444444] dark:text-[#e6e6e6] dark:hover:bg-zinc-900"
                   >
                     {category}
                   </DropdownMenuCheckboxItem>
@@ -195,10 +195,11 @@ export default function ProjectsPage() {
 
             {/* order by */}
             <Select value={sortOrder} onValueChange={(value: "desc" | "asc") => setSortOrder(value)}>
-              <SelectTrigger className="w-[180px] border-zinc-700 hover:bg-zinc-800 bg-transparent">
-                <SelectValue placeholder={t("projects.sortBy")} />
+              <SelectTrigger className="w-[180px] border-zinc-300 dark:border-zinc-700 hover:bg-[#cbcdcf] dark:hover:bg-zinc-800 bg-transparent">
+                  
+                  <SelectValue className="border-zinc-400 dark:border-zinc-700 text-[#444444] dark:text-[#e6e6e6] bg-transparent hover:bg-[#cbcdcf] dark:hover:bg-zinc-800" placeholder={t("projects.sortBy")}  />
               </SelectTrigger>
-              <SelectContent className="bg-zinc-900 border-zinc-800">
+              <SelectContent className="bg-zinc-300 dark:bg-zinc-900 dark:border-zinc-900">
                 <SelectItem value="desc">{t("projects.newest")}</SelectItem>
                 <SelectItem value="asc">{t("projects.oldest")}</SelectItem>
               </SelectContent>
@@ -254,7 +255,7 @@ export default function ProjectsPage() {
               
               rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-zinc-900/60 dark:via-zinc-900/40 dark:to-zinc-900/30 border border-zinc-200/60 dark:border-zinc-800/60 backdrop-blur-xl hover:border-zinc-300/50 dark:hover:border-zinc-700/50 transition-all duration-500 hover:transform hover:scale-[1.02]"
             >
-              <div className="absolute top-3 right-3 z-10 bg-[#38A7F7] text-white text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+              <div className="absolute top-3 right-3 z-10 bg-black/20 backdrop-blur-sm text-white dark:text-white text-xs font-medium px-3 py-1 rounded-full shadow-lg">
                 {formatProjectDate(project.startDate, project.endDate)}
               </div>
 
@@ -296,9 +297,9 @@ export default function ProjectsPage() {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 rounded-md bg-[#38A7F7] text-white hover:bg-[#2a8fd9] group-hover:scale-110"
+                      className="group opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto rounded-md bg-white text-zinc-100 hover:bg-white hover:scale-110 transition-transform duration-300"
                     >
-                      <ArrowUpRight className="h-4 w-4 m-2 flex text-white items-center justify-center" />
+                      <ArrowUpRight className="h-4 w-4 m-2 flex text-zinc-900 items-center justify-center group-hover:scale-110 transition-transform duration-300" />
                     </Link>
                     )}
                   </div>
