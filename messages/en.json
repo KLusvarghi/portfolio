@@ -52,6 +52,15 @@
     "oldest": "Oldest",
     "sortBy": "Order by"
   },
+  "projectsDetails": {
+    "comeBack": "Back to projects" ,
+    "seeDemo": "See Demo",
+    "seeDemoLive": "Watch Live Demo",
+    "seeCode": "See Code",
+    "seeGithub": "View on Github",
+    "aboutProject": "About the Project",
+    "technologiesUsed": "Technologies Used"
+  },
   "contact": {
     "title": "Contact",
     "heading": "Let's talk?",

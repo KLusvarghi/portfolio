@@ -51,6 +51,15 @@
     "oldest": "Mais antigo",
     "sortBy": "Ordenar por"
   },
+  "projectsDetails": {
+    "comeBack": "Voltar para projetos",
+    "seeDemo": "Ver Demo",
+    "seeDemoLive": "Ver Demo ao Vivo",
+    "seeCode": "Ver Código",
+    "seeGithub": "Ver no Github",
+    "aboutProject": "Sobre o Projeto",
+    "technologiesUsed": "Tecnologias Utilizadas"
+  },
   "contact": {
     "title": "Contato",
     "heading": "Vamos conversar?",
