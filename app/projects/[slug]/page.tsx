@@ -145,7 +145,7 @@ export default function ProjectDetailPage({
                 </Link>
               )}
               <Link
-                href={`${project.github}?source=mgiovani.com`}
+                href={`${project.github}?source=kaualusvarghi.vercel.app`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -234,7 +234,7 @@ export default function ProjectDetailPage({
               </Link>
             )}
             <Link
-              href={`${project.github}?source=mgiovani.com`}
+              href={`${project.github}?source=kaualusvarghi.vercel.app`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1"
