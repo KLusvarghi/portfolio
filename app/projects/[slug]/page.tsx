@@ -10,6 +10,7 @@ import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { formatProjectDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import ProjectsDetailsLoading from "./loading";
 
 // export async function generateMetadata({
 //   params,
@@ -36,6 +37,7 @@ export default function ProjectDetailPage({
   params: { slug: string };
 }) {
   const [project, setProject] = useState<Project | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
   const t = useTranslations();
 
   useEffect(() => {
@@ -55,10 +57,16 @@ export default function ProjectDetailPage({
           (p: Project) => p.slug === params.slug
         );
         setProject(currentProject);
+      } finally {
+        setIsLoading(false);
       }
     };
     loadProjectsData();
-  }, []);
+  }, [params.slug]);
+
+  if (isLoading) {
+    return <ProjectsDetailsLoading />;
+  }
 
   if (!project) {
     notFound();
@@ -67,7 +75,7 @@ export default function ProjectDetailPage({
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="relative w-full h-[50vh] md:h-[60vh] bg-gradient-to-br from-primary/20 via-background to-background overflow-hidden">
+      <div className="relative w-full h-[50vh] md:h-[60vh] bg-gradient-to-bl from-primary/20 via-background to-background overflow-hidden">
         <div className="absolute inset-0">
           {project.image ? (
             <Image
@@ -95,7 +103,8 @@ export default function ProjectDetailPage({
               className="mb-6 -ml-2 hover:bg-transparent group"
             >
               <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-              Voltar para projetos
+
+              {t("projectsDetails.comeBack")}
             </Button>
           </Link>
 
@@ -131,7 +140,7 @@ export default function ProjectDetailPage({
                 >
                   <Button size="lg" className="group">
                     <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                    Ver Demo
+                    {t("projectsDetails.seeDemo")}
                   </Button>
                 </Link>
               )}
@@ -146,7 +155,7 @@ export default function ProjectDetailPage({
                   className="group bg-transparent"
                 >
                   <Github className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                  Ver Código
+                  {t("projectsDetails.seeCode")}
                 </Button>
               </Link>
             </div>
@@ -155,7 +164,7 @@ export default function ProjectDetailPage({
       </div>
 
       {/* Content Section */}
-      <div className="container py-12 md:py-16">
+      <div className="container pt-6 md:pt-12 md:pb-20">
         <div className="max-w-4xl mx-auto">
           {/* Project Image */}
           {project.image && (
@@ -172,8 +181,10 @@ export default function ProjectDetailPage({
           )}
 
           {/* Description */}
-          <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
-            <h2 className="text-3xl font-bold mb-6">Sobre o Projeto</h2>
+          <div className="prose prose-lg dark:prose-invert max-w-none mb-10">
+            <h2 className="text-3xl font-bold mb-6">
+              {t("projectsDetails.aboutProject")}
+            </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
               {project.longDescription || project.description}
             </p>
@@ -181,7 +192,9 @@ export default function ProjectDetailPage({
 
           {/* Technologies */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Tecnologias Utilizadas</h2>
+            <h2 className="text-3xl font-bold mb-6">
+              {t("projectsDetails.technologiesUsed")}
+            </h2>
             <div className="flex flex-wrap gap-3">
               {project.tags.map((tag) => (
                 <span
@@ -203,7 +216,7 @@ export default function ProjectDetailPage({
                 className="w-full group bg-transparent"
               >
                 <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-                Voltar para Projetos
+                {t("projectsDetails.comeBack")}
               </Button>
             </Link>
             {project.demo && (
@@ -211,11 +224,11 @@ export default function ProjectDetailPage({
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1"
+                className="flex-1 basis-[77%]"
               >
                 <Button size="lg" className="w-full group">
                   <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                  Ver Demo ao Vivo
+                  {t("projectsDetails.seeDemoLive")}
                 </Button>
               </Link>
             )}
@@ -231,7 +244,7 @@ export default function ProjectDetailPage({
                 className="w-full group bg-transparent"
               >
                 <Github className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                Ver no GitHub
+                {t("projectsDetails.seeGithub")}
               </Button>
             </Link>
           </div>
