@@ -186,7 +186,8 @@ export default function ProjectDetailPage({
               {t("projectsDetails.aboutProject")}
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              {project.longDescription || project.description}
+              {/* {project.longDescription || project.description} */}
+              {project.description}
             </p>
           </div>
 
