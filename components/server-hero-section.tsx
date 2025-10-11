@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Instagram, MapPin, FileText } from "lucide-react";
 import type { ResumeData } from "@/data/resume-data.pt";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export function ServerHeroSection() {
@@ -13,7 +13,7 @@ export function ServerHeroSection() {
   const t = useTranslations();
 
   useEffect(() => {
-    const savedLocale = localStorage.getItem('locale') || 'pt';
+    const savedLocale = localStorage.getItem("locale") || "pt";
     loadResumeData(savedLocale);
   }, []);
 
@@ -39,24 +39,24 @@ export function ServerHeroSection() {
             <span>{resumeData.personalInfo.location}</span>
           </div>
           <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">
-            {t('home.greeting')} {resumeData.personalInfo.name}
+            {t("home.greeting")} {resumeData.personalInfo.name}
           </h1>
           <div className="flex items-center gap-2 text-zinc-400">
-            <span className="text-xl">{t('home.role')}</span>
+            <span className="text-xl">{t("home.role")}</span>
           </div>
         </div>
 
-        <p className="text-muted-foreground text-lg">{t('home.description')}</p>
+        <p className="text-muted-foreground text-lg">{t("home.description")}</p>
 
         <div className="flex flex-wrap gap-4">
-          <Link href="/about">
+          <Link href={resumeData.personalInfo.cv}>
             {/* CORRIGIR A COR DOS BOTÕES EM MODO LIGHT */}
             <Button
               size="lg"
               className="bg-popover-foreground text-popover hover:bg-[#262626] dark:hover:bg-[#dfdfdf]"
-              >
-              <FileText/>
-              {t('home.cv')}
+            >
+              <FileText />
+              {t("home.cv")}
             </Button>
           </Link>
           <Link href="/contact">
@@ -65,7 +65,7 @@ export function ServerHeroSection() {
               size="lg"
               className="border-popover-foreground/20 text-popover-foreground hover:bg-popover-foreground/10 dark:border-white/20 dark:text-white bg-transparent"
             >
-              {t('nav.contact')}
+              {t("nav.contact")}
             </Button>
           </Link>
         </div>
