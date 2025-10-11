@@ -14,7 +14,9 @@
     "featuredProjects": "Projetos em Destaque",
     "viewAllProjects": "Ver todos os projetos",
     "latestVideos": "Últimos Vídeos",
-    "latestVideosDescription": "Confira meu conteúdo recente no YouTube"
+    "latestVideosDescription": "Confira meu conteúdo recente no YouTube",
+    "cv": "Visualizar CV",
+    "cv2": "Visualizar CV no Drive"
   },
   "about": {
     "title": "Sobre Mim",
@@ -35,6 +37,7 @@
     "allTechnologies": "Todas as Tecnologias",
     "categories": "Categorias",
     "filterByCategory": "Filtrar por categoria",
+    "details": "Ver detalhes",
     "clear": "Limpar",
     "showing": "Mostrando",
     "of": "de",
@@ -43,7 +46,10 @@
     "code": "Código",
     "projectsFound": "projetos encontrados",
     "noProjectsFound": "Nenhum projeto encontrado com seus filtros",
-    "clearAllFilters": "Limpar todos os filtros"
+    "clearAllFilters": "Limpar todos os filtros",
+    "newest": "Mais recente",
+    "oldest": "Mais antigo",
+    "sortBy": "Ordenar por"
   },
   "contact": {
     "title": "Contato",

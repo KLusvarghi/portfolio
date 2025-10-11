@@ -14,7 +14,10 @@
     "featuredProjects": "Featured Projects",
     "viewAllProjects": "View all projects",
     "latestVideos": "Latest Videos",
-    "latestVideosDescription": "Check out my recent content on YouTube"
+    "latestVideosDescription": "Check out my recent content on YouTube",
+    "cv": "Open Resume",
+    "cv2": "Open Resume on Drive"
+
   },
   "about": {
     "title": "About Me",
@@ -35,6 +38,7 @@
     "allTechnologies": "All Technologies",
     "categories": "Categories",
     "filterByCategory": "Filter by category",
+    "details": "See details",
     "clear": "Clear",
     "showing": "Showing",
     "of": "of",
@@ -43,7 +47,10 @@
     "code": "Code",
     "projectsFound": "projects found",
     "noProjectsFound": "No projects found matching your filters",
-    "clearAllFilters": "Clear all filters"
+    "clearAllFilters": "Clear all filters",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "sortBy": "Order by"
   },
   "contact": {
     "title": "Contact",

@@ -126,24 +126,21 @@ export default function AboutClientPage() {
                 </div>
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <Link
                   href={resumeData.personalInfo.cv}
                   target="_blank"
                   className="block"
                 >
                   <Button className="w-full">
-                    {locale === "pt"
-                      ? "Abrir CV no Drive"
-                      : "Open Resume in Drive"}
+                  {t('home.cv2')}
+
                   </Button>
                 </Link>
 
                 <Link href={"/contact"} className="block">
                   <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
-                    {locale === "pt"
-                      ? "Entrar em contato"
-                      : "Get in touch"}
+                    {locale === "pt" ? "Entrar em contato" : "Get in touch"}
                   </Button>
                 </Link>
               </div>
@@ -155,7 +152,12 @@ export default function AboutClientPage() {
               <p className="text-sm  text-muted-foreground uppercase tracking-wider">
                 {locale === "pt" ? "INTRODUÇÃO" : "INTRODUCTION"}
               </p>
-              <h2 className="text-xl md:text-3xl font-bold leading-tight">
+              <h2 className="md:hidden text-xl md:text-3xl font-bold leading-tight">
+                {locale === "pt"
+                  ? "Dev apaixonado por tecnologia e inovação, em busca do próximo desafio"
+                  : "Dev passionate about technology and innovation, looking for the next challenge"}
+              </h2>
+              <h2 className="hidden md:block text-xl md:text-3xl font-bold leading-tight">
                 {locale === "pt"
                   ? "Desenvolvedor Full Stack apaixonado por tecnologia e soluções que geram impacto real"
                   : "Full Stack Developer passionate about technology and solutions that generate real impact"}
@@ -172,9 +174,7 @@ export default function AboutClientPage() {
                   onClick={() => setIsIntroExpanded(true)}
                   className="text-sm text-primary hover:text-primary/80 transition-colors font-medium md:hidden"
                 >
-                  {locale === "pt"
-                    ? "Continuar lendo →"
-                    : "Continue reading →"}
+                  {locale === "pt" ? "Continuar lendo →" : "Continue reading →"}
                 </button>
               )}
             </CardContent>
@@ -217,9 +217,7 @@ export default function AboutClientPage() {
                     {showPreviousRoles
                       ? t("about.seeLess")
                       : t("about.seeMore")}{" "}
-                    {locale === "pt"
-                      ? "cargos anteriores"
-                      : "previous roles"}
+                    {locale === "pt" ? "cargos anteriores" : "previous roles"}
                   </span>
                   <ChevronDown
                     className={`h-4 w-4 transition-transform duration-300 ${
@@ -503,12 +501,10 @@ export default function AboutClientPage() {
                     </div>
 
                     <h3 className="text-lg font-bold">
-                      {locale === "pt"
-                        ? "Stack Principal"
-                        : "Main Stack"}
+                      {locale === "pt" ? "Stack Principal" : "Main Stack"}
                     </h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      {resumeData.skills.languages.slice(0, 6).join(", ")}
+                      {resumeData.skills.languages.slice(0, 10).join(", ")}
                     </p>
                   </div>
                 </CardContent>
@@ -646,17 +642,14 @@ export default function AboutClientPage() {
                   className="block"
                 >
                   <Button className="w-full">
-                    {locale === "pt"
-                      ? "Abrir CV no Drive"
-                      : "Open Resume in Drive"}
+                  {t('home.cv2')}
+
                   </Button>
                 </Link>
 
                 <Link href={"/contact"} className="block">
                   <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
-                    {locale === "pt"
-                      ? "Entrar em contato"
-                      : "Get in touch"}
+                    {locale === "pt" ? "Entrar em contato" : "Get in touch"}
                   </Button>
                 </Link>
               </div>

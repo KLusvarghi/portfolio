@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Instagram, MapPin } from "lucide-react";
+import { Github, Linkedin, Instagram, MapPin, FileText } from "lucide-react";
 import type { ResumeData } from "@/data/resume-data.pt";
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from "react";
@@ -54,8 +54,9 @@ export function ServerHeroSection() {
             <Button
               size="lg"
               className="bg-popover-foreground text-popover hover:bg-[#262626] dark:hover:bg-[#dfdfdf]"
-            >
-              {t('nav.about')}
+              >
+              <FileText/>
+              {t('home.cv')}
             </Button>
           </Link>
           <Link href="/contact">

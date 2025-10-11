@@ -11,12 +11,6 @@ export type Language = {
   certificate?: string;
 };
 
-export type Publication = {
-  title: string;
-  description: string;
-  year: string;
-  link?: string;
-};
 
 export type Education = {
   institution: string;
@@ -53,9 +47,6 @@ export type ResumeData = {
   };
   experience: WorkExperience[];
   education: Education[];
-  hardSkills: string[];
-  softSkills: string[];
-  publications: Publication[];
 };
 
 const resumeData: ResumeData = {
@@ -88,6 +79,11 @@ const resumeData: ResumeData = {
       "Next.js",
       "Express",
       "Fastify",
+      "Tanstack",
+      "Figma",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Radix UI",
       "HTML5",
       "JavaScript",
       "CSS3",
@@ -102,7 +98,7 @@ const resumeData: ResumeData = {
       "Server Actions",
       "API REST",
     ],
-    cloud: ["Docker", "GitHub Actions", "Vercel", "AWS (básico)", "CI/CD"],
+    cloud: ["Docker", "GitHub Actions", "Vercel", "AWS (básico)", "CI/CD", "Neon", "Supabase"],
     data: ["PostgreSQL", "MySQL", "MOngoDB","Redis", "Prisma", "Drizzle ORM"],
     quality: ["Jest", "Supertest", "React Testing Library", "Vitest", "Zod", "Swagger", "JSDocs"],
   },
@@ -145,54 +141,6 @@ const resumeData: ResumeData = {
       degree: "English for Business",
       period: "Jan 2025 - Mar 2026",
       mode: "Online",
-    },
-  ],
-  hardSkills: [
-    "Python",
-    "FastAPI",
-    "SQLAlchemy",
-    "Django REST",
-    "TypeScript",
-    "Node.js",
-    "Express",
-    "Clean Architecture",
-    "DDD",
-    "Microservices",
-    "AWS",
-    "Docker",
-    "Kubernetes",
-    "PostgreSQL",
-    "Redis",
-    "Celery",
-    "TDD",
-    "Pytest",
-  ],
-  softSkills: [
-    "Problem Solving",
-    "Remote Collaboration",
-    "Adaptability",
-    "Critical Thinking",
-    "Communication",
-    "Team Leadership",
-  ],
-  publications: [
-    {
-      title: "Clinic Appointments",
-      description:
-        "Plataforma multi-tenant para gerenciamento integrado de clínicas médicas com sistema de permissões granular.",
-      year: "Jul 2025 - Atual",
-    },
-    {
-      title: "Finance App",
-      description:
-        "Plataforma SaaS para controle financeiro pessoal com arquitetura hexagonal e cobertura de testes próxima a 100%.",
-      year: "Ago 2025 - Atual",
-    },
-    {
-      title: "Dashboard Comercial",
-      description:
-        "Reconstrução completa de dashboard estratégico para visualização de KPIs em tempo real.",
-      year: "Nov 2024 - Fev 2025",
     },
   ],
 };

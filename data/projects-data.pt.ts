@@ -1,19 +1,26 @@
 export type Project = {
   id: number;
   title: string;
+  slug: string;
   description: string;
+  longDescription?: string;
   image?: string | null;
   tags: string[];
   github: string;
   demo: string | null;
   categories?: string[];
+  startDate: string; // Format: "YYYY" or "YYYY-MM"
+  endDate: string | null; // null if ongoing, or "YYYY" or "YYYY-MM"
 };
 
 const projects: Project[] = [
   {
     id: 1,
     title: "Finance App",
-    description: "Uma API financeira para gerenciar suas finanças pessoais.",
+    slug: "finance-app",
+    description:
+      "Uma API financeira para gerenciar suas finanças pessoais.Uma API financeira para gerenciar suas finanças pessoais.Uma API financeira para gerenciar suas finanças pessoais.",
+    longDescription: "teste",
     image: null,
     tags: [
       "Typescript",
@@ -32,11 +39,16 @@ const projects: Project[] = [
     categories: ["API", "Fullstack"],
     github: "https://github.com/KLusvarghi/finance-api",
     demo: null,
+    startDate: "2025",
+    endDate: null,
   },
   {
     id: 2,
     title: "Clinic Appointments",
-    description: "Uma plataforma de agendamentos médicos para gerenciar consultas.",
+    slug: "clinic-appointments",
+    description:
+      "Uma plataforma de agendamentos médicos para gerenciar consultas.",
+    longDescription: "teste",
     image: null,
     tags: [
       "Typescript",
@@ -54,11 +66,16 @@ const projects: Project[] = [
     categories: ["Fullstack", "Server Action"],
     github: "https://github.com/KLusvarghi/clinic-appointments",
     demo: null,
+    startDate: "2025",
+    endDate: "2025",
   },
   {
     id: 3,
     title: "Next Saas",
-    description: "Um template SaaS em Next.js para construir seu próprio produto SaaS.",
+    slug: "next-saas-rbac",
+    description:
+      "Um template SaaS em Next.js para construir seu próprio produto SaaS.",
+    longDescription: "teste",
     image: null,
     tags: [
       "Typescript",
@@ -78,21 +95,30 @@ const projects: Project[] = [
     categories: ["Fullstack", "API", "RBAC"],
     github: "https://github.com/KLusvarghi/next-saas-rbac/",
     demo: null,
+    startDate: "2025",
+    endDate: null,
   },
   {
     id: 4,
     title: "Api Swagger",
+    slug: "api-swagger",
     description: "Uma API com documentação Swagger para gerenciar suas APIs.",
+    longDescription: "teste",
     image: null,
     tags: ["Typescript", "Express", "Swagger"],
     categories: ["API"],
     github: "https://github.com/KLusvarghi/api-swagger/",
     demo: null,
+    startDate: "2025",
+    endDate: "2025",
   },
   {
     id: 5,
     title: "Realtime Docs",
-    description: "Documentos colaborativos em tempo real para gerenciar sua documentação.",
+    slug: "realtime-docs",
+    description:
+      "Documentos colaborativos em tempo real para gerenciar sua documentação.",
+    longDescription: "teste",
     image: null,
     tags: [
       "Javascript",
@@ -105,35 +131,53 @@ const projects: Project[] = [
     categories: ["Fullstack", "Socket.IO"],
     github: "https://github.com/KLusvarghi/realtime-docs",
     demo: null,
+    startDate: "2025",
+    endDate: "2025",
   },
   {
     id: 6,
     title: "Space App",
+    slug: "space-app",
     description: "Um aplicativo espacial para explorar o universo.",
+    longDescription: "teste",
     image: null,
     tags: ["Typescript", "Vite", "React", "Styled-Components"],
     categories: ["Frontend"],
     github: "https://github.com/KLusvarghi/realtime-docs",
     demo: null,
+    startDate: "2024",
+    endDate: "2024",
   },
   {
     id: 7,
-    title: "Dogs",
+    title: "Dogs App",
+    slug: "dogs-app",
     description: "Uma rede social para cachorros e seus donos.",
+    longDescription: "teste",
     image: null,
     tags: ["Javascript", "Vite", "React", "Scss", "Testing-Library"],
     categories: ["Frontend"],
     github: "https://github.com/KLusvarghi/dogs",
     demo: "https://dogsapp-eight.vercel.app/",
+    startDate: "2023",
+    endDate: "2024",
   },
 ];
 
 export const featuredProjects = [projects[0], projects[1], projects[2]];
 
-const projectFilters = ["Typescript", "React", "Next.js", "Fastify", "Jest", "Docker", "Prisma", "Swagger", "Zod"];
+const projectFilters = [
+  "Typescript",
+  "React",
+  "Next.js",
+  "Fastify",
+  "Jest",
+  "Docker",
+  "Prisma",
+];
 
 export default {
   projects,
   featuredProjects,
-  projectFilters
+  projectFilters,
 };

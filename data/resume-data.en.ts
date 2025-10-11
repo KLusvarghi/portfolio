@@ -11,12 +11,6 @@ export type Language = {
   certificate?: string;
 };
 
-export type Publication = {
-  title: string;
-  description: string;
-  year: string;
-  link?: string;
-};
 
 export type Education = {
   institution: string;
@@ -53,9 +47,6 @@ export type ResumeData = {
   };
   experience: WorkExperience[];
   education: Education[];
-  hardSkills: string[];
-  softSkills: string[];
-  publications: Publication[];
 };
 
 const resumeData: ResumeData = {
@@ -88,23 +79,44 @@ const resumeData: ResumeData = {
       "Next.js",
       "Express",
       "Fastify",
-      "JavaScript",
+      "Tanstack",
+      "Figma",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Radix UI",
       "HTML5",
+      "JavaScript",
       "CSS3",
       "SQL",
     ],
     architecture: [
       "Clean Architecture",
       "SOLID",
-      "Hexagonal Architecture",
+      "Arquitetura Hexagonal",
       "TDD",
       "DDD",
       "Server Actions",
-      "REST API",
+      "API REST",
     ],
-    cloud: ["Docker", "GitHub Actions", "Vercel", "AWS (basic)", "CI/CD"],
-    data: ["PostgreSQL", "MySQL", "MOngoDB","Redis", "Prisma", "Drizzle ORM"],
-    quality: ["Jest", "Supertest", "React Testing Library", "Vitest", "Zod", "Swagger", "JSDocs"],
+    cloud: [
+      "Docker",
+      "GitHub Actions",
+      "Vercel",
+      "AWS (básico)",
+      "CI/CD",
+      "Neon",
+      "Supabase",
+    ],
+    data: ["PostgreSQL", "MySQL", "MOngoDB", "Redis", "Prisma", "Drizzle ORM"],
+    quality: [
+      "Jest",
+      "Supertest",
+      "React Testing Library",
+      "Vitest",
+      "Zod",
+      "Swagger",
+      "JSDocs",
+    ],
   },
   experience: [
     {
@@ -145,54 +157,6 @@ const resumeData: ResumeData = {
       degree: "English for Business",
       period: "Jan 2025 - Mar 2026",
       mode: "Online",
-    },
-  ],
-  hardSkills: [
-    "Python",
-    "FastAPI",
-    "SQLAlchemy",
-    "Django REST",
-    "TypeScript",
-    "Node.js",
-    "Express",
-    "Clean Architecture",
-    "DDD",
-    "Microservices",
-    "AWS",
-    "Docker",
-    "Kubernetes",
-    "PostgreSQL",
-    "Redis",
-    "Celery",
-    "TDD",
-    "Pytest",
-  ],
-  softSkills: [
-    "Problem Solving",
-    "Remote Collaboration",
-    "Adaptability",
-    "Critical Thinking",
-    "Communication",
-    "Team Leadership",
-  ],
-  publications: [
-    {
-      title: "Clinic Appointments",
-      description:
-        "Multi-tenant platform for integrated medical clinic management with granular permissions system.",
-      year: "Jul 2025 - Present",
-    },
-    {
-      title: "Finance App",
-      description:
-        "SaaS platform for personal financial control with hexagonal architecture and test coverage close to 100%.",
-      year: "Aug 2025 - Present",
-    },
-    {
-      title: "Commercial Dashboard",
-      description:
-        "Complete reconstruction of strategic dashboard for real-time KPI visualization.",
-      year: "Nov 2024 - Feb 2025",
     },
   ],
 };
