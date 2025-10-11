@@ -19,7 +19,7 @@ const projects: Project[] = [
     title: "Finance App",
     slug: 'finance-app',
     description: "A finance API to manage your personal finances.",
-    longDescription: "teste",
+    longDescription: "AI Cursor Init is a revolutionary documentation framework that integrates directly into your IDE, making documentation creation effortless and intelligent. Using advanced AI capabilities, it automatically generates comprehensive Architecture Decision Records (ADRs), system diagrams, and onboarding guides through intuitive slash commands. The framework understands your codebase context and produces documentation that's not only accurate but also maintains consistency across your entire project. Perfect for teams looking to maintain high-quality documentation without the overhead.",
     image: null,
     tags: [
       "Typescript",
