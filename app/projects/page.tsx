@@ -24,7 +24,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatProjectDate } from "@/lib/utils";
@@ -33,8 +39,7 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [projectFilters, setProjectFilters] = useState<string[]>([]);
   const t = useTranslations();
-  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc")
-
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
 
   useEffect(() => {
     const loadProjectsData = async () => {
@@ -88,11 +93,11 @@ export default function ProjectsPage() {
 
     // Sort by start date
     return filtered.sort((a, b) => {
-      const dateA = new Date(a.startDate).getTime()
-      const dateB = new Date(b.startDate).getTime()
-      return sortOrder === "desc" ? dateB - dateA : dateA - dateB
-    })
-  }, [projects, searchQuery, selectedTechs, selectedCategories, sortOrder])
+      const dateA = new Date(a.startDate).getTime();
+      const dateB = new Date(b.startDate).getTime();
+      return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
+    });
+  }, [projects, searchQuery, selectedTechs, selectedCategories, sortOrder]);
   const toggleTech = (tech: string) => {
     setSelectedTechs((prev) =>
       prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech]
@@ -194,10 +199,15 @@ export default function ProjectsPage() {
             </DropdownMenu>
 
             {/* order by */}
-            <Select value={sortOrder} onValueChange={(value: "desc" | "asc") => setSortOrder(value)}>
+            <Select
+              value={sortOrder}
+              onValueChange={(value: "desc" | "asc") => setSortOrder(value)}
+            >
               <SelectTrigger className="w-[180px] border-zinc-300 dark:border-zinc-700 hover:bg-[#cbcdcf] dark:hover:bg-zinc-800 bg-transparent">
-                  
-                  <SelectValue className="border-zinc-400 dark:border-zinc-700 text-[#444444] dark:text-[#e6e6e6] bg-transparent hover:bg-[#cbcdcf] dark:hover:bg-zinc-800" placeholder={t("projects.sortBy")}  />
+                <SelectValue
+                  className="border-zinc-400 dark:border-zinc-700 text-[#444444] dark:text-[#e6e6e6] bg-transparent hover:bg-[#cbcdcf] dark:hover:bg-zinc-800"
+                  placeholder={t("projects.sortBy")}
+                />
               </SelectTrigger>
               <SelectContent className="bg-zinc-300 dark:bg-zinc-900 dark:border-zinc-900">
                 <SelectItem value="desc">{t("projects.newest")}</SelectItem>
@@ -251,11 +261,9 @@ export default function ProjectsPage() {
             <Card
               key={project.id}
               // className="group overflow-hidden flex flex-col bg-white border-zinc-300  hover:border-zinc-400 dark:bg-zinc-900/50 dark:border-zinc-800/50  dark:hover:border-zinc-700/50 relative hover:scale-105 transition-transform duration-500 hover:shadow-lg"
-              className="group  
-              
-              rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-zinc-900/60 dark:via-zinc-900/40 dark:to-zinc-900/30 border border-zinc-200/60 dark:border-zinc-800/60 backdrop-blur-xl hover:border-zinc-300/50 dark:hover:border-zinc-700/50 transition-all duration-500 hover:transform hover:scale-[1.02]"
+              className="group rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-zinc-900/60 dark:via-zinc-900/40 dark:to-zinc-900/30 border border-zinc-200/60 dark:border-zinc-800/60 backdrop-blur-xl hover:border-zinc-300/50 dark:hover:border-zinc-700/50 transition-all duration-500 hover:transform hover:scale-[1.02]"
             >
-              <div className="absolute top-3 right-3 z-10 bg-black/20 backdrop-blur-sm text-white dark:text-white text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+              <div className="absolute top-3 right-3 z-10 bg-black/20 backdrop-blur-sm text-white dark:text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-lg">
                 {formatProjectDate(project.startDate, project.endDate)}
               </div>
 
@@ -290,17 +298,17 @@ export default function ProjectsPage() {
               </div>
               <CardContent className="flex flex-col flex-1 p-6">
                 <div className="items-start justify-between">
-                  <div className="flex items-center justify-between mb-2"  >
+                  <div className="flex items-center justify-between mb-2">
                     <h2 className="text-xl font-bold mt-2">{project.title}</h2>
                     {project.demo && (
                       <Link
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto rounded-md bg-white text-zinc-100 hover:bg-white hover:scale-110 transition-transform duration-300"
-                    >
-                      <ArrowUpRight className="h-4 w-4 m-2 flex text-zinc-900 items-center justify-center group-hover:scale-110 transition-transform duration-300" />
-                    </Link>
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto rounded-md bg-white text-zinc-100 hover:bg-white hover:scale-110 transition-transform duration-300"
+                      >
+                        <ArrowUpRight className="h-4 w-4 m-2 flex text-zinc-900 items-center justify-center group-hover:scale-110 group-transition-transform group-duration-300 transition-transform duration-300" />
+                      </Link>
                     )}
                   </div>
                   <p className="text-zinc-400 mb-4 flex-grow line-clamp-2">
