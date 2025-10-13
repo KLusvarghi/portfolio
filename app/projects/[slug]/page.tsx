@@ -182,7 +182,7 @@ export default function ProjectDetailPage({
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
               {/* {project.longDescription || project.description} */}
-              {project.description}
+              {project.longDescription}
             </p>
           </div>
 
