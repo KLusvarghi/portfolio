@@ -305,7 +305,7 @@ export default function ProjectsPage() {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto rounded-md bg-white text-zinc-100 hover:bg-white hover:scale-110 transition-transform duration-300"
+                        className="group md:opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto rounded-md bg-white text-zinc-100 hover:bg-white hover:scale-110 transition-transform duration-300"
                       >
                         <ArrowUpRight className="h-4 w-4 m-2 flex text-zinc-900 items-center justify-center group-hover:scale-110 group-transition-transform group-duration-300 transition-transform duration-300" />
                       </Link>
