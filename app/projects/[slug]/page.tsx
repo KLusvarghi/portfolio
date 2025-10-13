@@ -11,6 +11,7 @@ import { formatProjectDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import ProjectsDetailsLoading from "./loading";
+import { isNullOrUndefined } from "util";
 
 // export async function generateMetadata({
 //   params,
@@ -75,23 +76,17 @@ export default function ProjectDetailPage({
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="relative w-full h-[50vh] md:h-[60vh] bg-gradient-to-bl from-primary/20 via-background to-background overflow-hidden">
+      <div className="relative w-full h-[50vh] md:h-[60vh] bg-gradient-to-br md:bg-gradient-to-bl from-primary/45 md:from-primary/20 via-background to-background overflow-hidden">
         <div className="absolute inset-0">
-          {project.image ? (
+          {project.image !== null ? (
             <Image
-              src={project.image || "/placeholder.svg"}
+              src={project.image || ""}
               alt={project.title}
               fill
               className="object-cover opacity-20"
               priority
             />
-          ) : (
-            <PlaceholderImage
-              type="project"
-              title={project.title}
-              className="opacity-20"
-            />
-          )}
+          ): <></> }
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
@@ -170,7 +165,7 @@ export default function ProjectDetailPage({
           {project.image && (
             <div className="mb-12 rounded-xl overflow-hidden border-2 border-border shadow-2xl">
               <Image
-                src={project.image || "/placeholder.svg"}
+                src={project.image}
                 alt={project.title}
                 width={1200}
                 height={675}
@@ -196,11 +191,11 @@ export default function ProjectDetailPage({
             <h2 className="text-3xl font-bold mb-6">
               {t("projectsDetails.technologiesUsed")}
             </h2>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 md:gap-3">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-sm font-medium px-4 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
+                  className="text-sm font-medium px-2 py-1 md:px-4 md:py-2 rounded-md bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
                 >
                   {tag}
                 </span>
