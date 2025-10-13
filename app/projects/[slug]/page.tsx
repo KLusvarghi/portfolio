@@ -6,12 +6,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/data/projects-data.pt";
-import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { formatProjectDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import ProjectsDetailsLoading from "./loading";
-import { isNullOrUndefined } from "util";
+import { parseDescription } from "@/utils";
 
 // export async function generateMetadata({
 //   params,
@@ -72,6 +71,9 @@ export default function ProjectDetailPage({
   if (!project) {
     notFound();
   }
+
+  const descriptionParagraphs = parseDescription(project.longDescription, project.description)
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -180,10 +182,13 @@ export default function ProjectDetailPage({
             <h2 className="text-3xl font-bold mb-6">
               {t("projectsDetails.aboutProject")}
             </h2>
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              {/* {project.longDescription || project.description} */}
-              {project.longDescription}
-            </p>
+            <div className="space-y-4">
+              {descriptionParagraphs.map((paragraph, index) => (
+                <p key={index} className="text-lg leading-relaxed text-muted-foreground">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* Technologies */}

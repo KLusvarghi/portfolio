@@ -1,25 +1,18 @@
-export type Project = {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  longDescription?: string;
-  image?: string | null;
-  tags: string[];
-  github: string;
-  demo: string | null;
-  categories?: string[];
-  startDate: string; // Format: "YYYY" or "YYYY-MM"
-  endDate: string | null; // null if ongoing, or "YYYY" or "YYYY-MM"
-};
+import type { Project } from "./projects-data.pt";
 
 const projects: Project[] = [
   {
     id: 1,
     title: "Finance App",
-    slug: 'finance-app',
+    slug: "finance-app",
     description: "A finance API to manage your personal finances.",
-    longDescription: "AI Cursor Init is a revolutionary documentation framework that integrates directly into your IDE, making documentation creation effortless and intelligent. Using advanced AI capabilities, it automatically generates comprehensive Architecture Decision Records (ADRs), system diagrams, and onboarding guides through intuitive slash commands. The framework understands your codebase context and produces documentation that's not only accurate but also maintains consistency across your entire project. Perfect for teams looking to maintain high-quality documentation without the overhead.",
+    longDescription: [
+      "Fullstack application for personal financial management, with backend in Node.js, TypeScript and PostgreSQL and frontend under development using React, Vite, Redux and TanStack Query. The project was architected applying hexagonal architecture and SOLID principles, ensuring high scalability, maintainability and testability.",
+      "The architecture prioritizes total decoupling between layers (Controllers → Services → Repositories), allowing independent evolution of each component and facilitating unit and integration testing. I implemented a robust testing strategy with Factories and Fixtures, achieving high code coverage via Jest and ensuring delivery reliability. The Adapters pattern isolates external dependencies, allowing replacements without impact on business logic.",
+      "In terms of security, the application uses password hashing, rigorous validation across multiple layers with Zod (type-safe) and database constraints to ensure data integrity. The quality pipeline includes ESLint, Prettier and Husky with pre-commit validation, plus standardized semantic commits.",
+      "The environment was completely dockerized to facilitate onboarding and ensure consistency between dev/test/prod. The monorepo structure is prepared to scale, integrating backend, web frontend and future iOS mobile version.",
+      "The roadmap includes JWT authentication implementation, structured logging with Pino, observability with OpenTelemetry, caching system for performance optimization on critical routes, and complete CI/CD with GitHub Actions for automated deliveries.",
+    ],
     image: null,
     tags: [
       "Typescript",
@@ -44,9 +37,15 @@ const projects: Project[] = [
   {
     id: 2,
     title: "Clinic Appointments",
-    slug: 'clinic-appointments',
+    slug: "clinic-appointments",
     description: "A clinic appointments platform to manage your appointments.",
-    longDescription: "teste",
+    longDescription: [
+      "Fullstack application developed with Next.js 15, React 19 and TypeScript for medical clinic management with multi-tenancy support, allowing users to manage multiple clinics while maintaining data isolation and security. The system implements complete appointment control, subscriptions via Stripe and modern authentication with BetterAuth (server-side sessions).",
+      "The architecture was built using Next.js App Router, applying Server Actions for backend operations and clear separation of responsibilities between components, data logic (data layer) and server actions. The project uses Drizzle ORM with PostgreSQL to ensure type-safety across the entire persistence layer, rigorous validation with Zod and React Hook Form, plus a modern interface built with Tailwind CSS and shadcn/ui.",
+      "In terms of security, the system implements HTTP-only session-based authentication (instead of JWT), providing greater protection against XSS attacks. Google OAuth integration facilitates user onboarding, while complete Stripe integration (webhooks, customer portal) ensures secure management of subscriptions and recurring payments.",
+      "The multi-tenant model allows a single user to manage multiple clinics with complete data isolation, ensuring compliance and privacy. The system offers full observability of the appointment flow, with manual consultation confirmation and granular permission control per clinic.",
+      "Developed as a study project to deepen knowledge in modern React application architecture, session-based authentication, payment integrations and scalable multi-tenant design.",
+    ],
     image: null,
     tags: [
       "Typescript",
@@ -70,9 +69,15 @@ const projects: Project[] = [
   {
     id: 3,
     title: "Next Saas",
-    slug: 'next-saas-rbac',
+    slug: "next-saas-rbac",
     description: "A Next.js SaaS template to build your own SaaS product.",
-    longDescription: "teste",
+    longDescription: [
+      "Fullstack SaaS application developed with Next.js and Fastify, structured as a monorepo with TurboRepo, focused on managing organizations, projects and teams with granular permission control via CASL (RBAC). The project was built as a learning laboratory for implementing advanced patterns of multi-tenant architecture, role-based authorization and dependency injection.",
+      "The backend architecture uses Fastify with its native plugin ecosystem, providing high performance and modularity. The API is completely documented with Swagger/OpenAPI, facilitating integration and maintenance. The system implements complete RBAC through CASL, allowing detailed permissions definition per resource (organizations, projects, members) with support for customizable roles (Owner, Admin, Member, Billing).",
+      "The multi-tenant model ensures complete data isolation between organizations, with access control at multiple layers: authentication, role-based authorization and resource validation. The Next.js frontend consumes the API in a type-safe manner, applying validation with Zod and optimized rendering with Server Components.",
+      "The monorepo structure with TurboRepo promotes scalability and code reuse between packages (backend, frontend, shared types), with optimized build pipeline and intelligent caching. The project applies clean code principles, dependency injection and separation of concerns, facilitating testing and maintenance.",
+      "Developed with educational focus to master essential concepts of professional SaaS applications: complex permission systems, scalable multi-tenant architecture, automatic API documentation and modern monorepo management — fundamental competencies for building robust B2B products.",
+    ],
     image: null,
     tags: [
       "Typescript",
@@ -98,9 +103,15 @@ const projects: Project[] = [
   {
     id: 4,
     title: "Api Swagger",
-    slug: 'api-swagger',
+    slug: "api-swagger",
     description: "A Swagger API to manage your APIs with documentation.",
-    longDescription: "teste",
+    longDescription: [
+      "REST API developed with Node.js, MongoDB and Mongoose, with focus on professional and interactive documentation following the OpenAPI 3.0 standard via Swagger. The project implements complete CRUD with all endpoint specifications, schemas and responses documented in an automatic and accessible way through web interface.",
+      "Documentation was built using swagger-jsdoc for inline code annotations and swagger-ui-express for interactive interface rendering, allowing developers to test endpoints directly in the browser without external tools. The OpenAPI specification ensures standardization, facilitating integration with client generation tools (SDKs) and automated testing.",
+      "The environment was completely dockerized with Docker Compose, orchestrating application and MongoDB containers with a single command, ensuring reproducibility and facilitating onboarding. The use of Mongoose as ODM provides schema validation at application level, type-safety and clear data modeling.",
+      "The project demonstrates developer experience (DX) best practices: documentation as code (maintained alongside development), interactive interface for API exploration, containerized environment and schema versioning. The approach adopted significantly reduces integration time and improves collaboration between frontend/backend teams.",
+      "Developed as a laboratory to master professional technical API documentation, OpenAPI/Swagger specification, containerization and essential tools for building consumable and well-documented APIs — fundamental competencies for modern backend development and efficient system integration.",
+    ],
     image: null,
     tags: ["Typescript", "Express", "Swagger"],
     categories: ["API"],
@@ -112,10 +123,16 @@ const projects: Project[] = [
   {
     id: 5,
     title: "Realtime Docs",
-    slug: 'realtime-docs',
+    slug: "realtime-docs",
     description:
       "Real-time collaborative documents to manage your documentation.",
-    longDescription: "teste",
+    longDescription: [
+      "Fullstack application developed with focus on bidirectional real-time communication using WebSocket via Socket.io and MongoDB. The project implements a collaborative document editor (Google Docs style), where multiple users can edit simultaneously with instant synchronization of changes.",
+      "The backend architecture deeply explores the functioning of the WebSocket protocol, establishing persistent connections between client and server for bidirectional message exchange with minimum latency. The Socket.io implementation automatically manages reconnections, polling fallback and efficient broadcasting to multiple connected clients.",
+      "The system uses MongoDB for document persistence, leveraging its flexibility to store editing operations and synchronize state between users. The application implements basic CRUD of documents with real-time updating, ensuring that all changes are instantly propagated to all active users.",
+      "The project demonstrates practical understanding of fundamental concepts of real-time applications: managing simultaneous connections, event broadcasting, distributed state synchronization and handling disconnections/reconnections. The event-based architecture allows scalability and facilitates addition of new collaborative features.",
+      "Developed as a study project to master real-time communication, WebSocket protocols, Socket.io and NoSQL databases (MongoDB) — essential technologies for building collaborative applications, chats, live dashboards and systems requiring low latency and instant synchronization.",
+    ],
     image: null,
     tags: [
       "Javascript",
@@ -134,9 +151,15 @@ const projects: Project[] = [
   {
     id: 6,
     title: "Space App",
-    slug: 'space-app',
+    slug: "space-app",
     description: "A space application to explore the universe.",
-    longDescription: "teste",
+    longDescription: [
+      "Frontend application developed with React, TypeScript and Vite, exploring best practices for componentization, CSS-in-JS styling and modern React project architecture. The project implements an interactive space image gallery, applying fundamental concepts of component composition, state management and responsiveness.",
+      "Styling was built entirely with Styled Components, demonstrating mastery of CSS-in-JS, dynamic theming and style encapsulation. The component architecture follows the single responsibility principle, with reusable, isolated and highly testable components, facilitating maintenance and scalability.",
+      "The project uses Vite as bundler, providing instant Hot Module Replacement (HMR) and optimized production builds. TypeScript configuration ensures type-safety throughout the application, preventing errors at development time and improving refactoring experience.",
+      "The component structure demonstrates practical application of React composition patterns, such as controlled props drilling, component children pattern and separation between presentation components and containers. The code follows clean code principles, with semantic naming, pure functions and isolated business logic.",
+      "Developed as a study project to consolidate essential fundamentals of modern frontend: scalable componentization, professional styling with Styled Components, tooling configuration (Vite) and React architecture best practices — base competencies for any robust frontend application.",
+    ],
     image: null,
     tags: ["Typescript", "Vite", "React", "Styled-Components"],
     categories: ["Frontend"],
@@ -148,9 +171,15 @@ const projects: Project[] = [
   {
     id: 7,
     title: "Dogs",
-    slug: 'dogs-app',
+    slug: "dogs-app",
     description: "A social network for dogs and their owners.",
-    longDescription: "teste",
+    longDescription: [
+      "Frontend application developed with React and CSS Modules, inspired by Instagram and focused on sharing dog photos. Project that consolidated essential fundamentals of modern React, exploring componentization, custom hooks, state management and performance optimization to ensure excellent user experience (UX).",
+      "The component architecture was structured following principles of reusability and separation of concerns, with custom hooks to abstract complex logic (authentication, HTTP requests, form validation). The application uses native React Hooks (useState, useEffect, useContext, useCallback) in an optimized way, avoiding unnecessary re-renders and ensuring interface fluidity.",
+      "The project implements lazy loading of images, skeleton screens during loading and smooth transitions, prioritizing perceived performance and constant visual feedback to the user. Modular styling with CSS Modules provides style encapsulation and avoids naming conflicts, keeping the code scalable.",
+      "The application consumes an external REST API with robust error handling, loading states and fallbacks, demonstrating best practices for backend integration. Automated tests with React Testing Library ensure reliability of critical components and facilitate future refactoring.",
+      "Developed as a fundamental project early in the career to master essential React, componentization patterns, custom hooks, performance optimization and user-centered design — base competencies that support the development of professional and scalable frontend applications.",
+    ],
     image: "/projects/dogs.png",
     tags: ["Javascript", "Vite", "React", "SCSS"],
     categories: ["Frontend"],

@@ -16,6 +16,8 @@ import {
 import type { ResumeData } from "@/data/resume-data.pt";
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { ScrollReveal } from "@/components/scroll-reveal";
+
 
 export default function AboutClientPage() {
   const [showPreviousRoles, setShowPreviousRoles] = useState(false);

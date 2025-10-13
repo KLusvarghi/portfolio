@@ -1,165 +1,139 @@
-import { Skeleton } from "@/components/ui/skeleton"
+import Skeleton from "react-loading-skeleton"
 import { Card, CardContent } from "@/components/ui/card"
+import { PageHeaderSkeleton } from "@/components/loading"
 
 export default function AboutLoading() {
   return (
     <div className="container py-12">
       <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
-        {/* Main Content Skeleton */}
         <div className="space-y-8">
-          {/* Header */}
-          <div>
-            <Skeleton className="h-10 w-48 mb-2" />
-            <Skeleton className="h-6 w-96 max-w-full" />
-          </div>
+          <PageHeaderSkeleton />
 
-          {/* Introduction Card */}
           <Card className="border-2">
             <CardContent className="p-8 space-y-4">
-              <Skeleton className="h-4 w-32" />
-              <Skeleton className="h-8 w-full" />
-              <Skeleton className="h-8 w-3/4" />
+              <Skeleton width={128} height={16} />
+              <Skeleton height={32} />
+              <Skeleton width="75%" height={32} />
               <div className="space-y-2">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-2/3" />
+                <Skeleton count={3} height={16} />
               </div>
             </CardContent>
           </Card>
 
-          {/* Career Section */}
           <div className="space-y-6">
-            <Skeleton className="h-8 w-32" />
-            {/* Current Role */}
+            <Skeleton width={128} height={32} />
             <Card className="border-2">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <Skeleton className="w-12 h-12 rounded-full flex-shrink-0" />
+                  <Skeleton width={48} height={48} borderRadius="9999px" containerClassName="flex-shrink-0" />
                   <div className="flex-1 space-y-2">
-                    <Skeleton className="h-6 w-64" />
-                    <Skeleton className="h-4 w-48" />
-                    <Skeleton className="h-4 w-32" />
+                    <Skeleton width={256} height={24} />
+                    <Skeleton width={192} height={16} />
+                    <Skeleton width={128} height={16} />
                   </div>
                 </div>
               </CardContent>
             </Card>
-            {/* Previous Roles Toggle */}
-            <Skeleton className="h-5 w-48" />
+            <Skeleton width={192} height={20} />
           </div>
 
-          {/* Education Section */}
           <div className="space-y-6">
-            <Skeleton className="h-8 w-32" />
-            {/* Current Education */}
+            <Skeleton width={128} height={32} />
             <Card className="border-2">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <Skeleton className="w-12 h-12 rounded-full flex-shrink-0" />
+                  <Skeleton width={48} height={48} borderRadius="9999px" containerClassName="flex-shrink-0" />
                   <div className="flex-1 space-y-2">
-                    <Skeleton className="h-6 w-64" />
-                    <Skeleton className="h-4 w-48" />
-                    <Skeleton className="h-4 w-32" />
+                    <Skeleton width={256} height={24} />
+                    <Skeleton width={192} height={16} />
+                    <Skeleton width={128} height={16} />
                   </div>
                 </div>
               </CardContent>
             </Card>
-            {/* Previous Education Toggle */}
-            <Skeleton className="h-5 w-48" />
+            <Skeleton width={192} height={20} />
           </div>
 
-          {/* Skills Section */}
           <div className="space-y-6">
-            <Skeleton className="h-8 w-32" />
+            <Skeleton width={128} height={32} />
             <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 auto-rows-fr">
-              {/* Cloud & DevOps - tall on mobile */}
               <Card className="border-2 row-span-2 sm:row-span-1">
                 <CardContent className="p-6 space-y-3">
-                  <Skeleton className="w-10 h-10 rounded-lg" />
-                  <Skeleton className="h-5 w-32" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton width={40} height={40} borderRadius="0.5rem" />
+                  <Skeleton width={128} height={20} />
+                  <Skeleton count={2} height={16} />
                 </CardContent>
               </Card>
-              {/* Quality */}
               <Card className="border-2">
                 <CardContent className="p-6 space-y-3">
-                  <Skeleton className="w-10 h-10 rounded-lg" />
-                  <Skeleton className="h-5 w-24" />
-                  <Skeleton className="h-4 w-full" />
+                  <Skeleton width={40} height={40} borderRadius="0.5rem" />
+                  <Skeleton width={96} height={20} />
+                  <Skeleton height={16} />
                 </CardContent>
               </Card>
-              {/* Main Stack */}
               <Card className="border-2">
                 <CardContent className="p-6 space-y-3">
                   <div className="flex gap-2">
-                    <Skeleton className="w-10 h-10 rounded-lg" />
-                    <Skeleton className="w-10 h-10 rounded-lg" />
-                    <Skeleton className="w-10 h-10 rounded-lg" />
+                    <Skeleton width={40} height={40} borderRadius="0.5rem" />
+                    <Skeleton width={40} height={40} borderRadius="0.5rem" />
+                    <Skeleton width={40} height={40} borderRadius="0.5rem" />
                   </div>
-                  <Skeleton className="h-5 w-32" />
-                  <Skeleton className="h-3 w-full" />
+                  <Skeleton width={128} height={20} />
+                  <Skeleton height={12} />
                 </CardContent>
               </Card>
-              {/* Database */}
               <Card className="border-2 sm:order-last">
                 <CardContent className="p-6 space-y-3">
-                  <Skeleton className="w-10 h-10 rounded-lg" />
-                  <Skeleton className="h-5 w-24" />
-                  <Skeleton className="h-4 w-full" />
+                  <Skeleton width={40} height={40} borderRadius="0.5rem" />
+                  <Skeleton width={96} height={20} />
+                  <Skeleton height={16} />
                 </CardContent>
               </Card>
-              {/* Architecture - wide */}
               <Card className="border-2 col-span-2">
                 <CardContent className="p-6 space-y-3">
-                  <Skeleton className="w-10 h-10 rounded-lg" />
-                  <Skeleton className="h-5 w-48" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton width={40} height={40} borderRadius="0.5rem" />
+                  <Skeleton width={192} height={20} />
+                  <Skeleton count={2} height={16} />
                 </CardContent>
               </Card>
             </div>
           </div>
         </div>
 
-        {/* Sidebar Skeleton */}
         <div className="space-y-6">
-          {/* Mobile Sidebar */}
           <Card className="border-2 lg:hidden">
             <CardContent className="p-6 space-y-6">
               <div className="flex items-start gap-4">
-                <Skeleton className="w-20 h-20 rounded-full flex-shrink-0" />
+                <Skeleton width={80} height={80} borderRadius="9999px" containerClassName="flex-shrink-0" />
                 <div className="flex-1 space-y-2">
-                  <Skeleton className="h-6 w-32" />
-                  <Skeleton className="h-4 w-48" />
-                  <Skeleton className="h-4 w-40" />
+                  <Skeleton width={128} height={24} />
+                  <Skeleton width={192} height={16} />
+                  <Skeleton width={160} height={16} />
                 </div>
               </div>
               <div className="flex items-center justify-center gap-4">
-                <Skeleton className="h-5 w-5 rounded-full" />
-                <Skeleton className="h-5 w-5 rounded-full" />
-                <Skeleton className="h-5 w-5 rounded-full" />
+                <Skeleton width={20} height={20} borderRadius="9999px" />
+                <Skeleton width={20} height={20} borderRadius="9999px" />
+                <Skeleton width={20} height={20} borderRadius="9999px" />
               </div>
-              <Skeleton className="h-10 w-full" />
+              <Skeleton height={40} />
             </CardContent>
           </Card>
 
-          {/* Desktop Sidebar */}
           <div className="hidden lg:flex lg:flex-col lg:sticky lg:top-0 lg:h-screen lg:py-6 lg:justify-between">
             <div className="flex flex-col items-center text-center space-y-4">
-              <Skeleton className="w-[200px] h-[250px] rounded-lg" />
+              <Skeleton width={200} height={250} borderRadius="0.5rem" />
               <div className="space-y-2">
-                <Skeleton className="h-6 w-32 mx-auto" />
-                <Skeleton className="h-4 w-48 mx-auto" />
-                <Skeleton className="h-4 w-40 mx-auto" />
+                <Skeleton width={128} height={24} containerClassName="mx-auto" />
+                <Skeleton width={192} height={16} containerClassName="mx-auto" />
+                <Skeleton width={160} height={16} containerClassName="mx-auto" />
               </div>
             </div>
             <div className="space-y-4 px-4">
               <div className="space-y-2">
-                <Skeleton className="h-5 w-full" />
-                <Skeleton className="h-5 w-full" />
-                <Skeleton className="h-5 w-full" />
+                <Skeleton count={3} height={20} />
               </div>
-              <Skeleton className="h-10 w-full" />
+              <Skeleton height={40} />
             </div>
           </div>
         </div>
