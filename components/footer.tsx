@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { Github, Linkedin, Instagram } from "lucide-react";
 import { useTranslations } from 'next-intl';
-import { cn } from "@/lib/utils";
-import type { ResumeData } from "@/data/resume-data.pt";
+import type { ResumeData } from "@/data/types";
 import { ThemeToggle } from "./theme-toggle";
 import { useState, useEffect } from "react";
+import { cn } from "@/helpers/utils";
 
 export default function Footer() {
   const t = useTranslations();

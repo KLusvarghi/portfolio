@@ -4,8 +4,8 @@ import { PageHeaderSkeleton } from "@/components/loading"
 
 export default function AboutLoading() {
   return (
-    <div className="container py-12">
-      <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
+    <div className="container pt-10 md:py-12">
+      <div className="grid lg:gap-12 lg:grid-cols-[1fr_300px]">
         <div className="space-y-8">
           <PageHeaderSkeleton />
 

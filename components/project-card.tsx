@@ -8,8 +8,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, Github, ArrowRight, ArrowUpRight } from "lucide-react";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { useTranslations } from 'next-intl';
-import type { Project } from '@/data/projects-data.pt';
-import { formatProjectDate } from '@/lib/utils';
+import { formatProjectDate } from '@/helpers/utils';
+import { Project } from '@/data/types';
 
 export function ProjectCard(project: Project) {
   const t = useTranslations();

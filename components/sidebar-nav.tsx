@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, FileText, Briefcase, Mail, Book } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/helpers/utils"
 import { useTranslations } from 'next-intl'
 import { ThemeToggle } from "./theme-toggle"
 

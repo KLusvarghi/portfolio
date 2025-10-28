@@ -12,47 +12,22 @@ import {
   Check,
 } from "lucide-react";
 import Link from "next/link";
-import type { ResumeData } from "@/data/resume-data.pt";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { useTranslations } from 'next-intl';
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { useLocaleData } from "@/contexts/locale-data-context";
 
 export default function ContactPage() {
   const [copied, setCopied] = useState(false);
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const { resumeData, isLoading } = useLocaleData();
   const t = useTranslations();
 
-  useEffect(() => {
-    const savedLocale = localStorage.getItem('locale') || 'pt';
-    loadResumeData(savedLocale);
-  }, []);
+  if (isLoading || !resumeData) return null;
 
-  const loadResumeData = async (locale: string) => {
-    try {
-      const data = await import(`@/data/resume-data.${locale}.ts`);
-      setResumeData(data.default);
-    } catch (error) {
-      // Fallback to Portuguese
-      const data = await import(`@/data/resume-data.pt.ts`);
-      setResumeData(data.default);
-    }
-  };
+  const { email, location, github, linkedin, instagram, phone } = resumeData.personalInfo
 
-  if (!resumeData) return null;
-
-  const email = resumeData?.personalInfo?.email || "kauaolusvarghi@proton.me";
-  const location = resumeData?.personalInfo?.location || "Brasil, São Paulo";
-  const github =
-    resumeData?.personalInfo?.github || "https://github.com/KLusvarghi";
-  const linkedin =
-    resumeData?.personalInfo?.linkedin ||
-    "https://www.linkedin.com/in/kaua-lusvarghi-fullstack-dev/";
-  const instagram =
-    resumeData?.personalInfo?.instagram ||
-    "https://www.instagram.com/lusvarghkaua";
-  const phone = resumeData?.personalInfo?.phone || "+55 (13) 99606-8207";
-  const whatsappNumber = phone.replace(/\D/g, "");
+  const whatsappNumber = phone?.replace(/\D/g, "");
 
   const copyToClipboard = async () => {
     try {
@@ -181,15 +156,13 @@ export default function ContactPage() {
 
           {/* Social Media Section */}
 
-          <div className="text-center py-6 md:py-8">
-            <ScrollReveal animation="fadeUp" delay={1}>
+          <ScrollReveal animation="fadeUp" delay={0.6}>
+            <div className="text-center py-6 md:py-8">
               <p className="text-muted-foreground mb-4 md:mb-6 text-sm md:text-base">
                 {t('contact.findMeOn')}
               </p>
-            </ScrollReveal>
 
-            <div className="flex justify-center items-center gap-6 md:gap-8">
-              <ScrollReveal animation="fadeUp" delay={1.2}>
+              <div className="flex justify-center items-center gap-6 md:gap-8">
                 <Link
                   href={linkedin}
                   target="_blank"
@@ -203,10 +176,8 @@ export default function ContactPage() {
                     {t('contact.linkedin')}
                   </span>
                 </Link>
-              </ScrollReveal>
-              <ScrollReveal animation="fadeUp" delay={1.4}>
                 <Link
-                  href={github}
+                  href={github!}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-col items-center gap-2 group"
@@ -218,10 +189,9 @@ export default function ContactPage() {
                     {t('contact.github')}
                   </span>
                 </Link>
-              </ScrollReveal>
-              <ScrollReveal animation="fadeUp" delay={1.6}>
+
                 <Link
-                  href={instagram}
+                  href={instagram!}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-col items-center gap-2 group"
@@ -233,9 +203,9 @@ export default function ContactPage() {
                     {t('contact.instagram')}
                   </span>
                 </Link>
-              </ScrollReveal>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </div>

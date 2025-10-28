@@ -1,15 +1,6 @@
-export type BlogPost = {
-  id: number
-  title: string
-  excerpt: string
-  date: string
-  readTime: string
-  slug: string
-  tags: string[]
-  image?: string | null
-}
+import { BlogPost } from "./types";
 
-export const allBlogPosts: BlogPost[] = [
+export const posts: BlogPost[] = [
   // {
   //   id: 1,
   //   title: "Optimizing FastAPI Performance for High-Traffic Applications",
@@ -45,12 +36,9 @@ export const allBlogPosts: BlogPost[] = [
   // },
 ]
 
-// Get featured blog posts (top 3)
-export const featuredBlogPosts = allBlogPosts.slice(0, 3)
+const postsFilters = ["Architecture", "DevOps", "Tips", "AI","Recents"];
 
-const blogFilters = ["Architecture", "DevOps", "Tips", "AI","Recents"];
 export default {
-  allBlogPosts,
-  featuredBlogPosts,
-  blogFilters,
+  posts,
+  postsFilters,
 }

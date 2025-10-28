@@ -1,15 +1,6 @@
-export type BlogPost = {
-  id: number
-  title: string
-  excerpt: string
-  date: string
-  readTime: string
-  slug: string
-  tags: string[]
-  image?: string | null
-}
+import { BlogPost } from "./blog-data.en";
 
-export const allBlogPosts: BlogPost[] = [
+export const posts: BlogPost[] = [
   // {
   //   id: 1,
   //   title: "Otimizando Performance do FastAPI para Aplicações de Alto Tráfego",
@@ -45,13 +36,12 @@ export const allBlogPosts: BlogPost[] = [
   // },
 ]
 
-// Get featured blog posts (top 3)
-export const featuredBlogPosts = allBlogPosts.slice(0, 3)
+export const featuredPosts = posts.slice(0, 3)
 
-const blogFilters = ["Arquitetura", "DevOps", "Dicas", "AI","Recente"];
+const postsFilters = ["Arquitetura", "DevOps", "Dicas", "AI","Recente"];
 
 export default {
-  allBlogPosts,
-  featuredBlogPosts,
-  blogFilters,
+  posts,
+  featuredPosts,
+  postsFilters,
 }

@@ -1,17 +1,4 @@
-export type Project = {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  longDescription?: string[];
-  image?: string | null;
-  tags: string[];
-  github: string;
-  demo: string | null;
-  categories?: string[];
-  startDate: string; // Format: "YYYY" or "YYYY-MM"
-  endDate: string | null; // null if ongoing, or "YYYY" or "YYYY-MM"
-};
+import { Project } from "./types";
 
 const projects: Project[] = [
   {
@@ -205,8 +192,6 @@ const projects: Project[] = [
   },
 ];
 
-export const featuredProjects = [projects[0], projects[1], projects[2]];
-
 const projectFilters = [
   "Typescript",
   "React",
@@ -219,6 +204,5 @@ const projectFilters = [
 
 export default {
   projects,
-  featuredProjects,
   projectFilters,
 };

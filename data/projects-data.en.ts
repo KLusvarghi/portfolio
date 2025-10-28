@@ -1,4 +1,4 @@
-import type { Project } from "./projects-data.pt";
+import { Project } from "./types";
 
 const projects: Project[] = [
   {
@@ -190,8 +190,6 @@ const projects: Project[] = [
   },
 ];
 
-export const featuredProjects = [projects[0], projects[1], projects[2]];
-
 const projectFilters = [
   "Typescript",
   "React",
@@ -204,6 +202,5 @@ const projectFilters = [
 
 export default {
   projects,
-  featuredProjects,
   projectFilters,
 };

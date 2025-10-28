@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Github, ArrowRight } from "lucide-react";
-import type { Project } from "@/data/projects-data.pt";
 import {
   Carousel,
   CarouselContent,
@@ -16,6 +15,7 @@ import { useTranslations } from 'next-intl';
 import { ProjectCard } from "./project-card";
 import { motion } from "framer-motion"
 import { ScrollReveal, StaggerContainer, staggerItem } from "@/components/scroll-reveal"
+import { Project } from "@/data/types";
 
 interface FeaturedProjectsProps {
   projects: Project[];

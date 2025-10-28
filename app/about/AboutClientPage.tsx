@@ -13,37 +13,22 @@ import {
   ChevronDown,
   GraduationCap,
 } from "lucide-react";
-import type { ResumeData } from "@/data/resume-data.pt";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { useLocaleData } from "@/contexts/locale-data-context";
 
 
 export default function AboutClientPage() {
   const [showPreviousRoles, setShowPreviousRoles] = useState(false);
   const [showPreviousEducation, setShowPreviousEducation] = useState(false);
   const [isIntroExpanded, setIsIntroExpanded] = useState(false);
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
 
+  const { resumeData, isLoading } = useLocaleData();
   const t = useTranslations();
-  const locale = useLocale(); // Pega o locale atual: "pt" ou "en"
+  const locale = useLocale();
 
-  useEffect(() => {
-    loadResumeData(locale);
-  }, [locale]);
-
-  const loadResumeData = async (locale: string) => {
-    try {
-      const data = await import(`@/data/resume-data.${locale}.ts`);
-      setResumeData(data.default);
-    } catch (error) {
-      // Fallback to Portuguese
-      const data = await import(`@/data/resume-data.pt.ts`);
-      setResumeData(data.default);
-    }
-  };
-
-  if (!resumeData) return null;
+  if (isLoading || !resumeData) return null;
 
   const currentRole = resumeData.experience[0];
   const previousRoles = resumeData.experience.slice(1);
@@ -61,116 +46,116 @@ export default function AboutClientPage() {
   const photoUrl = getValidPhotoUrl(resumeData.personalInfo.photo);
 
   return (
-    <div className="container pt-10 md:py-12">
+    <div className="container pt-10 pb-6 md:py-12">
       <div className="grid lg:gap-12 lg:grid-cols-[1fr_300px]">
         <div className="space-y-8">
           <div>
-        <ScrollReveal animation="fadeUp" delay={0.2}>
-            <h1 className="text-4xl font-bold">{t("about.title")}</h1>
-              </ScrollReveal>
-        <ScrollReveal animation="fadeUp" delay={0.3}>
-            <p className="text-xl text-muted-foreground">
-              {locale === "pt"
-                ? "Conheça Um pouco do Kauã — um desenvolvedor full-stack habilidoso."
-                : "Get to know Kauã — a skilled full-stack developer."}
-            </p>
-                </ScrollReveal>
+            <ScrollReveal animation="fadeUp" delay={0.2}>
+              <h1 className="text-4xl font-bold">{t("about.title")}</h1>
+            </ScrollReveal>
+            <ScrollReveal animation="fadeUp" delay={0.3}>
+              <p className="text-xl text-muted-foreground">
+                {locale === "pt"
+                  ? "Conheça Um pouco do Kauã — um desenvolvedor full-stack habilidoso."
+                  : "Get to know Kauã — a skilled full-stack developer."}
+              </p>
+            </ScrollReveal>
           </div>
 
           {/* Mobile Sidebar - Keep as Card */}
           <Card className="border-2 lg:hidden">
             <CardContent className="p-6 space-y-2">
               <div className="flex items-center gap-6 mb-6 ">
-        <ScrollReveal animation="fadeUp" delay={0.2}>
-                <div className="flex-shrink-0">
-                  <Image
-                    src={photoUrl || "/placeholder.svg"}
-                    alt={resumeData.personalInfo.name}
-                    width={80}
-                    height={60}
-                    className="object-cover rounded-full"
-                  />
-                </div>
+                <ScrollReveal animation="fadeUp" delay={0.2}>
+                  <div className="flex-shrink-0">
+                    <Image
+                      src={photoUrl || "/placeholder.svg"}
+                      alt={resumeData.personalInfo.name}
+                      width={80}
+                      height={60}
+                      className="object-cover rounded-full"
+                    />
+                  </div>
                 </ScrollReveal>
                 <div className="flex-1 min-w-0">
-        <ScrollReveal animation="fadeUp" delay={0.2}>
-                  <h3 className="text-xl font-bold">
-                    {resumeData.personalInfo.name}
-                  </h3>
+                  <ScrollReveal animation="fadeUp" delay={0.2}>
+                    <h3 className="text-xl font-bold">
+                      {resumeData.personalInfo.name}
+                    </h3>
                   </ScrollReveal>
-        <ScrollReveal animation="fadeUp" delay={0.3}>
+                  <ScrollReveal animation="fadeUp" delay={0.3}>
 
-                  <p className="text-muted-foreground text-sm">
-                    {resumeData.personalInfo.title}
-                  </p>
+                    <p className="text-muted-foreground text-sm">
+                      {resumeData.personalInfo.title}
+                    </p>
                   </ScrollReveal>
-        <ScrollReveal animation="fadeUp" delay={0.4}>
-                  <div className="flex items-center gap-2 text-muted-foreground mt-2">
-                    <MapPin className="h-4 w-4 flex-shrink-0" />
-                    <span className="text-sm">
-                      {resumeData.personalInfo.location}
-                    </span>
-                  </div>
+                  <ScrollReveal animation="fadeUp" delay={0.4}>
+                    <div className="flex items-center gap-2 text-muted-foreground mt-2">
+                      <MapPin className="h-4 w-4 flex-shrink-0" />
+                      <span className="text-sm">
+                        {resumeData.personalInfo.location}
+                      </span>
+                    </div>
                   </ScrollReveal>
                   <div className="flex items-center gap-4 pt-4">
-        <ScrollReveal animation="fadeUp" delay={0.5}>
+                    <ScrollReveal animation="fadeUp" delay={0.5}>
 
-                    <Link
-                      href={`${resumeData.personalInfo.linkedin}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </Link>
-        </ScrollReveal>
-        <ScrollReveal animation="fadeUp" delay={0.6}>
-
-
-                    <Link
-                      href={`${resumeData.personalInfo.github}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <Github className="h-5 w-5" />
-                    </Link>
-                      </ScrollReveal>
-        <ScrollReveal animation="fadeUp" delay={0.7}>
-
-
-                    <Link
-                      href={`${resumeData.personalInfo.instagram}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      <Link
+                        href={`${resumeData.personalInfo.linkedin}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                      <Instagram className="h-5 w-5" />
-                    </Link>
-                      </ScrollReveal>
+                        <Linkedin className="h-5 w-5" />
+                      </Link>
+                    </ScrollReveal>
+                    <ScrollReveal animation="fadeUp" delay={0.6}>
+
+
+                      <Link
+                        href={`${resumeData.personalInfo.github}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        <Github className="h-5 w-5" />
+                      </Link>
+                    </ScrollReveal>
+                    <ScrollReveal animation="fadeUp" delay={0.7}>
+
+
+                      <Link
+                        href={`${resumeData.personalInfo.instagram}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        <Instagram className="h-5 w-5" />
+                      </Link>
+                    </ScrollReveal>
                   </div>
                 </div>
               </div>
               <ScrollReveal animation="fadeUp" delay={0.8}>
 
-              <div className="space-y-2">
-                <Link
-                  href={resumeData.personalInfo.cv}
-                  target="_blank"
-                  className="block"
-                >
-                  <Button className="w-full">
-                  {t('home.cv2')}
+                <div className="space-y-2">
+                  <Link
+                    href={resumeData.personalInfo.cv}
+                    target="_blank"
+                    className="block"
+                  >
+                    <Button className="w-full">
+                      {t('home.cv2')}
 
-                  </Button>
-                </Link>
+                    </Button>
+                  </Link>
 
-                <Link href={"/contact"} className="block">
-                  <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
-                    {locale === "pt" ? "Entrar em contato" : "Get in touch"}
-                  </Button>
-                </Link>
-              </div>
+                  <Link href={"/contact"} className="block">
+                    <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
+                      {locale === "pt" ? "Entrar em contato" : "Get in touch"}
+                    </Button>
+                  </Link>
+                </div>
               </ScrollReveal>
             </CardContent>
           </Card>
@@ -178,66 +163,61 @@ export default function AboutClientPage() {
           <ScrollReveal animation="fadeUp" delay={0.2}>
             <Card className="border-2">
               <CardContent className="px-4 py-6 md:p-8 space-y-4">
-              <ScrollReveal animation="fadeUp" delay={0.4}>
+                <ScrollReveal animation="fadeUp" delay={0.4}>
 
-                <p className="text-sm  text-muted-foreground uppercase tracking-wider">
-                  {locale === "pt" ? "INTRODUÇÃO" : "INTRODUCTION"}
-                </p>
-              </ScrollReveal>
-              <ScrollReveal animation="fadeUp" delay={0.5}>
-
-
-                <h2 className="md:hidden text-xl md:text-3xl font-bold leading-tight">
-                  {locale === "pt"
-                    ? "Dev apaixonado por tecnologia e inovação, em busca do próximo desafio"
-                    : "Dev passionate about technology and innovation, looking for the next challenge"}
-                </h2>
-                    </ScrollReveal>
-              <ScrollReveal animation="fadeUp" delay={0.6}>
+                  <p className="text-sm  text-muted-foreground uppercase tracking-wider">
+                    {locale === "pt" ? "INTRODUÇÃO" : "INTRODUCTION"}
+                  </p>
+                </ScrollReveal>
+                <ScrollReveal animation="fadeUp" delay={0.5}>
 
 
-                <h2 className="hidden md:block text-xl md:text-3xl font-bold leading-tight">
-                  {locale === "pt"
-                    ? "Desenvolvedor Full Stack apaixonado por tecnologia e soluções que geram impacto real"
-                    : "Full Stack Developer passionate about technology and solutions that generate real impact"}
-                </h2>
-                    </ScrollReveal>
-              <ScrollReveal animation="fadeUp" delay={0.7}>
+                  <h2 className="md:hidden text-xl md:text-3xl font-bold leading-tight">
+                    {locale === "pt"
+                      ? "Dev apaixonado por tecnologia e inovação, em busca do próximo desafio"
+                      : "Dev passionate about technology and innovation, looking for the next challenge"}
+                  </h2>
+                </ScrollReveal>
+                <ScrollReveal animation="fadeUp" delay={0.6}>
 
 
-                <p
-                  className={`text-muted-foreground leading-relaxed ${
-                    isIntroExpanded ? "" : "line-clamp-6 md:line-clamp-none"
-                    }`}
-                    >
-                  {resumeData.summary[0]}
-                </p>
-                  </ScrollReveal>
+                  <h2 className="hidden md:block text-xl md:text-3xl font-bold leading-tight">
+                    {locale === "pt"
+                      ? "Desenvolvedor Full Stack apaixonado por tecnologia e soluções que geram impacto real"
+                      : "Full Stack Developer passionate about technology and solutions that generate real impact"}
+                  </h2>
+                </ScrollReveal>
+                <ScrollReveal animation="fadeUp" delay={0.7}>
+                  <p
+                    className={`text-muted-foreground leading-relaxed ${isIntroExpanded ? "" : "line-clamp-6 md:line-clamp-none"
+                      }`}
+                  >
+                    {resumeData.summary[0]}
+                  </p>
+                </ScrollReveal>
                 {!isIntroExpanded && (
-              <ScrollReveal animation="fadeUp" delay={0.2}>
-
-
-                  <button
-                    onClick={() => setIsIntroExpanded(true)}
-                    className="text-sm text-primary hover:text-primary/80 transition-colors font-medium md:hidden"
+                  <ScrollReveal animation="fadeUp" delay={0.2}>
+                    <button
+                      onClick={() => setIsIntroExpanded(true)}
+                      className="text-sm text-primary hover:text-primary/80 transition-colors font-medium md:hidden"
                     >
-                    {locale === "pt" ? "Continuar lendo →" : "Continue reading →"}
-                  </button>
-                    </ScrollReveal>
+                      {locale === "pt" ? "Continuar lendo →" : "Continue reading →"}
+                    </button>
+                  </ScrollReveal>
                 )}
               </CardContent>
             </Card>
           </ScrollReveal>
 
 
-            <div className="space-y-6">
-          <ScrollReveal animation="fadeUp" delay={0.2}>
+          <div className="space-y-6">
+            <ScrollReveal animation="fadeUp" delay={0.2}>
 
               <h2 className="text-2xl font-bold">{t("about.career")}</h2>
-          </ScrollReveal>
+            </ScrollReveal>
 
-              {/* Current Role - Featured with gradient background */}
-          <ScrollReveal animation="fadeUp" delay={0.4}>
+            {/* Current Role - Featured with gradient background */}
+            <ScrollReveal animation="fadeUp" delay={0.4}>
 
               <Card className="relative overflow-hidden border-2 hover:shadow-lg transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
@@ -260,41 +240,39 @@ export default function AboutClientPage() {
                   </div>
                 </CardContent>
               </Card>
-          </ScrollReveal>
+            </ScrollReveal>
 
-              {/* Previous Roles Toggle */}
-              {previousRoles.length > 0 && (
-                <div className="space-y-4">
-                  <ScrollReveal animation="fadeLeft" delay={0.2}>
-                    <button
-                      onClick={() => setShowPreviousRoles(!showPreviousRoles)}
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
-                    >
-                      <span>
-                        {showPreviousRoles
-                          ? t("about.seeLess")
-                          : t("about.seeMore")}{" "}
-                        {locale === "pt" ? "cargos anteriores" : "previous roles"}
-                      </span>
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-300 ${
-                          showPreviousRoles ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                  </ScrollReveal>
-
-
-                  {/* Previous Roles - Animated collapse */}
-                  <div
-                    className={`space-y-4 transition-all duration-500 ease-in-out ${
-                      showPreviousRoles
-                        ? "opacity-100 max-h-[2000px]"
-                        : "opacity-0 max-h-0 overflow-hidden"
-                    }`}
+            {/* Previous Roles Toggle */}
+            {previousRoles.length > 0 && (
+              <div className="space-y-4">
+                <ScrollReveal animation="fadeLeft" delay={0.2}>
+                  <button
+                    onClick={() => setShowPreviousRoles(!showPreviousRoles)}
+                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
                   >
-                    {previousRoles.map((job, index) => (
-                  <ScrollReveal animation="fadeLeft" delay={0.2}>
+                    <span>
+                      {showPreviousRoles
+                        ? t("about.seeLess")
+                        : t("about.seeMore")}{" "}
+                      {locale === "pt" ? "cargos anteriores" : "previous roles"}
+                    </span>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-300 ${showPreviousRoles ? "rotate-180" : ""
+                        }`}
+                    />
+                  </button>
+                </ScrollReveal>
+
+
+                {/* Previous Roles - Animated collapse */}
+                <div
+                  className={`space-y-4 transition-all duration-500 ease-in-out ${showPreviousRoles
+                      ? "opacity-100 max-h-[2000px]"
+                      : "opacity-0 max-h-0 overflow-hidden"
+                    }`}
+                >
+                  {previousRoles.map((job, index) => (
+                    <ScrollReveal animation="fadeLeft" delay={0.2}>
                       <Card
                         key={index}
                         className="relative overflow-hidden border hover:border-primary/50 hover:shadow-md transition-all duration-300"
@@ -326,11 +304,11 @@ export default function AboutClientPage() {
                         </CardContent>
                       </Card>
                     </ScrollReveal>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+          </div>
 
           <ScrollReveal animation="fadeLeft" delay={0.2}>
             <div className="space-y-6">
@@ -364,8 +342,8 @@ export default function AboutClientPage() {
                             {currentEducation.mode === "Online"
                               ? t("about.online")
                               : currentEducation.mode === "Presencial"
-                              ? t("about.inPerson")
-                              : currentEducation.mode}
+                                ? t("about.inPerson")
+                                : currentEducation.mode}
                           </span>
                           {currentEducation.grade && (
                             <p className="text-sm text-muted-foreground mt-1">
@@ -382,92 +360,90 @@ export default function AboutClientPage() {
               {/* Previous Education Toggle */}
 
               {previousEducation.length > 0 && (
-          <ScrollReveal animation="fadeLeft" delay={0.2}>
-                <div className="space-y-4">
-                  <button
-                    onClick={() =>
-                      setShowPreviousEducation(!showPreviousEducation)
-                    }
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
-                  >
-                    <span>
-                      {showPreviousEducation
-                        ? t("about.seeLess")
-                        : t("about.seeMore")}{" "}
-                      {locale === "pt" ? "formações" : "education"}
-                    </span>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform duration-300 ${
-                        showPreviousEducation ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
+                <ScrollReveal animation="fadeLeft" delay={0.2}>
+                  <div className="space-y-4">
+                    <button
+                      onClick={() =>
+                        setShowPreviousEducation(!showPreviousEducation)
+                      }
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                    >
+                      <span>
+                        {showPreviousEducation
+                          ? t("about.seeLess")
+                          : t("about.seeMore")}{" "}
+                        {locale === "pt" ? "formações" : "education"}
+                      </span>
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform duration-300 ${showPreviousEducation ? "rotate-180" : ""
+                          }`}
+                      />
+                    </button>
 
-                  {/* Previous Education - Animated collapse */}
-                  <div
-                    className={`space-y-4 transition-all duration-500 ease-in-out ${
-                      showPreviousEducation
-                        ? "opacity-100 max-h-[2000px]"
-                        : "opacity-0 max-h-0 overflow-hidden"
-                    }`}
-                  >
-                    {previousEducation.map((edu, index) => (
-                      <ScrollReveal animation="fadeLeft" delay={0.4}>
-                        <Card
-                          key={index}
-                          className="relative overflow-hidden border hover:border-primary/50 hover:shadow-md transition-all duration-300"
-                          style={{
-                            transitionDelay: showPreviousEducation
-                              ? `${index * 100}ms`
-                              : "0ms",
-                          }}
-                        >
-                          {/* Timeline dot */}
-                          <div className="absolute left-[34px] top-0 bottom-0 w-px bg-border" />
-                          <CardContent className="relative p-6">
-                            <div className="flex items-start gap-4">
-                              <div className="flex-shrink-0 relative z-10">
-                                <div className="w-12 h-12 rounded-full bg-background border-2 border-border flex items-center justify-center">
-                                  <GraduationCap className="h-5 w-5 text-muted-foreground" />
-                                </div>
-                              </div>
-                              <div className="flex-1 space-y-2">
-                                <div className="flex items-start justify-between gap-4">
-                                  <div>
-                                    <h3 className="text-lg font-bold">
-                                      {edu.institution}
-                                    </h3>
-                                    <p className="text-muted-foreground">
-                                      {edu.degree}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                      {edu.period}
-                                    </p>
+                    {/* Previous Education - Animated collapse */}
+                    <div
+                      className={`space-y-4 transition-all duration-500 ease-in-out ${showPreviousEducation
+                          ? "opacity-100 max-h-[2000px]"
+                          : "opacity-0 max-h-0 overflow-hidden"
+                        }`}
+                    >
+                      {previousEducation.map((edu, index) => (
+                        <ScrollReveal animation="fadeLeft" delay={0.4}>
+                          <Card
+                            key={index}
+                            className="relative overflow-hidden border hover:border-primary/50 hover:shadow-md transition-all duration-300"
+                            style={{
+                              transitionDelay: showPreviousEducation
+                                ? `${index * 100}ms`
+                                : "0ms",
+                            }}
+                          >
+                            {/* Timeline dot */}
+                            <div className="absolute left-[34px] top-0 bottom-0 w-px bg-border" />
+                            <CardContent className="relative p-6">
+                              <div className="flex items-start gap-4">
+                                <div className="flex-shrink-0 relative z-10">
+                                  <div className="w-12 h-12 rounded-full bg-background border-2 border-border flex items-center justify-center">
+                                    <GraduationCap className="h-5 w-5 text-muted-foreground" />
                                   </div>
-                                  <div className="text-right flex-shrink-0">
-                                    <span className="text-sm text-muted-foreground">
-                                      {edu.mode === "Online"
-                                        ? t("about.online")
-                                        : edu.mode === "Presencial"
-                                        ? t("about.inPerson")
-                                        : edu.mode}
-                                    </span>
-                                    {edu.grade && (
-                                      <p className="text-sm text-muted-foreground mt-1">
-                                        {edu.grade}
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                  <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                      <h3 className="text-lg font-bold">
+                                        {edu.institution}
+                                      </h3>
+                                      <p className="text-muted-foreground">
+                                        {edu.degree}
                                       </p>
-                                    )}
+                                      <p className="text-sm text-muted-foreground">
+                                        {edu.period}
+                                      </p>
+                                    </div>
+                                    <div className="text-right flex-shrink-0">
+                                      <span className="text-sm text-muted-foreground">
+                                        {edu.mode === "Online"
+                                          ? t("about.online")
+                                          : edu.mode === "Presencial"
+                                            ? t("about.inPerson")
+                                            : edu.mode}
+                                      </span>
+                                      {edu.grade && (
+                                        <p className="text-sm text-muted-foreground mt-1">
+                                          {edu.grade}
+                                        </p>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </ScrollReveal>
-                    ))}
+                            </CardContent>
+                          </Card>
+                        </ScrollReveal>
+                      ))}
+                    </div>
                   </div>
-                </div>
-          </ScrollReveal>
+                </ScrollReveal>
               )}
 
             </div>
@@ -591,7 +567,7 @@ export default function AboutClientPage() {
 
 
               {/* Database Card - Mobile: Middle Left (short), Desktop: Bottom Right */}
-              <ScrollReveal animation="fadeRight" delay={0.6}  className="sm:col-span-1 sm:order-last">
+              <ScrollReveal animation="fadeRight" delay={0.6} className="sm:col-span-1 sm:order-last">
                 <Card className="relative overflow-hidden border-2 hover:shadow-xl hover:scale-[1.02] hover:border-orange-500/50 transition-all duration-300 ">
                   <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-transparent" />
                   <CardContent className="relative p-6 h-full flex flex-col justify-between">
@@ -666,87 +642,87 @@ export default function AboutClientPage() {
           <div className="hidden lg:flex sticky top-20 flex-col">
 
             <div className="rounded-lg overflow-hidden mb-6">
-          <ScrollReveal animation="fadeUp" delay={0.2}>
-              <Image
-                src={photoUrl || "/placeholder.svg"}
-                alt={resumeData.personalInfo.name}
-                width={300}
-                height={400}
-                className="object-cover w-full rounded-lg"
+              <ScrollReveal animation="fadeUp" delay={0.2}>
+                <Image
+                  src={photoUrl || "/placeholder.svg"}
+                  alt={resumeData.personalInfo.name}
+                  width={300}
+                  height={400}
+                  className="object-cover w-full rounded-lg"
                 />
-                </ScrollReveal>
-          <ScrollReveal animation="fadeUp" delay={0.4}>
+              </ScrollReveal>
+              <ScrollReveal animation="fadeUp" delay={0.4}>
 
-              <div className="mt-4">
-                <h3 className="text-xl font-bold">
-                  {resumeData.personalInfo.name}
-                </h3>
-                <p className="text-md text-muted-foreground">
-                  {resumeData.personalInfo.title}
-                </p>
-                <div className="flex gap-2 text-muted-foreground pt-2">
-                  <MapPin className="h-4 w-4" />
-                  <span className="text-sm">
-                    {resumeData.personalInfo.location}
-                  </span>
+                <div className="mt-4">
+                  <h3 className="text-xl font-bold">
+                    {resumeData.personalInfo.name}
+                  </h3>
+                  <p className="text-md text-muted-foreground">
+                    {resumeData.personalInfo.title}
+                  </p>
+                  <div className="flex gap-2 text-muted-foreground pt-2">
+                    <MapPin className="h-4 w-4" />
+                    <span className="text-sm">
+                      {resumeData.personalInfo.location}
+                    </span>
+                  </div>
                 </div>
-              </div>
-                </ScrollReveal>
+              </ScrollReveal>
             </div>
 
-          <ScrollReveal animation="fadeUp" delay={0.6}>
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <Link
-                  href={resumeData.personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  <span className="text-sm">LinkedIn</span>
-                </Link>
-                {resumeData.personalInfo.github && (
+            <ScrollReveal animation="fadeUp" delay={0.6}>
+              <div className="space-y-6">
+                <div className="space-y-2">
                   <Link
-                    href={resumeData.personalInfo.github}
+                    href={resumeData.personalInfo.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <Github className="h-5 w-5" />
-                    <span className="text-sm">GitHub</span>
+                    <Linkedin className="h-5 w-5" />
+                    <span className="text-sm">LinkedIn</span>
                   </Link>
-                )}
-                <Link
-                  href={resumeData.personalInfo.instagram || ""}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Instagram className="h-5 w-5" />
-                  <span className="text-sm">Instagram</span>
-                </Link>
-              </div>
-              <div className="space-y-2">
-                <Link
-                  href={resumeData.personalInfo.cv}
-                  target="_blank"
-                  className="block"
-                >
-                  <Button className="w-full">
-                  {t('home.cv2')}
+                  {resumeData.personalInfo.github && (
+                    <Link
+                      href={resumeData.personalInfo.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <Github className="h-5 w-5" />
+                      <span className="text-sm">GitHub</span>
+                    </Link>
+                  )}
+                  <Link
+                    href={resumeData.personalInfo.instagram || ""}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Instagram className="h-5 w-5" />
+                    <span className="text-sm">Instagram</span>
+                  </Link>
+                </div>
+                <div className="space-y-2">
+                  <Link
+                    href={resumeData.personalInfo.cv}
+                    target="_blank"
+                    className="block"
+                  >
+                    <Button className="w-full">
+                      {t('home.cv2')}
 
-                  </Button>
-                </Link>
+                    </Button>
+                  </Link>
 
-                <Link href={"/contact"} className="block">
-                  <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
-                    {locale === "pt" ? "Entrar em contato" : "Get in touch"}
-                  </Button>
-                </Link>
+                  <Link href={"/contact"} className="block">
+                    <Button className="w-full border bg-transparent border-zinc-600 text-zinc-800 hover:bg-zinc-300 hover:text-zinc-900 dark:border-muted-foreground dark:text-muted-foreground dark:hover:bg-muted-foreground/10 dark:hover:text-zinc-200">
+                      {locale === "pt" ? "Entrar em contato" : "Get in touch"}
+                    </Button>
+                  </Link>
+                </div>
               </div>
-            </div>
-              </ScrollReveal>
+            </ScrollReveal>
           </div>
         </div>
       </div>

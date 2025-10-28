@@ -3,7 +3,7 @@
 import type React from "react"
 import { SkeletonTheme as ReactSkeletonTheme } from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
-import { useTheme } from "@/lib/theme/theme-context"
+import { useTheme } from "@/contexts/theme-context";
 
 type SkeletonThemeProps = {
   children: React.ReactNode

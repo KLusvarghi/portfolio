@@ -5,12 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import type { Project } from "@/data/projects-data.pt";
-import { formatProjectDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import ProjectsDetailsLoading from "./loading";
 import { parseDescription } from "@/utils";
+import { useLocaleData } from "@/contexts/locale-data-context";
+import { formatProjectDate } from "@/helpers/utils";
+import { Project } from "@/data/types";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 // export async function generateMetadata({
 //   params,
@@ -37,29 +39,20 @@ export default function ProjectDetailPage({
   params: { slug: string };
 }) {
   const [project, setProject] = useState<Project | undefined>();
+  const { projectsData } = useLocaleData();
+
   const [isLoading, setIsLoading] = useState(true);
   const t = useTranslations();
 
+  if (!projectsData) return null;
+
   useEffect(() => {
     const loadProjectsData = async () => {
-      const savedLocale = localStorage.getItem("locale") || "pt";
-
-      try {
-        const data = await import(`@/data/projects-data.${savedLocale}.ts`);
-        const currentProject = data.default.projects.find(
-          (p: Project) => p.slug === params.slug
-        );
-        setProject(currentProject);
-      } catch (error) {
-        // Fallback to Portuguese
-        const data = await import(`@/data/projects-data.pt.ts`);
-        const currentProject = data.default.projects.find(
-          (p: Project) => p.slug === params.slug
-        );
-        setProject(currentProject);
-      } finally {
-        setIsLoading(false);
-      }
+      const currentProject = projectsData.projects.find(
+        (p: Project) => p.slug === params.slug
+      );
+      setProject(currentProject);
+      setIsLoading(false);
     };
     loadProjectsData();
   }, [params.slug]);
@@ -74,13 +67,12 @@ export default function ProjectDetailPage({
 
   const descriptionParagraphs = parseDescription(project.longDescription, project.description)
 
-
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="relative w-full h-[50vh] md:h-[60vh] bg-gradient-to-br md:bg-gradient-to-bl from-primary/45 md:from-primary/20 via-background to-background overflow-hidden">
         <div className="absolute inset-0">
-          {project.image !== null ? (
+          {project.image !== null ?? (
             <Image
               src={project.image || ""}
               alt={project.title}
@@ -88,74 +80,91 @@ export default function ProjectDetailPage({
               className="object-cover opacity-20"
               priority
             />
-          ): <></> }
+          )}
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
         <div className="relative container h-full flex flex-col justify-end pb-12 md:pb-16">
-          <Link href="/projects">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="mb-6 -ml-2 hover:bg-transparent group"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          <ScrollReveal animation="fadeUp" delay={0.2}>
+            <Link href="/projects">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="mb-6 -ml-2 hover:bg-transparent group"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
 
-              {t("projectsDetails.comeBack")}
-            </Button>
-          </Link>
+                {t("projectsDetails.comeBack")}
+              </Button>
+            </Link>
+          </ScrollReveal>
 
           <div className="space-y-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-sm font-medium px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">
-                {formatProjectDate(project.startDate, project.endDate)}
-              </span>
-              {project.categories?.map((category) => (
-                <span
-                  key={category}
-                  className="text-sm font-medium px-3 py-1 rounded-full bg-muted text-muted-foreground"
-                >
-                  {category}
+            <ScrollReveal animation="fadeUp" delay={0.3}>
+              <div className="flex flex-wrap items-center gap-3">
+
+
+                <span className="text-sm font-medium px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">
+                  {formatProjectDate(project.startDate, project.endDate)}
                 </span>
-              ))}
-            </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance">
-              {project.title}
-            </h1>
+                {project.categories?.map((category) => (
+                  <span
+                    key={category}
+                    className="text-sm font-medium px-3 py-1 rounded-full bg-muted text-muted-foreground"
+                  >
+                    {category}
+                  </span>
+                ))}
+              </div>
+            </ScrollReveal>
 
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl text-pretty">
-              {project.description}
-            </p>
+            <ScrollReveal animation="fadeUp" delay={0.4}>
 
-            <div className="flex flex-wrap gap-3 pt-4">
-              {project.demo && (
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance">
+                {project.title}
+              </h1>
+            </ScrollReveal>
+            <ScrollReveal animation="fadeUp" delay={0.5}>
+
+
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl text-pretty">
+                {project.description}
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.6}>
+
+              <div className="flex flex-wrap gap-3 pt-4">
+                {project.demo && (
+                  <Link
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button size="lg" className="group">
+                      <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                      {t("projectsDetails.seeDemo")}
+                    </Button>
+                  </Link>
+                )}
                 <Link
-                  href={project.demo}
+                  href={`${project.github}?source=kaualusvarghi.vercel.app`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button size="lg" className="group">
-                    <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                    {t("projectsDetails.seeDemo")}
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="group bg-transparent"
+                  >
+                    <Github className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                    {t("projectsDetails.seeCode")}
                   </Button>
                 </Link>
-              )}
-              <Link
-                href={`${project.github}?source=kaualusvarghi.vercel.app`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="group bg-transparent"
-                >
-                  <Github className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                  {t("projectsDetails.seeCode")}
-                </Button>
-              </Link>
-            </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
@@ -164,91 +173,107 @@ export default function ProjectDetailPage({
       <div className="container pt-6 md:pt-12 md:pb-20">
         <div className="max-w-4xl mx-auto">
           {/* Project Image */}
-          {project.image && (
-            <div className="mb-12 rounded-xl overflow-hidden border-2 border-border shadow-2xl">
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={1200}
-                height={675}
-                className="w-full h-auto"
-                priority
-              />
-            </div>
-          )}
+          <ScrollReveal animation="fadeUp" delay={0.2}>
+
+            {project.image && (
+              <div className="mb-12 rounded-xl overflow-hidden border-2 border-border shadow-2xl">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={1200}
+                  height={675}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+            )}
+          </ScrollReveal>
+
 
           {/* Description */}
           <div className="prose prose-lg dark:prose-invert max-w-none mb-10">
-            <h2 className="text-3xl font-bold mb-6">
-              {t("projectsDetails.aboutProject")}
-            </h2>
-            <div className="space-y-4">
-              {descriptionParagraphs.map((paragraph, index) => (
-                <p key={index} className="text-lg leading-relaxed text-muted-foreground">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            <ScrollReveal animation="fadeUp" delay={0.3}>
+
+              <h2 className="text-3xl font-bold mb-6">
+                {t("projectsDetails.aboutProject")}
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fadeUp" delay={0.4}>
+              <div className="space-y-4">
+                {descriptionParagraphs.map((paragraph, index) => (
+                  <p key={index} className="text-lg leading-relaxed text-muted-foreground">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Technologies */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">
-              {t("projectsDetails.technologiesUsed")}
-            </h2>
-            <div className="flex flex-wrap gap-2 md:gap-3">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-sm font-medium px-2 py-1 md:px-4 md:py-2 rounded-md bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <ScrollReveal animation="fadeUp" delay={0.3}>
+              <h2 className="text-3xl font-bold mb-6">
+                {t("projectsDetails.technologiesUsed")}
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fadeUp" delay={0.4}>
+              <div className="flex flex-wrap gap-2 md:gap-3">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-sm font-medium px-2 py-1 md:px-4 md:py-2 rounded-md bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </ScrollReveal>
+
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-border">
-            <Link href="/projects" className="flex-1">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full group bg-transparent"
-              >
-                <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-                {t("projectsDetails.comeBack")}
-              </Button>
-            </Link>
-            {project.demo && (
-              <Link
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 basis-[77%]"
-              >
-                <Button size="lg" className="w-full group">
-                  <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                  {t("projectsDetails.seeDemoLive")}
+          <ScrollReveal animation="fadeUp" delay={0.5}>
+            <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-border">
+              <Link href="/projects" className="flex-1">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full group bg-transparent"
+                >
+                  <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
+                  {t("projectsDetails.comeBack")}
                 </Button>
               </Link>
-            )}
-            <Link
-              href={`${project.github}?source=kaualusvarghi.vercel.app`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1"
-            >
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full group bg-transparent"
+              {project.demo && (
+                <Link
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 basis-[77%]"
+                >
+                  <Button size="lg" className="w-full group">
+                    <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                    {t("projectsDetails.seeDemoLive")}
+                  </Button>
+                </Link>
+              )}
+              <Link
+                href={`${project.github}?source=kaualusvarghi.vercel.app`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1"
               >
-                <Github className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                {t("projectsDetails.seeGithub")}
-              </Button>
-            </Link>
-          </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full group bg-transparent"
+                >
+                  <Github className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                  {t("projectsDetails.seeGithub")}
+                </Button>
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </div>

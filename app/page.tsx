@@ -5,47 +5,21 @@ import { FeaturedProjects } from "@/components/featured-projects";
 // import { YouTubeVideos } from "@/components/youtube-videos";
 import { ArrowRight, Code2 } from "lucide-react";
 import Link from "next/link";
-import type { ResumeData } from "@/data/resume-data.pt";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import { ScrollReveal } from "@/components/scroll-reveal"
-import type { Project } from "@/data/projects-data.pt";
+import { useLocaleData } from "@/contexts/locale-data-context";
 
 export default function Home() {
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
-  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
-
+  const { resumeData, projectsData, isLoading } = useLocaleData();
   const t = useTranslations();
 
-  useEffect(() => {
-    const loadData = async () => {
-      const locale = localStorage.getItem("locale") || "pt";
-      const resumeData = await import(`@/data/resume-data.${locale}.ts`);
-      const projectData = await import(`@/data/projects-data.${locale}.ts`);
-      try {
-        setResumeData(resumeData.default);
-        setFeaturedProjects(projectData.default.featuredProjects);
-      } catch (error) {
-        // Fallback to Portuguese
-        // Não é possível carregar arquivos TypeScript diretamente de outra forma em tempo de execução no Next.js App Router,
-        // pois require() e fetch() não funcionam para arquivos TS locais. O import dinâmico é a única forma suportada.
-        // Alternativas seriam transformar os dados em JSON, mas para manter tipagem e lazy loading, o import dinâmico é o padrão.
-        setResumeData(resumeData.default);
-        setFeaturedProjects(projectData.default.featuredProjects);
-      }
-    }
-    loadData()
-  }, []);
-
-
-  if (!resumeData) return null;
+  if (isLoading || !resumeData || !projectsData) return null;
 
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-background via-background to-muted/20">
       <div className="container h-full flex flex-col py-16">
         {/* Server-rendered Hero Section */}
         <ServerHeroSection />
-
         {/* Professional Summary Section - Simplified */}
         <div className="mt-16 pt-16 border-t border-border/50 w-full">
           <ScrollReveal animation="fadeUp" delay={0.3}>
@@ -75,10 +49,8 @@ export default function Home() {
             </div>
           </ScrollReveal>
         </div>
-
-
         <div className="mt-24 w-full">
-          <FeaturedProjects projects={featuredProjects} />
+          <FeaturedProjects projects={projectsData.projects.slice(0, 3)} />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/helpers/utils"
 import { Database, FileText, Video } from "lucide-react"
 
 interface PlaceholderImageProps extends HTMLAttributes<HTMLDivElement> {

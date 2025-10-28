@@ -6,30 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Instagram, MapPin, FileText } from "lucide-react";
 import type { ResumeData } from "@/data/resume-data.pt";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import { ScrollReveal } from "./scroll-reveal";
+import { useLocaleData } from "@/contexts/locale-data-context";
 
 export function ServerHeroSection() {
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const { resumeData, isLoading } = useLocaleData();
   const t = useTranslations();
 
-  useEffect(() => {
-    const savedLocale = localStorage.getItem("locale") || "pt";
-    loadResumeData(savedLocale);
-  }, []);
+  
 
-  const loadResumeData = async (locale: string) => {
-    try {
-      const data = await import(`@/data/resume-data.${locale}.ts`);
-      setResumeData(data.default);
-    } catch (error) {
-      // Fallback to Portuguese
-      const data = await import(`@/data/resume-data.pt.ts`);
-      setResumeData(data.default);
-    }
-  };
-
-  if (!resumeData) return null;
+  if (isLoading || !resumeData) return null;
 
   return (
     <div className="grid lg:grid-cols-[1fr_auto] items-center gap-12 lg:gap-16">
@@ -64,7 +50,6 @@ export function ServerHeroSection() {
           <ScrollReveal animation="fadeUp" delay={0.5}>
 
             <Link href={resumeData.personalInfo.cv}>
-              {/* CORRIGIR A COR DOS BOTÕES EM MODO LIGHT */}
               <Button
                 size="lg"
                 className="bg-popover-foreground text-popover hover:bg-[#262626] dark:hover:bg-[#dfdfdf]"
@@ -89,8 +74,9 @@ export function ServerHeroSection() {
           </ScrollReveal>
         </div>
 
-        <div className="flex gap-6">
-          <ScrollReveal animation="fadeUp" delay={0.7}>
+        <ScrollReveal animation="fadeUp" delay={0.2}>
+
+          <div className="flex gap-6">
 
             <Link
               href={`${resumeData.personalInfo.github}`}
@@ -101,8 +87,6 @@ export function ServerHeroSection() {
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Link>
-          </ScrollReveal>
-          <ScrollReveal animation="fadeUp" delay={0.8}>
 
 
             <Link
@@ -114,8 +98,6 @@ export function ServerHeroSection() {
               <Linkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Link>
-          </ScrollReveal>
-          <ScrollReveal animation="fadeUp" delay={0.9}>
 
 
             <Link
@@ -127,8 +109,9 @@ export function ServerHeroSection() {
               <Instagram className="h-5 w-5" />
               <span className="sr-only">Instagram</span>
             </Link>
-          </ScrollReveal>
-        </div>
+          </div>
+        </ScrollReveal>
+
       </div>
 
       <ScrollReveal animation="fadeUp" delay={0.6}>

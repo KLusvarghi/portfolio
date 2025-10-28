@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/lib/theme/theme-context";
 import Image from "next/image";
+import { useTheme } from "@/contexts/theme-context";
 
 export default function NotFound() {
   const { theme } = useTheme();

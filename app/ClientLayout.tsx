@@ -7,11 +7,12 @@ import "./globals.css"
 import { SidebarNav } from "@/components/sidebar-nav"
 import { BottomNav } from "@/components/bottom-nav"
 import Footer from "@/components/footer"
-import { ToastProvider } from "@/components/toast-provider"
 import { Suspense, useEffect, useState } from "react"
 import { NextIntlClientProvider } from 'next-intl'
-import { ThemeProvider } from "@/lib/theme/theme-context"
 import { SkeletonTheme } from "@/components/ui/skeleton-config"
+import { LocaleDataProvider } from "@/contexts/locale-data-context"
+import { ThemeProvider } from "@/contexts/theme-context"
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,7 +27,7 @@ export default function ClientLayout({
 
   useEffect(() => {
     async function loadLocaleData() {
-      // Get locale from cookie or default to 'pt'
+      // Get locale from localStorage or default to 'pt'
       const savedLocale = localStorage.getItem('locale') || 'pt'
       setLocale(savedLocale)
 
@@ -35,7 +36,6 @@ export default function ClientLayout({
       setMessages(localeMessages.default)
       setMounted(true)
     }
-
     loadLocaleData()
   }, [])
 
@@ -50,17 +50,20 @@ export default function ClientLayout({
         <ThemeProvider>
           <SkeletonTheme>
             <NextIntlClientProvider locale={locale} messages={messages}>
-              <div className="flex min-h-screen flex-col">
-                <SidebarNav />
-                <BottomNav />
+              <LocaleDataProvider>
+                <div className="flex min-h-screen flex-col">
+                  <SidebarNav />
+                  <BottomNav />
 
-                <Suspense>
-                  <main className="flex-1 md:ml-24 pb-24 md:pb-0">{children}</main>
-                </Suspense>
-                <Footer />
-                <ToastProvider />
-                <Analytics />
-              </div>
+                  <Suspense>
+                    <main className="flex-1 md:ml-24 pb-24 md:pb-0">{children}</main>
+                  </Suspense>
+                  <Footer />
+                  {/* <ToastProvider /> */}
+                  <Toaster/>
+                  <Analytics />
+                </div>
+              </LocaleDataProvider>
             </NextIntlClientProvider>
           </SkeletonTheme>
         </ThemeProvider>
