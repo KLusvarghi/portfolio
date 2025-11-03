@@ -24,7 +24,7 @@ export function ProjectCard(project: Project) {
       // className="group overflow-hidden flex flex-col bg-white border-zinc-300  hover:border-zinc-400 dark:bg-zinc-900/50 dark:border-zinc-800/50  dark:hover:border-zinc-700/50 relative hover:scale-105 transition-transform duration-500 hover:shadow-lg"
       className="group rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-zinc-900/60 dark:via-zinc-900/40 dark:to-zinc-900/30 border border-zinc-200/60 dark:border-zinc-800/60 backdrop-blur-xl hover:border-zinc-300/50 dark:hover:border-zinc-700/50 transition-all duration-500 hover:transform hover:scale-[1.02]"
     >
-      <div className="absolute top-3 right-3 z-10 bg-black/20 backdrop-blur-sm text-white dark:text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-lg">
+      <div className="absolute top-3 right-3 z-10 bg-black/50 backdrop-blur-sm text-white dark:text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-lg">
         {formatProjectDate(project.startDate, project.endDate)}
       </div>
 
