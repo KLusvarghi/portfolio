@@ -7,7 +7,7 @@ export { HeroSkeleton } from "./HeroSkeleton"
 
 export function FilterBarSkeleton() {
   return (
-    <div className="mb-8 space-y-4">
+    <div className="mb-8 space-y-2">
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
         <div className="flex flex-wrap gap-2 items-center flex-1">
           <div className="flex flex-wrap gap-2">
@@ -21,7 +21,10 @@ export function FilterBarSkeleton() {
         <Skeleton width={320} height={40} borderRadius="0.375rem" containerClassName="w-full md:w-80" />
       </div>
 
-      <Skeleton width={192} height={16} />
+      <div className="flex flex-col gap-2">
+        <Skeleton width={192} height={40} />
+        <Skeleton width={192} height={16} />
+      </div>
     </div>
   )
 }
@@ -41,8 +44,8 @@ export function SectionHeaderSkeleton() {
 
 export function PageHeaderSkeleton() {
   return (
-    <div className="mb-8">
-      <Skeleton width={192} height={40} containerClassName="mb-4" />
+    <div className="flex flex-col gap-2 mb-8">
+      <Skeleton width={192} height={40} />
       <Skeleton width={384} height={24} style={{ maxWidth: '100%' }} />
     </div>
   )
