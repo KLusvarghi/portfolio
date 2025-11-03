@@ -62,7 +62,7 @@ export default function ContactPage() {
             {/* Email Card */}
             <ScrollReveal animation="fadeUp" delay={0.3}>
               <Card className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border-blue-500/20 hover:border-blue-500/40 transition-colors">
-                <CardContent className="p-4 md:p-6">
+                <CardContent className="p-4 md:p-6 flex flex-col justify-center">
                   <div className="flex flex-col items-center text-center gap-3 md:gap-4">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-500/10 flex items-center justify-center">
                       <Mail className="h-5 w-5 md:h-6 md:w-6 text-blue-400" />
@@ -87,10 +87,10 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
             </ScrollReveal>
+            
             <ScrollReveal animation="fadeUp" delay={0.5}>
-
-              <Card className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border-blue-500/20 hover:border-blue-500/40 transition-colors">
-                <CardContent className="p-4 md:p-6">
+              <Card className="bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border-blue-500/20 hover:border-blue-500/40 transition-colors h-full">
+                <CardContent className="p-4 md:p-6 h-full flex flex-col justify-center">
                   <div className="flex flex-col items-center text-center gap-3 md:gap-4">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-500/10 flex items-center justify-center">
                       <MapPin className="h-5 w-5 md:h-6 md:w-6 text-blue-400" />

@@ -118,7 +118,7 @@ export default function ProjectsPage() {
   if (projectsData.projects.length === 0) {
     return null;
   }
-
+  
 
   return (
     <div className="container pt-12">
