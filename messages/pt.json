@@ -103,9 +103,9 @@
     "pagination": "paginação"
   },
   "metadata": {
-    "defaultTitle": "Kauã Ortolani Lusvarghi | Engenheiro de Software Sênior",
+    "defaultTitle": "Kauã Ortolani Lusvarghi | Engenheiro de Software",
     "template": "%s | Kauã Ortolani Lusvarghi",
-    "description": "Engenheiro de Software Sênior especializado em desenvolvimento fullstack com Typescript, React, Next, Express, Fastify e IA.",
+    "description": "Engenheiro de Software especializado em desenvolvimento fullstack com Typescript, React, Next, Node.js e IA.",
     "siteName": "Site de Kauã Ortolani Lusvarghi",
     "aboutTitle": "Sobre",
     "aboutDescription": "Conheça Kauã Ortolani Lusvarghi, Desenvolvedor Full Stack."
