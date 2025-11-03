@@ -103,6 +103,15 @@
     "breadcrumb": "breadcrumb",
     "pagination": "pagination"
   },
+  "ariaLabels": {
+    "toggleTheme": "Toggle theme",
+    "switchToEnglish": "Switch to English",
+    "switchToPortuguese": "Switch to Portuguese",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram"
+  },
+  "language": "English",
   "metadata": {
     "defaultTitle": "Kauã Ortolani Lusvarghi | Software Engineer",
     "template": "%s | Kauã Ortolani Lusvarghi",
