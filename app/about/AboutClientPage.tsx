@@ -17,12 +17,17 @@ import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { useLocaleData } from "@/contexts/locale-data-context";
+import { ExperienceDetailModal } from "@/components/experience-detail-modal";
+import { WorkExperience } from "@/data/types";
 
 
 export default function AboutClientPage() {
   const [showPreviousRoles, setShowPreviousRoles] = useState(false);
   const [showPreviousEducation, setShowPreviousEducation] = useState(false);
   const [isIntroExpanded, setIsIntroExpanded] = useState(false);
+  const [selectedExperience, setSelectedExperience] =
+    useState<WorkExperience | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { resumeData, isLoading } = useLocaleData();
   const t = useTranslations();
@@ -218,8 +223,13 @@ export default function AboutClientPage() {
 
             {/* Current Role - Featured with gradient background */}
             <ScrollReveal animation="fadeUp" delay={0.4}>
-
-              <Card className="relative overflow-hidden border-2 hover:shadow-lg transition-all duration-300">
+              <Card
+                className="relative overflow-hidden border-2 hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+                onClick={() => {
+                  setSelectedExperience(currentRole);
+                  setIsModalOpen(true);
+                }}
+              >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
                 <CardContent className="relative p-6">
                   <div className="flex items-start gap-4">
@@ -235,6 +245,16 @@ export default function AboutClientPage() {
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {currentRole.period}
+                      </p>
+                      {currentRole.description && (
+                        <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                          {currentRole.description}
+                        </p>
+                      )}
+                      <p className="text-xs text-primary mt-2 font-medium">
+                        {locale === "pt"
+                          ? "Clique para ver mais detalhes →"
+                          : "Click to see more details →"}
                       </p>
                     </div>
                   </div>
@@ -272,14 +292,17 @@ export default function AboutClientPage() {
                     }`}
                 >
                   {previousRoles.map((job, index) => (
-                    <ScrollReveal animation="fadeLeft" delay={0.2}>
+                    <ScrollReveal animation="fadeLeft" delay={0.2} key={index}>
                       <Card
-                        key={index}
-                        className="relative overflow-hidden border hover:border-primary/50 hover:shadow-md transition-all duration-300"
+                        className="relative overflow-hidden border hover:border-primary/50 hover:shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.01]"
                         style={{
                           transitionDelay: showPreviousRoles
                             ? `${index * 100}ms`
                             : "0ms",
+                        }}
+                        onClick={() => {
+                          setSelectedExperience(job);
+                          setIsModalOpen(true);
                         }}
                       >
                         {/* Timeline dot */}
@@ -298,6 +321,16 @@ export default function AboutClientPage() {
                               </p>
                               <p className="text-sm text-muted-foreground">
                                 {job.period}
+                              </p>
+                              {job.description && (
+                                <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                                  {job.description}
+                                </p>
+                              )}
+                              <p className="text-xs text-primary mt-2 font-medium">
+                                {locale === "pt"
+                                  ? "Clique para ver mais detalhes →"
+                                  : "Click to see more details →"}
                               </p>
                             </div>
                           </div>
@@ -726,6 +759,13 @@ export default function AboutClientPage() {
           </div>
         </div>
       </div>
+
+      {/* Experience Detail Modal */}
+      <ExperienceDetailModal
+        experience={selectedExperience}
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+      />
     </div>
   );
 }
