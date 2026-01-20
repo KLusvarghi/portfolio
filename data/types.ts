@@ -30,6 +30,10 @@ export type WorkExperience = {
   company: string;
   period: string;
   location: string;
+  description?: string;
+  technologies?: string[];
+  responsibilities?: string[];
+  achievements?: string[];
 };
 
 export type Language = {
