@@ -55,7 +55,13 @@ const resumeData: ResumeData = {
   },
   experience: [
     {
-      title: "Full Stack Software Developer",
+      title: "Engenheiro de Software Full Stack",
+      company: "X-VIA® Governo Digital",
+      period: "Dez 2025 - Atual",
+      location: "Remoto",
+    },
+    {
+      title: "Engenheiro de Software Full Stack",
       company: "Freelancer",
       period: "Mar 2025 - Atual",
       location: "Remoto",
