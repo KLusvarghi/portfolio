@@ -69,7 +69,7 @@ export function BottomSheet({
   );
 
   const animateToSnapPoint = React.useCallback(
-    (snap: "half" | "full" | "closed", animate = true) => {
+    (snap: "half" | "full" | "closed", animate = true, smooth = false) => {
       if (!sheetRef.current) return;
 
       let targetY = 0;
@@ -94,10 +94,16 @@ export function BottomSheet({
         return;
       }
 
-      sheetRef.current.style.transition =
-        "transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)";
+      // Use smoother transition for all animations - movimento mais fluido e natural
+      const duration = smooth ? "0.6s" : "0.5s"; // Duração um pouco maior para movimento mais suave
+      const easing = smooth 
+        ? "cubic-bezier(0.4, 0.0, 0.2, 1)" // Material Design ease-in-out - muito suave
+        : "cubic-bezier(0.4, 0.0, 0.2, 1)"; // Mesma curva suave para todas as animações
+
+      sheetRef.current.style.transition = `transform ${duration} ${easing}`;
       sheetRef.current.style.transform = `translateY(${targetY}px)`;
 
+      const timeoutDuration = smooth ? 600 : 500;
       setTimeout(() => {
         if (sheetRef.current) {
           sheetRef.current.style.transition = "";
@@ -105,7 +111,7 @@ export function BottomSheet({
         if (snap === "closed") {
           onOpenChange(false);
         }
-      }, 300);
+      }, timeoutDuration);
     },
     [onOpenChange, snapPoints]
   );
@@ -117,14 +123,22 @@ export function BottomSheet({
       setCurrentY(snapPoints.CLOSED);
       setCurrentSnap("half");
       
-      // Animate to half position after a brief delay
+      // Animate to half position after a brief delay with smooth animation
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           if (sheetRef.current) {
             setCurrentY(snapPoints.HALF);
+            // Animação suave e fluida na abertura - movimento natural
             sheetRef.current.style.transition =
-              "transform 0.4s cubic-bezier(0.32, 0.72, 0, 1)";
+              "transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)";
             sheetRef.current.style.transform = `translateY(${snapPoints.HALF}px)`;
+            
+            // Limpar transition após animação
+            setTimeout(() => {
+              if (sheetRef.current) {
+                sheetRef.current.style.transition = "";
+              }
+            }, 600);
           }
         });
       });
@@ -267,11 +281,11 @@ export function BottomSheet({
         clearTimeout(scrollTimeout);
         isExpanding = true;
         scrollTimeout = setTimeout(() => {
-          animateToSnapPoint("full");
+          animateToSnapPoint("full", true, true); // smooth = true para movimento mais fluido
           setTimeout(() => {
             isExpanding = false;
-          }, 300);
-        }, 150);
+          }, 600); // Ajustado para corresponder à duração da animação
+        }, 150); // Delay mantido para evitar animações muito frequentes
       }
 
       // Collapse when at top and scrolling up
@@ -283,11 +297,11 @@ export function BottomSheet({
         clearTimeout(scrollTimeout);
         isCollapsing = true;
         scrollTimeout = setTimeout(() => {
-          animateToSnapPoint("half");
+          animateToSnapPoint("half", true, true); // smooth = true para movimento mais fluido
           setTimeout(() => {
             isCollapsing = false;
-          }, 300);
-        }, 150);
+          }, 600); // Ajustado para corresponder à duração da animação
+        }, 150); // Delay mantido para evitar animações muito frequentes
       }
 
       lastScrollTop = scrollTop;
