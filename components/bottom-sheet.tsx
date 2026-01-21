@@ -32,7 +32,7 @@ export function BottomSheet({
 
   // Snap points: 25% = 75% visible (half), 0% = 100% visible (full)
   const snapPoints = React.useMemo(() => ({
-    HALF: viewportHeight * 0.25, // 75% visible
+    HALF: viewportHeight * 0.01, // 75% visible
     FULL: 0, // 100% visible
     CLOSED: viewportHeight, // Closed
   }), [viewportHeight]);
@@ -235,6 +235,72 @@ export function BottomSheet({
     };
   }, [open]);
 
+  // Handle scroll-based expansion/collapse
+  React.useEffect(() => {
+    if (!open || !contentRef.current) return;
+
+    const content = contentRef.current;
+    let lastScrollTop = content.scrollTop;
+    let scrollTimeout: NodeJS.Timeout;
+    let isExpanding = false;
+    let isCollapsing = false;
+
+    const handleScroll = () => {
+      if (isDragging || isExpanding || isCollapsing) return;
+
+      const scrollTop = content.scrollTop;
+      const scrollHeight = content.scrollHeight;
+      const clientHeight = content.clientHeight;
+      const scrollDelta = scrollTop - lastScrollTop;
+
+      // Threshold for detecting "near bottom" (70% scrolled)
+      const nearBottomThreshold = scrollHeight * 0.7;
+      const isNearBottom = scrollTop + clientHeight >= nearBottomThreshold;
+      const isAtTop = scrollTop <= 5; // Small threshold for "at top"
+
+      // Expand when scrolling down near bottom
+      if (
+        scrollDelta > 5 && // Minimum scroll delta to trigger
+        isNearBottom &&
+        currentSnap === "half"
+      ) {
+        clearTimeout(scrollTimeout);
+        isExpanding = true;
+        scrollTimeout = setTimeout(() => {
+          animateToSnapPoint("full");
+          setTimeout(() => {
+            isExpanding = false;
+          }, 300);
+        }, 150);
+      }
+
+      // Collapse when at top and scrolling up
+      if (
+        scrollDelta < -5 && // Minimum scroll delta to trigger
+        isAtTop &&
+        currentSnap === "full"
+      ) {
+        clearTimeout(scrollTimeout);
+        isCollapsing = true;
+        scrollTimeout = setTimeout(() => {
+          animateToSnapPoint("half");
+          setTimeout(() => {
+            isCollapsing = false;
+          }, 300);
+        }, 150);
+      }
+
+      lastScrollTop = scrollTop;
+    };
+
+    content.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      content.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, [open, currentSnap, isDragging, animateToSnapPoint]);
+
   // Update viewport height on resize
   React.useEffect(() => {
     const handleResize = () => {
@@ -242,7 +308,7 @@ export function BottomSheet({
       setViewportHeight(vh);
       // Update current position based on snap state
       if (open && currentSnap === "half") {
-        setCurrentY(vh * 0.25);
+        setCurrentY(vh * 0.7);
       } else if (open && currentSnap === "full") {
         setCurrentY(0);
       }
@@ -255,7 +321,7 @@ export function BottomSheet({
 
   const visiblePercentage = ((viewportHeight - currentY) / viewportHeight) * 100;
   const maxContentHeight =
-    currentSnap === "full" ? "calc(100vh - 100px)" : "calc(75vh - 100px)";
+    currentSnap === "full" ? "calc(100vh - 100px)" : "calc(70vh - 100px)";
 
   return (
     <>
