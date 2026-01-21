@@ -30,7 +30,7 @@ function ExperienceContent({
   locale: string;
 }) {
   return (
-    <div className="space-y-6 px-6 pb-6">
+    <div className="space-y-6 px-6 pb-12 md:pb-6">
       {/* Header Info */}
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0">
@@ -166,7 +166,7 @@ export function ExperienceDetailModal({
   // Desktop: Use Dialog
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto pb-10">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto ">
         <DialogHeader>
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
