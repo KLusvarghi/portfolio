@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView, type Variant } from "framer-motion"
+import { motion, useInView, type Variant, type Variants } from "framer-motion"
 import { useRef, type ReactNode } from "react"
 
 type AnimationType = "fadeUp" | "fadeDown" | "fadeLeft" | "fadeRight" | "scale" | "none"
@@ -103,7 +103,7 @@ export function StaggerContainer({ children, className, staggerDelay = 0.1, once
   )
 }
 
-export const staggerItem = {
+export const staggerItem: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
