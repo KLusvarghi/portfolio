@@ -36,25 +36,18 @@ export default function ProjectsPage() {
   const [projectFilters, setProjectFilters] = useState<string[]>([]);
   const t = useTranslations();
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
-
-  if (isLoading || !resumeData || !projectsData) return null;
-
-  useEffect(() => {
-    const loadProjectsData = async () => {
-      try {
-        setProjectFilters(projectsData.projectFilters);
-      } catch (error) {
-        setProjectFilters(projectsData.projectFilters);
-      }
-    };
-    loadProjectsData();
-  }, []);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
+  useEffect(() => {
+    if (projectsData?.projectFilters) {
+      setProjectFilters(projectsData.projectFilters);
+    }
+  }, [projectsData]);
+
   const allCategories = useMemo(() => {
+    if (!projectsData?.projects) return [];
     const categorySet = new Set<string>();
     projectsData.projects.forEach((project) => {
       project.categories?.forEach((cat) => categorySet.add(cat));
@@ -63,6 +56,8 @@ export default function ProjectsPage() {
   }, [projectsData]);
 
   const filteredProjects = useMemo(() => {
+    if (!projectsData?.projects) return [];
+    
     const filtered = projectsData.projects.filter((project) => {
       // Text search filter
       const matchesSearch =
@@ -90,6 +85,8 @@ export default function ProjectsPage() {
       return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
     });
   }, [projectsData, searchQuery, selectedTechs, selectedCategories, sortOrder]);
+
+  if (isLoading || !resumeData || !projectsData) return null;
   const toggleTech = (tech: string) => {
     setSelectedTechs((prev) =>
       prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech]
@@ -118,7 +115,6 @@ export default function ProjectsPage() {
   if (projectsData.projects.length === 0) {
     return null;
   }
-  
 
   return (
     <div className="container pt-12">
