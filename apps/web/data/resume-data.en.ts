@@ -73,7 +73,7 @@ const resumeData: ResumeData = {
     {
       title: "Junior Full Stack Software Developer",
       company: "X-VIA Digital Government",
-      period: "Dec 2025 - Present",
+      period: "Nov 2025 - Present",
       location: "Remote",
       description: "Working on the core of platforms focused on government solutions, participating in the creation, evolution, and maintenance of micro-frontends and microservices, with a focus on stability, scalability, performance, and maintainability of internal systems and solutions delivered to clients.",
       technologies: [
